@@ -384,8 +384,6 @@ public class vt extends javax.swing.JFrame {
       int tfw = Integer.parseInt(wt1.getText()) +Integer.parseInt(wt2.getText())+
               Integer.parseInt(wt3.getText())+Integer.parseInt(wt4.getText());
   
-                    JOptionPane.showMessageDialog(null, tfw);
-
          
             String sql = "insert into vt(date,vehicle,driver,runs,tor1,tir1,fwr1"
                     + ",tor2,tir2,fwr2,tor3,tir3,fwr3,tor4,tir4,fwr4,tfw)"
