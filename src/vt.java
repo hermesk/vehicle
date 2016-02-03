@@ -381,8 +381,8 @@ public class vt extends javax.swing.JFrame {
         
          try{
              
-      int tfw = Integer.parseInt(wt1.getText()) +Integer.parseInt(wt2.getText())+
-              Integer.parseInt(wt3.getText())+Integer.parseInt(wt4.getText());
+      Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
+              Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
   
          
             String sql = "insert into vt(date,vehicle,driver,runs,tor1,tir1,fwr1"
@@ -412,7 +412,7 @@ public class vt extends javax.swing.JFrame {
             pst.setString(14, t41.getText());
             pst.setString(15, t42.getText());
             pst.setString(16, wt4.getText());
-            pst.setInt(17, tfw);
+            pst.setFloat(17, tfw);
 
                     
             pst.execute();
