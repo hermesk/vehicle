@@ -104,7 +104,7 @@ public class login extends javax.swing.JFrame {
 
     private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
         // TODO add your handling code here:
-        String sql = "select * from users where user=? and password=?";
+        String sql = "select * from users where username=? and password=?";
         
         try{
              pst = conn.prepareStatement(sql);
@@ -114,7 +114,7 @@ public class login extends javax.swing.JFrame {
              rs =pst.executeQuery();
              if(rs.next()){
               // JOptionPane.showMessageDialog(null,"Logged in");
-              vt v = new vt();
+                 vt v = new vt();
                  v.setVisible(true);
                         close();
                
