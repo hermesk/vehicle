@@ -322,9 +322,19 @@ public class vt extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Drivers");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Vehicle");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Vehicleturnabout");
@@ -465,6 +475,18 @@ public class vt extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_wt4KeyTyped
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        // TODO add your handling code here:
+          vehicles v = new vehicles();
+                 v.setVisible(true);
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+          drivers dr = new drivers();
+                 dr.setVisible(true);
+    }//GEN-LAST:event_jMenu3MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
