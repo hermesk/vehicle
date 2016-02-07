@@ -111,7 +111,7 @@ public class login extends javax.swing.JFrame {
              pst.setString(1,txt_user.getText());
              pst.setString(2,txt_password.getText());
              
-             rs =pst.executeQuery();
+             rs =pst.executeQuery(); 
              if(rs.next()){
               // JOptionPane.showMessageDialog(null,"Logged in");
                  vt v = new vt();
