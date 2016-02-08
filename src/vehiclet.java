@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -14,7 +15,8 @@ public class vehiclet extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-   
+    float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,vt,tt;
+
     public vehiclet() {
       conn = javaconnect.connecrDb();
        initComponents();
@@ -274,7 +276,7 @@ public class vehiclet extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 55, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,7 +292,7 @@ public class vehiclet extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(51, 51, 51))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +304,7 @@ public class vehiclet extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(670, 673));
+        setSize(new java.awt.Dimension(531, 588));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -320,11 +322,12 @@ public class vehiclet extends javax.swing.JFrame {
   
          
             String sql = "insert into vt(date,vehicle,driver,runs,tor1,tir1,fwr1"
-                    + ",tor2,tir2,fwr2,tor3,tir3,fwr3,tor4,tir4,fwr4,tfw)"
+                    + ",tor2,tir2,fwr2,tor3,tir3,fwr3,tor4,tir4,fwr4,tfw,vt)"
                     
-            + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pst=conn.prepareStatement(sql);
-            SimpleDateFormat sdf=new SimpleDateFormat("kk:mm:ss");
+            
+          SimpleDateFormat sdf=new SimpleDateFormat("kk:mm:ss");
           sdf.setTimeZone(TimeZone.getDefault());
           String tt11=sdf.format(t11.getValue());
           String tt12=sdf.format(t12.getValue());
@@ -334,10 +337,52 @@ public class vehiclet extends javax.swing.JFrame {
           String tt32=sdf.format(t32.getValue());
           String tt41=sdf.format(t41.getValue());
           String tt42=sdf.format(t42.getValue()); 
+          //FT RUN1
+                 Date d11 = sdf.parse(tt11);
+	         Date d12= sdf.parse(tt12);
+                 long diff1 = d12.getTime() - d11.getTime();
+                 long diffH1 = diff1 / (60 * 60 * 1000) % 24;
+                 long diffM1 = diff1 / (60 * 1000) % 60;
+                 th = th+diffH1;
+                 tm = tm+diffM1;
+                 tmh = tm/60;
+                 TH1 = tmh +th;
+          //FT RUN2
+                 Date d21 = sdf.parse(tt21);
+	         Date d22= sdf.parse(tt22);
+                 long diff2 = d22.getTime() - d21.getTime();
+                 long diffH2 = diff2 / (60 * 60 * 1000) % 24;
+                 long diffM2 = diff2 / (60 * 1000) % 60;
+                 th = th+diffH2;
+                 tm = tm+diffM2;
+                 tmh = tm/60;
+                 TH2 = tmh +th;
+           //FT RUN3      
+                 Date d31 = sdf.parse(tt31);
+	         Date d32= sdf.parse(tt32);
+                 long diff3 = d32.getTime() - d31.getTime();
+                 long diffH3 = diff3 / (60 * 60 * 1000) % 24;
+                 long diffM3 = diff3 / (60 * 1000) % 60;
+                 th = th+diffH3;
+                 tm = tm+diffM3;
+                 tmh = tm/60;
+                 TH3 = tmh +th; 
+           //FT RUN4      
+                 Date d41 = sdf.parse(tt41);
+	         Date d42= sdf.parse(tt42);
+                 long diff4 = d42.getTime() - d41.getTime();
+                 long diffH4 = diff4 / (60 * 60 * 1000) % 24;
+                 long diffM4 = diff4 / (60 * 1000) % 60;
+                 th = th+diffH4;
+                 tm = tm+diffM4;
+                 tmh = tm/60;
+                 TH4 = tmh +th; 
+                 tt = TH1+TH2+TH3+TH4;
+                 vt = tt/Float.parseFloat((String) runs.getValue());
             pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
             pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
             pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-            pst.setString(4, runs.getValue().toString());
+            pst.setInt(4, (int) runs.getValue());
             
             pst.setString(5,tt11 );
             pst.setString(6, tt12);
@@ -355,6 +400,8 @@ public class vehiclet extends javax.swing.JFrame {
             pst.setString(15, tt42);
             pst.setString(16, wt4.getText());
             pst.setFloat(17, tfw);
+            pst.setDouble(18,vt );
+
 
                     
             pst.execute();
