@@ -33,7 +33,7 @@ private void update_table(){
           String sql;
           sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
                   + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
-                  + ",kmh as 'L/KM' kgl as 'KG/L'from kmrange";
+                  + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablekmr.setModel( DbUtils.resultSetToTableModel(rs));

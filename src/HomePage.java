@@ -29,8 +29,11 @@ public class HomePage extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         logout = new javax.swing.JMenuItem();
-        vt = new javax.swing.JMenu();
+        vtb = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        fillvt = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        viewvt = new javax.swing.JMenuItem();
         kmr = new javax.swing.JMenu();
         fillkmr = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -43,7 +46,6 @@ public class HomePage extends javax.swing.JFrame {
         addriver = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,15 +61,27 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        vt.setText("Vehicleturnabout");
-        vt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                vtMouseClicked(evt);
+        vtb.setText("Vehicleturnabout");
+        vtb.add(jSeparator1);
+
+        fillvt.setText("Fill");
+        fillvt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fillvtMousePressed(evt);
             }
         });
-        vt.add(jSeparator1);
+        vtb.add(fillvt);
+        vtb.add(jSeparator5);
 
-        jMenuBar1.add(vt);
+        viewvt.setText("View");
+        viewvt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                viewvtMousePressed(evt);
+            }
+        });
+        vtb.add(viewvt);
+
+        jMenuBar1.add(vtb);
 
         kmr.setText("KM Overhaul");
 
@@ -76,11 +90,19 @@ public class HomePage extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 fillkmrMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fillkmrMousePressed(evt);
+            }
         });
         kmr.add(fillkmr);
         kmr.add(jSeparator2);
 
         viewkmr.setText("View");
+        viewkmr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                viewkmrMousePressed(evt);
+            }
+        });
         kmr.add(viewkmr);
 
         jMenuBar1.add(kmr);
@@ -88,6 +110,11 @@ public class HomePage extends javax.swing.JFrame {
         vehicle.setText("Vehicles");
 
         addvehicle.setText("Add");
+        addvehicle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addvehicleMousePressed(evt);
+            }
+        });
         vehicle.add(addvehicle);
         vehicle.add(jSeparator3);
 
@@ -103,17 +130,22 @@ public class HomePage extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addriverMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addriverMousePressed(evt);
+            }
         });
         driver.add(addriver);
         driver.add(jSeparator4);
 
         jMenuItem9.setText("View");
+        jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem9MousePressed(evt);
+            }
+        });
         driver.add(jMenuItem9);
 
         jMenuBar1.add(driver);
-
-        jMenu2.setText("jMenu2");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -125,7 +157,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGap(0, 424, Short.MAX_VALUE)
         );
 
         pack();
@@ -146,11 +178,47 @@ public class HomePage extends javax.swing.JFrame {
          
     }//GEN-LAST:event_fillkmrMouseClicked
 
-    private void vtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vtMouseClicked
+    private void addriverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addriverMousePressed
         // TODO add your handling code here:
-        vehiclet vct = new vehiclet();
-        vct.setVisible(true);
-    }//GEN-LAST:event_vtMouseClicked
+                drivers dr = new drivers();
+                 dr.setVisible(true);
+    }//GEN-LAST:event_addriverMousePressed
+
+    private void jMenuItem9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MousePressed
+        // TODO add your handling code here:
+          viewdrivers view = new viewdrivers();
+           view.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9MousePressed
+
+    private void fillvtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fillvtMousePressed
+        // TODO add your handling code here:
+        vehiclet vht = new vehiclet();
+            vht.setVisible(true);
+    }//GEN-LAST:event_fillvtMousePressed
+
+    private void viewvtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewvtMousePressed
+        // TODO add your handling code here:
+        viewvt vwvt = new viewvt();
+               vwvt.setVisible(true);
+    }//GEN-LAST:event_viewvtMousePressed
+
+    private void fillkmrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fillkmrMousePressed
+        // TODO add your handling code here:
+        kmrange kmrg = new kmrange();
+               kmrg.setVisible(true);
+    }//GEN-LAST:event_fillkmrMousePressed
+
+    private void viewkmrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewkmrMousePressed
+        // TODO add your handling code here:
+        viewkmr vkmr = new viewkmr();
+                vkmr.setVisible(true);
+    }//GEN-LAST:event_viewkmrMousePressed
+
+    private void addvehicleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addvehicleMousePressed
+        // TODO add your handling code here:
+        vehicles v = new vehicles();
+                 v.setVisible(true);
+    }//GEN-LAST:event_addvehicleMousePressed
 
     /**
      * @param args the command line arguments
@@ -193,19 +261,21 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem addvehicle;
     private javax.swing.JMenu driver;
     private javax.swing.JMenuItem fillkmr;
+    private javax.swing.JMenuItem fillvt;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JMenu kmr;
     private javax.swing.JMenuItem logout;
     private javax.swing.JMenu vehicle;
     private javax.swing.JMenuItem viewkmr;
     private javax.swing.JMenuItem viewvehicles;
-    private javax.swing.JMenu vt;
+    private javax.swing.JMenuItem viewvt;
+    private javax.swing.JMenu vtb;
     // End of variables declaration//GEN-END:variables
 }

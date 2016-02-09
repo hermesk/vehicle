@@ -44,8 +44,8 @@ public class drivers extends javax.swing.JFrame {
         cmd_clear = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         sname = new javax.swing.JTextField();
-        cmd_viewdrivers = new javax.swing.JButton();
         txt_search = new javax.swing.JTextField();
+        cmdexit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,10 +105,10 @@ public class drivers extends javax.swing.JFrame {
 
         jLabel2.setText("Sir Name");
 
-        cmd_viewdrivers.setText("View Drivers");
-        cmd_viewdrivers.addActionListener(new java.awt.event.ActionListener() {
+        cmdexit.setText("Exit");
+        cmdexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmd_viewdriversActionPerformed(evt);
+                cmdexitActionPerformed(evt);
             }
         });
 
@@ -119,36 +119,33 @@ public class drivers extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(cmdexit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cmd_save)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmd_clear)
-                                .addContainerGap())
+                                .addComponent(cmd_clear))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(sname, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(fname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                                     .addComponent(phoneno, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton2)
-                                        .addComponent(jButton1))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(search)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap())))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmd_viewdrivers)
-                        .addGap(106, 106, 106))))
+                                .addComponent(search)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,10 +170,9 @@ public class drivers extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmd_save)
                     .addComponent(jButton1)
-                    .addComponent(cmd_clear))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(cmd_viewdrivers)
-                .addContainerGap())
+                    .addComponent(cmd_clear)
+                    .addComponent(cmdexit))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -331,12 +327,10 @@ public class drivers extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cmd_clearActionPerformed
 
-    private void cmd_viewdriversActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_viewdriversActionPerformed
+    private void cmdexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexitActionPerformed
         // TODO add your handling code here:
-        
-        viewdrivers view = new viewdrivers();
-           view.setVisible(true);
-    }//GEN-LAST:event_cmd_viewdriversActionPerformed
+        dispose();
+    }//GEN-LAST:event_cmdexitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,7 +372,7 @@ public class drivers extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_save;
-    private javax.swing.JButton cmd_viewdrivers;
+    private javax.swing.JButton cmdexit;
     private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
