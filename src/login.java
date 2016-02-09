@@ -1,4 +1,5 @@
 
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.*;
@@ -114,8 +115,8 @@ public class login extends javax.swing.JFrame {
              rs =pst.executeQuery(); 
              if(rs.next()){
               // JOptionPane.showMessageDialog(null,"Logged in");
-                 vt v = new vt();
-                 v.setVisible(true);
+                 HomePage hp = new  HomePage();
+                 hp.setVisible(true);
                         close();
                
              }
@@ -126,7 +127,7 @@ public class login extends javax.swing.JFrame {
             
         
     }                                         
-   catch(Exception e){
+   catch(SQLException | HeadlessException e){
                       JOptionPane.showMessageDialog(null,e);
 
    }
@@ -161,6 +162,7 @@ public class login extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new login().setVisible(true);
             }

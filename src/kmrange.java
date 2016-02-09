@@ -1,7 +1,9 @@
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -226,10 +228,11 @@ public class kmrange extends javax.swing.JFrame {
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
         try{
-            String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh)"
-                    + "values(?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh,kgl)"
+                    + "values(?,?,?,?,?,?,?,?,?,?)";
          pst=conn.prepareStatement(sql);
-         Float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText()));
+         float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText()));
+         float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText()));
          
             pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
             pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
@@ -240,13 +243,17 @@ public class kmrange extends javax.swing.JFrame {
             pst.setString(7, dibal.getText());
             pst.setString(8, tfw.getText());
             pst.setFloat(9, kml);
-
+            pst.setFloat(10, kgl);
 
             pst.execute();
 
              JOptionPane.showMessageDialog(null, "Saved Successfully");
     }//GEN-LAST:event_cmd_saveActionPerformed
-/*
+catch(  SQLException | NumberFormatException | HeadlessException e){
+              JOptionPane.showMessageDialog(null, e);
+
+        }}
+        /*
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmd_clearActionPerformed
@@ -255,10 +262,7 @@ public class kmrange extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmd_exitActionPerformed
 */     
-catch(Exception e){
-              JOptionPane.showMessageDialog(null, e);
 
-        }}
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt){
     
         ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).setText("");
@@ -274,6 +278,7 @@ catch(Exception e){
     public static void main(String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new kmrange().setVisible(true);
             }

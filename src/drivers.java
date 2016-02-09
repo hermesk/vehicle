@@ -1,13 +1,10 @@
 
-import java.awt.Toolkit;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class drivers extends javax.swing.JFrame {
@@ -219,7 +216,7 @@ public class drivers extends javax.swing.JFrame {
 
         
         }
-        catch(Exception e){
+        catch(SQLException | HeadlessException e){
                     JOptionPane.showMessageDialog(null, e);
 
         }
@@ -258,7 +255,7 @@ public class drivers extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Successfully Updated");
 
         }
-    catch(Exception e)
+    catch(SQLException | HeadlessException e)
           {
                JOptionPane.showMessageDialog(null, e);
             }   
@@ -370,6 +367,7 @@ public class drivers extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new drivers().setVisible(true);
             }

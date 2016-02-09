@@ -65,7 +65,12 @@ public class vehiclet extends javax.swing.JFrame {
         t32 = new javax.swing.JSpinner();
         t41 = new javax.swing.JSpinner();
         t42 = new javax.swing.JSpinner();
+        cmd_clear = new javax.swing.JButton();
+        cmd_exit = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("VehicleTurnabout"); // NOI18N
@@ -145,6 +150,20 @@ public class vehiclet extends javax.swing.JFrame {
         t42.setModel(new SpinnerDateModel());
         t42.setEditor(new JSpinner.DateEditor(t42, "HH:mm"));
 
+        cmd_clear.setText("Clear");
+        cmd_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_clearActionPerformed(evt);
+            }
+        });
+
+        cmd_exit.setText("Exit");
+        cmd_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_exitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,8 +218,12 @@ public class vehiclet extends javax.swing.JFrame {
                             .addComponent(jLabel15)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(164, 164, 164)
-                        .addComponent(cmd_save)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                        .addComponent(cmd_save)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmd_clear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmd_exit)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +293,10 @@ public class vehiclet extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(wt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(cmd_save)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmd_save)
+                    .addComponent(cmd_clear)
+                    .addComponent(cmd_exit))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
 
@@ -284,6 +310,19 @@ public class vehiclet extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 42, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("View");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -405,16 +444,7 @@ public class vehiclet extends javax.swing.JFrame {
             pst.setString(16, wt4.getText());
             pst.setFloat(17, tfw);
             pst.setDouble(18,vt );
-
-
-                    
             pst.execute();
-            // conn.close();
-            JOptionPane.showMessageDialog(null, TH1);
-            JOptionPane.showMessageDialog(null, tm1);
-            JOptionPane.showMessageDialog(null, TH3);
-            JOptionPane.showMessageDialog(null, TH4);
-            JOptionPane.showMessageDialog(null, tt);
             JOptionPane.showMessageDialog(null, "Saved Successfully");
 
         }
@@ -423,6 +453,25 @@ public class vehiclet extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_cmd_saveActionPerformed
+
+    private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
+        // TODO add your handling code here:
+        wt1.setText("");
+        wt2.setText("");
+        wt3.setText("");
+        wt4.setText("");
+    }//GEN-LAST:event_cmd_clearActionPerformed
+
+    private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_cmd_exitActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        viewvt vvt = new viewvt();
+          vvt.setVisible(true);
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -506,6 +555,8 @@ public class vehiclet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox_driver;
     private javax.swing.JComboBox ComboBox_vehicle;
+    private javax.swing.JButton cmd_clear;
+    private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_save;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -524,6 +575,9 @@ public class vehiclet extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner runs;
