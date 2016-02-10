@@ -1,8 +1,11 @@
 
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.MessageFormat;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import net.proteanit.sql.DbUtils;
 
 public class viewvehicles extends javax.swing.JFrame {
@@ -103,6 +106,17 @@ public class viewvehicles extends javax.swing.JFrame {
 
     private void cmd_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_printActionPerformed
         // TODO add your handling code here:
+                                                           
+     MessageFormat header = new MessageFormat("Ragati Tea Factory Vehicles");
+      MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+
+      try{
+           tablevehicles.print(JTable.PrintMode.NORMAL,header,footer);
+         }
+      catch(java.awt.print.PrinterException e)
+      {
+         PrintStream format = System.err.format("Cannot print %s%n");
+      }
     }//GEN-LAST:event_cmd_printActionPerformed
 
     private void cmdexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexitActionPerformed

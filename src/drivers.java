@@ -40,6 +40,10 @@ public class drivers extends javax.swing.JFrame {
         cmd_save = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cmdexit = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        closedr = new javax.swing.JMenuItem();
+        viewdr = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -183,6 +187,28 @@ public class drivers extends javax.swing.JFrame {
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
+        jMenu1.setText("File");
+
+        closedr.setText("Close");
+        closedr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                closedrMousePressed(evt);
+            }
+        });
+        jMenu1.add(closedr);
+
+        jMenuBar1.add(jMenu1);
+
+        viewdr.setText("View");
+        viewdr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewdrMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(viewdr);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,7 +216,7 @@ public class drivers extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,6 +365,17 @@ public class drivers extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cmdexitActionPerformed
 
+    private void viewdrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewdrMouseClicked
+        // TODO add your handling code here:
+        viewdrivers view = new viewdrivers();
+           view.setVisible(true);
+    }//GEN-LAST:event_viewdrMouseClicked
+
+    private void closedrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closedrMousePressed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_closedrMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -377,6 +414,7 @@ public class drivers extends javax.swing.JFrame {
     
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem closedr;
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmdexit;
@@ -386,11 +424,14 @@ public class drivers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField phoneno;
     private javax.swing.JButton search;
     private javax.swing.JTextField sname;
     private javax.swing.JTextField txt_search;
+    private javax.swing.JMenu viewdr;
     // End of variables declaration//GEN-END:variables
 }

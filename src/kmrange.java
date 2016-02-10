@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class kmrange extends javax.swing.JFrame {
 
@@ -48,6 +49,10 @@ public class kmrange extends javax.swing.JFrame {
         cmd_exit = new javax.swing.JButton();
         cmd_save = new javax.swing.JButton();
         cmd_clear = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        closekm = new javax.swing.JMenuItem();
+        viewkm = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -181,6 +186,28 @@ public class kmrange extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jMenu1.setText("File");
+
+        closekm.setText("Close");
+        closekm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                closekmMousePressed(evt);
+            }
+        });
+        jMenu1.add(closekm);
+
+        jMenuBar1.add(jMenu1);
+
+        viewkm.setText("View");
+        viewkm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewkmMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(viewkm);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,7 +246,7 @@ public class kmrange extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(586, 449));
@@ -262,7 +289,18 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmd_exitActionPerformed
-*/     
+   */
+    private void viewkmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewkmMouseClicked
+        // TODO add your handling code here:
+         viewkmr vkmr = new viewkmr();
+                vkmr.setVisible(true);
+    }//GEN-LAST:event_viewkmMouseClicked
+
+    private void closekmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closekmMousePressed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_closekmMousePressed
+    
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt){
     
@@ -328,6 +366,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox_driver;
     private javax.swing.JComboBox ComboBox_vehicle;
+    private javax.swing.JMenuItem closekm;
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_save;
@@ -343,10 +382,13 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField kmgl;
     private javax.swing.JTextField tfw;
     private javax.swing.JTextField tkm;
+    private javax.swing.JMenu viewkm;
     // End of variables declaration//GEN-END:variables
 }

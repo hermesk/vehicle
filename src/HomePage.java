@@ -1,15 +1,23 @@
 
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
+
 public class HomePage extends javax.swing.JFrame {
 
     public HomePage() {
         super("Factory Vehicle System Homepage");
         initComponents();
+    //this.setIconImage(new ImageIcon(getClass().getResource("logo.png")).getImage());  
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         logout = new javax.swing.JMenuItem();
@@ -32,7 +40,16 @@ public class HomePage extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 153, 153));
 
+        jLabel1.setForeground(new java.awt.Color(102, 102, 0));
+        jLabel1.setText("Welcome to Ragati Tea Factory Vehicleturnabout System");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rgv.jpg"))); // NOI18N
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rg.jpg"))); // NOI18N
+
+        jMenu1.setForeground(new java.awt.Color(51, 51, 0));
         jMenu1.setText("File");
 
         logout.setText("Logout");
@@ -50,6 +67,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        vtb.setForeground(new java.awt.Color(51, 51, 0));
         vtb.setText("Vehicleturnabout");
         vtb.add(jSeparator1);
 
@@ -72,6 +90,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenuBar1.add(vtb);
 
+        kmr.setForeground(new java.awt.Color(51, 51, 0));
         kmr.setText("KM Overhaul");
 
         fillkmr.setText("Fill");
@@ -96,6 +115,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenuBar1.add(kmr);
 
+        vehicle.setForeground(new java.awt.Color(51, 51, 0));
         vehicle.setText("Vehicles");
 
         addvehicle.setText("Add");
@@ -117,6 +137,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenuBar1.add(vehicle);
 
+        driver.setForeground(new java.awt.Color(51, 51, 0));
         driver.setText("Drivers");
 
         addriver.setText("Add");
@@ -137,6 +158,11 @@ public class HomePage extends javax.swing.JFrame {
                 jMenuItem9MousePressed(evt);
             }
         });
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         driver.add(jMenuItem9);
 
         jMenuBar1.add(driver);
@@ -147,14 +173,31 @@ public class HomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(80, 80, 80)
+                            .addComponent(jLabel3))))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(58, 58, 58))
         );
 
-        setSize(new java.awt.Dimension(550, 484));
+        setSize(new java.awt.Dimension(550, 505));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -228,6 +271,10 @@ public class HomePage extends javax.swing.JFrame {
               this.dispose();
     }//GEN-LAST:event_logoutMousePressed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     public static void main(String args[]) {
      
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -244,6 +291,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenu driver;
     private javax.swing.JMenuItem fillkmr;
     private javax.swing.JMenuItem fillvt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem9;

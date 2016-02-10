@@ -1,8 +1,11 @@
 
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.MessageFormat;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import net.proteanit.sql.DbUtils;
 
 
@@ -43,6 +46,8 @@ public class viewdrivers extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_drivers = new javax.swing.JTable();
+        cmdprint = new javax.swing.JButton();
+        cmdexit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,21 +65,46 @@ public class viewdrivers extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table_drivers);
 
+        cmdprint.setText("Print");
+        cmdprint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdprintActionPerformed(evt);
+            }
+        });
+
+        cmdexit.setText("Exit");
+        cmdexit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdexitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(cmdprint)
+                        .addGap(54, 54, 54)
+                        .addComponent(cmdexit)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdprint)
+                    .addComponent(cmdexit))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,6 +127,26 @@ public class viewdrivers extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmdexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexitActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_cmdexitActionPerformed
+
+    private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed
+        // TODO add your handling code here:
+        MessageFormat header = new MessageFormat("Ragati Tea Factory Drivers");
+      MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+
+      try{
+           table_drivers.print(JTable.PrintMode.NORMAL,header,footer);
+         }
+      catch(java.awt.print.PrinterException e)
+      {
+         PrintStream format = System.err.format("Cannot print %s%n");
+      }
+    
+    }//GEN-LAST:event_cmdprintActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -111,6 +161,8 @@ public class viewdrivers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdexit;
+    private javax.swing.JButton cmdprint;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_drivers;
