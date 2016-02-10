@@ -17,7 +17,7 @@ public class javaconnect {
             return conn;
         }
         
-        catch (Exception e)
+        catch (ClassNotFoundException | SQLException e)
         {
             JOptionPane.showMessageDialog(null, e);
             return null;
