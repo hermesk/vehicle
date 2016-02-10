@@ -21,6 +21,7 @@ public class vehiclet extends javax.swing.JFrame {
     float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,vt,tt;
     float th1,th2,th3,th4,tm1,tm2,tm3,tm4,tmh1,tmh2,tmh3,tmh4;
     public vehiclet() {
+      super("Fill Vehicleturnabout");
       conn = javaconnect.connecrDb();
        initComponents();
         ComboDriver();

@@ -15,8 +15,9 @@ public class viewdrivers extends javax.swing.JFrame {
     PreparedStatement pst = null;
 
     public viewdrivers() {
+        super("Ragati Tea Factory Vehicles");
         initComponents();
-                conn = javaconnect.connecrDb();
+         conn = javaconnect.connecrDb();
         update_table();
 
     }

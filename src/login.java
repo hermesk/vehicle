@@ -6,9 +6,6 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 public class login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form login
-     */
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
@@ -114,7 +111,6 @@ public class login extends javax.swing.JFrame {
              
              rs =pst.executeQuery(); 
              if(rs.next()){
-              // JOptionPane.showMessageDialog(null,"Logged in");
                  HomePage hp = new  HomePage();
                  hp.setVisible(true);
                         close();

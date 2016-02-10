@@ -14,6 +14,7 @@ public class kmrange extends javax.swing.JFrame {
     PreparedStatement pst = null;
     
     public kmrange() {
+        super("Kilometer Overhaul");
         initComponents();
         conn = javaconnect.connecrDb();
         ComboDriver();

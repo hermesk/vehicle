@@ -5,27 +5,24 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
-public class viewvt extends javax.swing.JFrame {
-
+public class viewvehicles extends javax.swing.JFrame {
+    
+   
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    public viewvt() {
-        super("Vehicleturnabout");
+    public viewvehicles() {
+        super("Ragati Tea Factory vehicles");
         initComponents();
         conn = javaconnect.connecrDb();
-          update_table();
+        update_table();
     }
-
-    private void update_table(){
+ private void update_table(){
       try{
-          String sql = "select date as 'Date',driver as 'Driver',runs as 'No of Runs',tor1 as 'TimeOut R1',"
-                  + "tir1 as 'TimeIn R1', fwr1 as'Factory Weight',tor2 as 'TimeOut R2',tir2 as 'TimeIn R2', fwr2 as'Factory Weight'"
-                  + ",tor3 as 'TimeOut R3',tir3 as 'TimeIn R3', fwr3 as'Factory Weight',tor4 as 'TimeOut R4',tir4 as 'TimeIn R4', "
-                  + "fwr4 as'Factory Weight',tfw as 'Total Factory Weight',vt as 'Vehicleturnabout'from vt";
+          String sql = "select Regno,DOP as 'Date of Purchase',Make from vehicles";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
-          tablevt.setModel( DbUtils.resultSetToTableModel(rs));
+          tablevehicles.setModel( DbUtils.resultSetToTableModel(rs));
 
       }
       catch(Exception e)
@@ -34,18 +31,19 @@ public class viewvt extends javax.swing.JFrame {
       
       }
      }
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablevt = new javax.swing.JTable();
-        cmdprint = new javax.swing.JButton();
+        tablevehicles = new javax.swing.JTable();
+        cmd_print = new javax.swing.JButton();
         cmdexit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tablevt.setModel(new javax.swing.table.DefaultTableModel(
+        tablevehicles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -56,9 +54,14 @@ public class viewvt extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablevt);
+        jScrollPane1.setViewportView(tablevehicles);
 
-        cmdprint.setText("Print");
+        cmd_print.setText("Print");
+        cmd_print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_printActionPerformed(evt);
+            }
+        });
 
         cmdexit.setText("Exit");
         cmdexit.addActionListener(new java.awt.event.ActionListener() {
@@ -72,50 +75,56 @@ public class viewvt extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(225, 225, 225)
-                .addComponent(cmdprint)
-                .addGap(81, 81, 81)
-                .addComponent(cmdexit)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cmd_print)
+                        .addGap(55, 55, 55)
+                        .addComponent(cmdexit)
+                        .addGap(128, 128, 128))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdprint)
+                    .addComponent(cmd_print)
                     .addComponent(cmdexit))
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1104, 391));
+        setSize(new java.awt.Dimension(578, 342));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmd_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_printActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmd_printActionPerformed
 
     private void cmdexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexitActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_cmdexitActionPerformed
 
+   
     public static void main(String args[]) {
+      
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new viewvt().setVisible(true);
-                
+                new viewvehicles().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmd_print;
     private javax.swing.JButton cmdexit;
-    private javax.swing.JButton cmdprint;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablevt;
+    private javax.swing.JTable tablevehicles;
     // End of variables declaration//GEN-END:variables
 }
