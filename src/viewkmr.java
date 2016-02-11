@@ -43,7 +43,10 @@ public class viewkmr extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablekmr = new javax.swing.JTable();
+        tablekmr = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowindex, int colIndex)
+            { return false;}
+        };
         cmdprint = new javax.swing.JButton();
         cmdexit = new javax.swing.JButton();
 

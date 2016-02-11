@@ -112,8 +112,8 @@ public class login extends javax.swing.JFrame {
              
              rs =pst.executeQuery(); 
              if(rs.next()){
-                 HomePage hp = new  HomePage();
-                 hp.setVisible(true);
+                 vehiclet vt = new  vehiclet();
+                 vt.setVisible(true);
                         close();
                
              }

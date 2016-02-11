@@ -40,7 +40,10 @@ public class viewvehicles extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablevehicles = new javax.swing.JTable();
+        tablevehicles = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowindex, int colIndex)
+            { return false;}
+        };
         cmd_print = new javax.swing.JButton();
         cmdexit = new javax.swing.JButton();
 
