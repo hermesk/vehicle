@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 public class kmrange extends javax.swing.JFrame {
 
@@ -28,7 +30,7 @@ public class kmrange extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txt_Date = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         diesel = new javax.swing.JTextField();
@@ -58,11 +60,41 @@ public class kmrange extends javax.swing.JFrame {
 
         jLabel3.setText("Date");
 
-        jDateChooser1.setDateFormatString("yyy-MM-dd\n");
+        txt_Date.setDateFormatString("yyy-MM-dd\n");
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Vehicle KM Range Overhaul");
+
+        diesel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dieselKeyTyped(evt);
+            }
+        });
+
+        tkm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tkmKeyTyped(evt);
+            }
+        });
+
+        dibal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dibalKeyTyped(evt);
+            }
+        });
+
+        kmgl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kmglKeyTyped(evt);
+            }
+        });
+
+        tfw.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfwKeyTyped(evt);
+            }
+        });
 
         jLabel10.setText("Vehicle Regno");
 
@@ -223,7 +255,7 @@ public class kmrange extends javax.swing.JFrame {
                         .addGap(51, 51, 51)
                         .addComponent(jLabel3)
                         .addGap(27, 27, 27)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_Date, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(114, 114, 114))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -240,7 +272,7 @@ public class kmrange extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
                 .addGap(19, 19, 19)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,14 +287,40 @@ public class kmrange extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-        try{
+         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
+                    {
+                  JOptionPane.showMessageDialog(null,"Choose Date");
+                    }
+        if(kmgl.getText().isEmpty())
+                    {
+                   kmgl.setText("Fill ");
+                 kmgl.setForeground(Color.RED);}
+        if(tkm.getText().isEmpty())
+                    {
+                   tkm.setText("Fill ");
+               tkm.setForeground(Color.RED);}
+        if(diesel.getText().isEmpty())
+                    {
+                    diesel.setText("Fill ");
+                   diesel.setForeground(Color.RED);}
+         if(dibal.getText().isEmpty())
+                    {
+                    dibal.setText("Fill ");
+                   dibal.setForeground(Color.RED);}
+          if(tfw.getText().isEmpty())
+                    {
+                    tfw.setText("Fill ");
+                   tfw.setForeground(Color.RED);}
+          else{
+            
+              try{
             String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh,kgl)"
                     + "values(?,?,?,?,?,?,?,?,?,?)";
          pst=conn.prepareStatement(sql);
          float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText()));
          float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText()));
          
-            pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
+            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
             pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
             pst.setString(3, ComboBox_driver.getSelectedItem().toString());
             pst.setString(4, kmgl.getText());
@@ -280,7 +338,7 @@ public class kmrange extends javax.swing.JFrame {
 catch(  SQLException | NumberFormatException | HeadlessException e){
               JOptionPane.showMessageDialog(null, e);
 
-        }}
+        }}}
         /*
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
         // TODO add your handling code here:
@@ -300,11 +358,56 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_closekmMousePressed
+
+    private void tfwKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfwKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_tfwKeyTyped
+
+    private void dibalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dibalKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE)){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_dibalKeyTyped
+
+    private void dieselKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dieselKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE)){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_dieselKeyTyped
+
+    private void tkmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tkmKeyTyped
+        // TODO add your handling code here:
+          char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE)){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_tkmKeyTyped
+
+    private void kmglKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kmglKeyTyped
+        // TODO add your handling code here:
+          char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE)){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_kmglKeyTyped
     
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt){
     
-        ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
            kmgl.setText("");
            tkm.setText("");
            diesel.setText("");
@@ -372,7 +475,6 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     private javax.swing.JButton cmd_save;
     private javax.swing.JTextField dibal;
     private javax.swing.JTextField diesel;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -389,6 +491,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     private javax.swing.JTextField kmgl;
     private javax.swing.JTextField tfw;
     private javax.swing.JTextField tkm;
+    private com.toedter.calendar.JDateChooser txt_Date;
     private javax.swing.JMenu viewkm;
     // End of variables declaration//GEN-END:variables
 }

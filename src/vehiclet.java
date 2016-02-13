@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -57,7 +58,7 @@ public class vehiclet extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         wt1 = new javax.swing.JTextField();
         runs = new javax.swing.JSpinner();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txt_Date = new com.toedter.calendar.JDateChooser();
         jLabel16 = new javax.swing.JLabel();
         t11 = new javax.swing.JSpinner();
         t12 = new javax.swing.JSpinner();
@@ -161,7 +162,7 @@ public class vehiclet extends javax.swing.JFrame {
 
         runs.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
 
-        jDateChooser1.setDateFormatString(" yyyy-MM-d");
+        txt_Date.setDateFormatString(" yyyy-MM-d");
 
         jLabel16.setText("Date");
 
@@ -233,7 +234,7 @@ public class vehiclet extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ComboBox_driver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(txt_Date, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                             .addComponent(t22)
                             .addComponent(t21)
                             .addComponent(runs, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
@@ -269,7 +270,7 @@ public class vehiclet extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -458,6 +459,27 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
+         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
+                    {
+                  JOptionPane.showMessageDialog(null,"Choose Date");
+                    }
+          if(wt1.getText().isEmpty())
+                    {
+                    wt1.setText("Fill ");
+                   wt1.setForeground(Color.RED);}
+          if(wt2.getText().isEmpty())
+                    {
+                    wt2.setText("Fill ");
+                   wt2.setForeground(Color.RED);}
+          if(wt3.getText().isEmpty())
+                    {
+                    wt3.setText("Fill ");
+                   wt3.setForeground(Color.RED);}
+          if(wt4.getText().isEmpty())
+                    {
+                    wt4.setText("Fill ");
+                   wt4.setForeground(Color.RED);}
+          else{
           
          try{
              
@@ -525,7 +547,7 @@ public class vehiclet extends javax.swing.JFrame {
                  
                 int run =(int)runs.getValue();
                  vt = (float)tt/run;
-            pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
+            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
             pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
             pst.setString(3, ComboBox_driver.getSelectedItem().toString());
             pst.setString(4,  runs.getValue().toString());
@@ -554,7 +576,7 @@ public class vehiclet extends javax.swing.JFrame {
               catch(NumberFormatException | SQLException | ParseException | HeadlessException e){
               JOptionPane.showMessageDialog(null, e);
 
-        }
+        }}
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
@@ -717,12 +739,12 @@ public class vehiclet extends javax.swing.JFrame {
          String sql = "select *from drivers";
          pst = conn.prepareStatement(sql);
          rs =pst.executeQuery();
-         while(rs.next()){
+         while(rs.next())
+         {
           String fname = rs.getString("fname");
           String sname = rs.getString("sname");
           String name = fname+ " "+sname;
           ComboBox_driver.addItem(name);
-         
          }
      
      
@@ -745,7 +767,6 @@ public class vehiclet extends javax.swing.JFrame {
     private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmdviewvt;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -784,6 +805,7 @@ public class vehiclet extends javax.swing.JFrame {
     private javax.swing.JSpinner t32;
     private javax.swing.JSpinner t41;
     private javax.swing.JSpinner t42;
+    private com.toedter.calendar.JDateChooser txt_Date;
     private javax.swing.JMenuItem viewdr;
     private javax.swing.JMenuItem viewvh;
     private javax.swing.JTextField wt1;

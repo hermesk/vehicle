@@ -18,7 +18,7 @@ public class drivers extends javax.swing.JFrame {
         super("Factroy Drivers");
         initComponents();
         
-                 conn = javaconnect.connecrDb();
+            conn = javaconnect.connecrDb();
 
     }
 
@@ -246,12 +246,12 @@ public class drivers extends javax.swing.JFrame {
                     fname.setText("Fill ");
                    fname.setForeground(Color.RED);
                     }
-        else if(sname.getText().isEmpty())
+      if(sname.getText().isEmpty())
                     {
                     sname.setText("Fill ");
                      sname.setForeground(Color.RED);
                     }
-        else   if(phoneno.getText().length()>10||phoneno.getText().length()<10)
+      if(phoneno.getText().length()>10||phoneno.getText().length()<10)
                    {
                 phoneno.setText("invalid phone number");
                 phoneno.setForeground(Color.RED);}
