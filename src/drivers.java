@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -235,13 +236,25 @@ public class drivers extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
+        if(fname.getText().isEmpty())
+                    {
+                    fname.setText("Fill ");
+                    }
+        else if(sname.getText().isEmpty())
+                    {
+                    sname.setText("Fill ");
+                    }
+        else   if(phoneno.getText().length()>10||phoneno.getText().length()<10)
+                   {
+                phoneno.setText("invalid phone number");}
+                else{
         try{
                  String sql = "insert into drivers(fname,sname,phoneno ) values (?,?,?)";
                  
                  pst=conn.prepareStatement(sql);
-                 pst.setString(1, fname.getText());
-                 pst.setString(2, sname.getText());
-                 pst.setString(3, phoneno.getText());
+                 pst.setString(1, fname.getText().toUpperCase());
+                 pst.setString(2, sname.getText().toUpperCase());
+                 pst.setString(3, phoneno.getText().toUpperCase());
                  
                  pst.execute();
                  JOptionPane.showMessageDialog(null, "Saved");
@@ -251,7 +264,7 @@ public class drivers extends javax.swing.JFrame {
         catch(SQLException | HeadlessException e){
                     JOptionPane.showMessageDialog(null, e);
 
-        }
+        }}
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

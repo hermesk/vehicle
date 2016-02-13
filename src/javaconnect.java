@@ -7,12 +7,17 @@ public class javaconnect {
     
     Connection conn = null;
     
+    /**
+     *
+     * @return
+     */
     public static Connection connecrDb()
     {
         try{ 
-               Class.forName("com.mysql.jdbc.Driver");
-               Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vehicle?" + "user=root&password=admin");     
-            //JOptionPane.showMessageDialog(null, "connection established");
+               Class.forName("org.sqlite.JDBC");
+               Connection conn = DriverManager.getConnection
+              ("jdbc:sqlite:vehicle.sqlite");     
+              //JOptionPane.showMessageDialog(null, "connection established");
 
             return conn;
         }

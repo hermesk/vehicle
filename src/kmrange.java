@@ -58,7 +58,7 @@ public class kmrange extends javax.swing.JFrame {
 
         jLabel3.setText("Date");
 
-        jDateChooser1.setDateFormatString("yyy,MM,d\n");
+        jDateChooser1.setDateFormatString("yyy-MM-dd\n");
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -249,7 +249,7 @@ public class kmrange extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(586, 449));
+        setSize(new java.awt.Dimension(586, 550));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

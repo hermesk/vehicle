@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -36,6 +37,9 @@ public class vehicles extends javax.swing.JFrame {
         txt_regno = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         cmdexit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        txt_search = new javax.swing.JTextField();
+        cmdsearch = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -63,6 +67,11 @@ public class vehicles extends javax.swing.JFrame {
                 txt_regnoActionPerformed(evt);
             }
         });
+        txt_regno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_regnoKeyTyped(evt);
+            }
+        });
 
         jLabel1.setText("Enter  Vehicle Registration Number");
 
@@ -73,29 +82,48 @@ public class vehicles extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        cmdsearch.setText("Search");
+        cmdsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdsearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(cmd_save)
-                        .addGap(58, 58, 58)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(cmdexit))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmd_save)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_make, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txt_Date, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                                 .addComponent(txt_regno, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmdsearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_search, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,8 +131,10 @@ public class vehicles extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txt_regno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
+                    .addComponent(txt_regno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdsearch))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(txt_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -112,11 +142,12 @@ public class vehicles extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_make, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmd_save)
-                    .addComponent(cmdexit))
-                .addContainerGap(124, Short.MAX_VALUE))
+                    .addComponent(cmdexit)
+                    .addComponent(jButton1))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -126,7 +157,7 @@ public class vehicles extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +196,7 @@ public class vehicles extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,24 +211,37 @@ public class vehicles extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-        // TODO add your handling code here:
-         try{
+                    
+               if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
+                   {
+                 txt_regno.setText("enter valid Regno");
+                   }
+               else if(txt_make.getText().isEmpty())
+                    {
+                    txt_make.setText("Fill Make");
+                    }
+                 
+           else{
+              try{
                  String sql = "insert into vehicles(Regno,DOP,Make ) values (?,?,?)";
                  
-                 pst=conn.prepareStatement(sql);
-                 pst.setString(1, txt_regno.getText().toUpperCase());
-                 pst.setString(2, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
-                 pst.setString(3, txt_make.getText().toUpperCase());
+                pst=conn.prepareStatement(sql);
+                
+                pst.setString(1, txt_regno.getText().toUpperCase()); 
+                
+                pst.setString(2, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
+                
+                pst.setString(3, txt_make.getText().toUpperCase());
+                
+               
                  pst.execute();
                
                  JOptionPane.showMessageDialog(null, "Saved");
-
-        
-        }
+         }
         catch(SQLException | HeadlessException e){
-                    JOptionPane.showMessageDialog(null, e);
+                    //JOptionPane.showMessageDialog(null, );
 
-        }
+        }}
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void txt_regnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_regnoActionPerformed
@@ -220,6 +264,55 @@ public class vehicles extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cmdexitActionPerformed
 
+    private void cmdsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdsearchActionPerformed
+        // TODO add your handling code here:
+        try{
+        String sql = "select *from vehicles where Regno=?  ";
+
+          pst=conn.prepareStatement(sql);
+          pst.setString(1, txt_search.getText().toUpperCase());
+          rs=pst.executeQuery();
+          
+          if(rs.next()){
+            txt_regno.setText(rs.getString(1));
+            String dop = rs.getString(2);
+            java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dop);
+            txt_Date.setDate(date);
+            txt_make.setText(rs.getString(3));
+                      
+          }
+        }
+        catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+           
+        }
+    }//GEN-LAST:event_cmdsearchActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
+         
+        if(d==0){
+        String sql = "delete from vehicles where Regno=?";
+        
+          try {
+              pst=conn.prepareStatement(sql);
+              pst.setString(1, txt_regno.getText());
+              
+              pst.execute();
+                    JOptionPane.showMessageDialog(null, "deleted");
+
+          } catch (SQLException e) {
+                   JOptionPane.showMessageDialog(null, e);
+
+          }}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_regnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_regnoKeyTyped
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_txt_regnoKeyTyped
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -232,6 +325,8 @@ public class vehicles extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmdexit;
+    private javax.swing.JButton cmdsearch;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -243,6 +338,7 @@ public class vehicles extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser txt_Date;
     private javax.swing.JTextField txt_make;
     private javax.swing.JTextField txt_regno;
+    private javax.swing.JTextField txt_search;
     private javax.swing.JMenu viewdr;
     // End of variables declaration//GEN-END:variables
 }
