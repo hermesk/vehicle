@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 public class kmrange extends javax.swing.JFrame {
@@ -30,7 +29,7 @@ public class kmrange extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        txt_Date = new com.toedter.calendar.JDateChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         diesel = new javax.swing.JTextField();
@@ -58,9 +57,9 @@ public class kmrange extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel3.setText("Date");
+        jLabel3.setText("Choose Date");
 
-        txt_Date.setDateFormatString("yyy-MM-dd\n");
+        jDateChooser1.setDateFormatString("yyy-MM-dd\n");
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -251,12 +250,14 @@ public class kmrange extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel3)
-                        .addGap(27, 27, 27)
-                        .addComponent(txt_Date, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(114, 114, 114))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(80, 80, 80))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(174, 174, 174))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,14 +272,14 @@ public class kmrange extends javax.swing.JFrame {
                         .addComponent(jLabel9))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
                 .addGap(19, 19, 19)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(586, 550));
@@ -287,30 +288,32 @@ public class kmrange extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
-                    {
-                  JOptionPane.showMessageDialog(null,"Choose Date");
-                    }
         if(kmgl.getText().isEmpty())
                     {
-                   kmgl.setText("Fill ");
-                 kmgl.setForeground(Color.RED);}
+                   jLabel12.setText("KM on GL ");
+                   jLabel12.setForeground(Color.RED);}
+        
+         if(((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty())
+                    {jLabel3.setText("Choose Date");
+                     jLabel3.setForeground(Color.red);
+                    }
+        
         if(tkm.getText().isEmpty())
                     {
-                   tkm.setText("Fill ");
-               tkm.setForeground(Color.RED);}
+                   jLabel13.setText("Total KM covered");
+               jLabel13.setForeground(Color.RED);}
         if(diesel.getText().isEmpty())
                     {
-                    diesel.setText("Fill ");
-                   diesel.setForeground(Color.RED);}
+                    jLabel14.setText("Diesel consumed");
+                   jLabel14.setForeground(Color.RED);}
          if(dibal.getText().isEmpty())
                     {
-                    dibal.setText("Fill ");
-                   dibal.setForeground(Color.RED);}
+                    jLabel15.setText("Diesel Balance");
+                   jLabel15.setForeground(Color.RED);}
           if(tfw.getText().isEmpty())
                     {
-                    tfw.setText("Fill ");
-                   tfw.setForeground(Color.RED);}
+                    jLabel16.setText("Total Factory Weight");
+                   jLabel16.setForeground(Color.RED);}
           else{
             
               try{
@@ -320,7 +323,7 @@ public class kmrange extends javax.swing.JFrame {
          float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText()));
          float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText()));
          
-            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
+            pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
             pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
             pst.setString(3, ComboBox_driver.getSelectedItem().toString());
             pst.setString(4, kmgl.getText());
@@ -407,7 +410,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt){
     
-        ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).setText("");
            kmgl.setText("");
            tkm.setText("");
            diesel.setText("");
@@ -475,6 +478,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     private javax.swing.JButton cmd_save;
     private javax.swing.JTextField dibal;
     private javax.swing.JTextField diesel;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -491,7 +495,6 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     private javax.swing.JTextField kmgl;
     private javax.swing.JTextField tfw;
     private javax.swing.JTextField tkm;
-    private com.toedter.calendar.JDateChooser txt_Date;
     private javax.swing.JMenu viewkm;
     // End of variables declaration//GEN-END:variables
 }

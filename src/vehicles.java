@@ -228,17 +228,18 @@ public class vehicles extends javax.swing.JFrame {
                     
                if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
                    {
-                  txt_regno.setText("enter valid Regno");
-                  txt_regno.setForeground(Color.RED);
+                  jLabel1.setText("Enter  Vehicle Registration Number");
+                  jLabel1.setForeground(Color.RED);
                    }
                 if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
-                    {
-                  JOptionPane.showMessageDialog(null,"Choose Date");
+                    {jLabel2.setText("Date of Purchase");
+                     jLabel2.setForeground(Color.RED);
+
                     }
              if   (txt_make.getText().isEmpty())
                     {
-                    txt_make.setText("Fill Make");
-                    txt_make.setForeground(Color.RED);
+                    jLabel3.setText("Make");
+                    jLabel3.setForeground(Color.RED);
                     }
                  
            else{

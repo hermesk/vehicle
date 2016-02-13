@@ -105,7 +105,7 @@ public class drivers extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Sir Name");
+        jLabel2.setText("Sirname");
 
         cmdexit.setText("Exit");
         cmdexit.addActionListener(new java.awt.event.ActionListener() {
@@ -243,18 +243,18 @@ public class drivers extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(fname.getText().isEmpty())
                     {
-                    fname.setText("Fill ");
-                   fname.setForeground(Color.RED);
+                    jLabel1.setText("First Name ");
+                   jLabel1.setForeground(Color.RED);
                     }
       if(sname.getText().isEmpty())
                     {
-                    sname.setText("Fill ");
-                     sname.setForeground(Color.RED);
+                    jLabel2.setText("Sirname ");
+                     jLabel2.setForeground(Color.RED);
                     }
       if(phoneno.getText().length()>10||phoneno.getText().length()<10)
                    {
-                phoneno.setText("invalid phone number");
-                phoneno.setForeground(Color.RED);}
+                jLabel3.setText("Phone No");
+                jLabel3.setForeground(Color.RED);}
                 else{
         try{
                  String sql = "insert into drivers(fname,sname,phoneno ) values (?,?,?)";

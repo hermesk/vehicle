@@ -163,8 +163,13 @@ public class vehiclet extends javax.swing.JFrame {
         runs.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
 
         txt_Date.setDateFormatString(" yyyy-MM-d");
+        txt_Date.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_DateKeyTyped(evt);
+            }
+        });
 
-        jLabel16.setText("Date");
+        jLabel16.setText("Choose Date");
 
         t11.setModel(new SpinnerDateModel());
         t11.setEditor(new JSpinner.DateEditor(t11, "HH:mm"));
@@ -459,31 +464,31 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
-                    {
-                  JOptionPane.showMessageDialog(null,"Choose Date");
+        
+            if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
+                    {jLabel16.setText("Choose Date");
+                    jLabel16.setForeground(Color.RED);
                     }
           if(wt1.getText().isEmpty())
                     {
-                    wt1.setText("Fill ");
-                   wt1.setForeground(Color.RED);}
+                    jLabel6.setText("Enter factory Weight for run 1 ");
+                    jLabel6.setForeground(Color.RED);}
           if(wt2.getText().isEmpty())
                     {
-                    wt2.setText("Fill ");
-                   wt2.setForeground(Color.RED);}
+                    jLabel9.setText("Enter factory Weight for run 2");
+                   jLabel9.setForeground(Color.RED);}
           if(wt3.getText().isEmpty())
                     {
-                    wt3.setText("Fill ");
-                   wt3.setForeground(Color.RED);}
+                    jLabel12.setText("Enter factory Weight for run 3");
+                    jLabel12.setForeground(Color.RED);}
           if(wt4.getText().isEmpty())
                     {
-                    wt4.setText("Fill ");
-                   wt4.setForeground(Color.RED);}
-          else{
-          
-         try{
+                    jLabel15.setText("Enter factory Weight for run 4");
+                   jLabel15.setForeground(Color.RED);}
+          else{          
+              try{
              
-      Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
+              Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
               Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
   
          
@@ -581,6 +586,7 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
         // TODO add your handling code here:
+        ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
         wt1.setText("");
         wt2.setText("");
         wt3.setText("");
@@ -678,6 +684,15 @@ public class vehiclet extends javax.swing.JFrame {
         evt.consume();
          getToolkit().beep();}
     }//GEN-LAST:event_wt4KeyTyped
+
+    private void txt_DateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_DateKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if((Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '/'||evt.getKeyChar() == '-')){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_txt_DateKeyTyped
 
     /**
      * @param args the command line arguments
