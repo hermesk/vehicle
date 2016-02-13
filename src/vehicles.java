@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -214,11 +215,13 @@ public class vehicles extends javax.swing.JFrame {
                     
                if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
                    {
-                 txt_regno.setText("enter valid Regno");
+                  txt_regno.setText("enter valid Regno");
+                  txt_regno.setForeground(Color.RED);
                    }
                else if(txt_make.getText().isEmpty())
                     {
                     txt_make.setText("Fill Make");
+                    txt_make.setForeground(Color.RED);
                     }
                  
            else{

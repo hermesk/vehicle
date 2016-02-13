@@ -126,26 +126,26 @@ public class drivers extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addComponent(cmd_save)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fname, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(sname)
+                            .addComponent(phoneno))
+                        .addGap(18, 18, 18)
+                        .addComponent(search)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cmdexit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
-                            .addComponent(jButton1)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cmd_save)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmd_clear))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(sname, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fname, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phoneno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmd_clear)))))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,12 +167,16 @@ public class drivers extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(phoneno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmd_save)
-                    .addComponent(jButton1)
-                    .addComponent(cmd_clear)
-                    .addComponent(cmdexit))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmd_save)
+                            .addComponent(jButton1)
+                            .addComponent(cmdexit))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(cmd_clear)
+                        .addGap(21, 21, 21))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -180,8 +184,9 @@ public class drivers extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 35, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,14 +244,17 @@ public class drivers extends javax.swing.JFrame {
         if(fname.getText().isEmpty())
                     {
                     fname.setText("Fill ");
+                   fname.setForeground(Color.RED);
                     }
         else if(sname.getText().isEmpty())
                     {
                     sname.setText("Fill ");
+                     sname.setForeground(Color.RED);
                     }
         else   if(phoneno.getText().length()>10||phoneno.getText().length()<10)
                    {
-                phoneno.setText("invalid phone number");}
+                phoneno.setText("invalid phone number");
+                phoneno.setForeground(Color.RED);}
                 else{
         try{
                  String sql = "insert into drivers(fname,sname,phoneno ) values (?,?,?)";
@@ -312,10 +320,11 @@ public class drivers extends javax.swing.JFrame {
 
     private void phonenoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phonenoKeyTyped
 
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)|| c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE)){
-         getToolkit().beep();
+        char c=evt.getKeyChar();
+     if(!(Character.isDigit(c)||
+       (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
          evt.consume();
+  getToolkit().beep();
         }
     }//GEN-LAST:event_phonenoKeyTyped
 
@@ -325,7 +334,7 @@ public class drivers extends javax.swing.JFrame {
         String sql = "select *from drivers where fname=?  ";
 
           pst=conn.prepareStatement(sql);
-          pst.setString(1, txt_search.getText());
+          pst.setString(1, txt_search.getText().toUpperCase());
           rs=pst.executeQuery();
           
           if(rs.next()){
@@ -346,7 +355,7 @@ public class drivers extends javax.swing.JFrame {
         String sql = "select *from drivers where sname=?  ";
 
           pst=conn.prepareStatement(sql);
-          pst.setString(1, txt_search.getText());
+          pst.setString(1, txt_search.getText().toUpperCase());
           rs=pst.executeQuery();
           
           if(rs.next()){

@@ -1,5 +1,6 @@
 
 import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -104,6 +105,12 @@ public class vehiclet extends javax.swing.JFrame {
 
         jLabel15.setText("Enter factory Weight for run 4");
 
+        wt4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                wt4KeyTyped(evt);
+            }
+        });
+
         cmd_save.setText("Save");
         cmd_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +119,12 @@ public class vehiclet extends javax.swing.JFrame {
         });
 
         jLabel14.setText("Enter timein for run 4");
+
+        wt2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                wt2KeyTyped(evt);
+            }
+        });
 
         jLabel1.setText("Choose Vehicle");
 
@@ -125,6 +138,12 @@ public class vehiclet extends javax.swing.JFrame {
 
         jLabel6.setText("Enter factory Weight for run 1");
 
+        wt3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                wt3KeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("Enter timeout for run 2");
 
         jLabel9.setText("Enter factory Weight for run 2");
@@ -132,6 +151,11 @@ public class vehiclet extends javax.swing.JFrame {
         wt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 wt1ActionPerformed(evt);
+            }
+        });
+        wt1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                wt1KeyTyped(evt);
             }
         });
 
@@ -209,23 +233,20 @@ public class vehiclet extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ComboBox_driver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(wt4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(t22, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(t21, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(runs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                .addComponent(t11, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(t12, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(wt1, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(t32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                .addComponent(t31, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(wt2, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(t42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                .addComponent(t41, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(wt3, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(t22)
+                            .addComponent(t21)
+                            .addComponent(runs, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(t11)
+                            .addComponent(t12)
+                            .addComponent(wt1)
+                            .addComponent(t32, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(t31)
+                            .addComponent(wt2)
+                            .addComponent(t42, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(t41)
+                            .addComponent(wt3)
+                            .addComponent(wt4)))
                     .addComponent(jLabel8)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
@@ -598,6 +619,43 @@ public class vehiclet extends javax.swing.JFrame {
          viewvt vwvt = new viewvt();
                vwvt.setVisible(true);
     }//GEN-LAST:event_cmdviewvtActionPerformed
+
+    private void wt1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt1KeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
+        evt.consume();
+         getToolkit().beep();
+        }
+    }//GEN-LAST:event_wt1KeyTyped
+
+    private void wt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt2KeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_wt2KeyTyped
+
+    private void wt3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt3KeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_wt3KeyTyped
+
+    private void wt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
+        evt.consume();
+         getToolkit().beep();}
+    }//GEN-LAST:event_wt4KeyTyped
 
     /**
      * @param args the command line arguments
