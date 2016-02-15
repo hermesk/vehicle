@@ -288,32 +288,13 @@ public class kmrange extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-        if(kmgl.getText().isEmpty())
-                    {
-                   jLabel12.setText("KM on GL ");
-                   jLabel12.setForeground(Color.RED);}
+        if(kmgl.getText().isEmpty()||tkm.getText().isEmpty()||diesel.getText().isEmpty()||
+                dibal.getText().isEmpty()||tfw.getText().isEmpty()||tfw.getText().isEmpty()||
+                ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty())
+        {
+           JOptionPane.showMessageDialog(null, "Fill all the fields!");
         
-         if(((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty())
-                    {jLabel3.setText("Choose Date");
-                     jLabel3.setForeground(Color.red);
-                    }
-        
-        if(tkm.getText().isEmpty())
-                    {
-                   jLabel13.setText("Total KM covered");
-               jLabel13.setForeground(Color.RED);}
-        if(diesel.getText().isEmpty())
-                    {
-                    jLabel14.setText("Diesel consumed");
-                   jLabel14.setForeground(Color.RED);}
-         if(dibal.getText().isEmpty())
-                    {
-                    jLabel15.setText("Diesel Balance");
-                   jLabel15.setForeground(Color.RED);}
-          if(tfw.getText().isEmpty())
-                    {
-                    jLabel16.setText("Total Factory Weight");
-                   jLabel16.setForeground(Color.RED);}
+     }
           else{
             
               try{
