@@ -464,27 +464,12 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-        
-            if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
-                    {jLabel16.setText("Choose Date");
-                    jLabel16.setForeground(Color.RED);
-                    }
-          if(wt1.getText().isEmpty())
-                    {
-                    jLabel6.setText("Enter factory Weight for run 1 ");
-                    jLabel6.setForeground(Color.RED);}
-          if(wt2.getText().isEmpty())
-                    {
-                    jLabel9.setText("Enter factory Weight for run 2");
-                   jLabel9.setForeground(Color.RED);}
-          if(wt3.getText().isEmpty())
-                    {
-                    jLabel12.setText("Enter factory Weight for run 3");
-                    jLabel12.setForeground(Color.RED);}
-          if(wt4.getText().isEmpty())
-                    {
-                    jLabel15.setText("Enter factory Weight for run 4");
-                   jLabel15.setForeground(Color.RED);}
+        if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
+               wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
+        {
+             JOptionPane.showMessageDialog(null, "Fill all the fields!");
+
+        }
           else{          
               try{
              

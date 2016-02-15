@@ -241,20 +241,15 @@ public class drivers extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-        if(fname.getText().isEmpty())
-                    {
-                    jLabel1.setText("First Name ");
-                   jLabel1.setForeground(Color.RED);
-                    }
-      if(sname.getText().isEmpty())
-                    {
-                    jLabel2.setText("Sirname ");
-                     jLabel2.setForeground(Color.RED);
-                    }
-      if(phoneno.getText().length()>10||phoneno.getText().length()<10)
-                   {
-                jLabel3.setText("Phone No");
-                jLabel3.setForeground(Color.RED);}
+        if(fname.getText().isEmpty()||sname.getText().isEmpty())
+            {
+                       JOptionPane.showMessageDialog(null, "Fill all the fields!");
+
+            
+        if(phoneno.getText().length()>10||phoneno.getText().length()<10)
+        {              JOptionPane.showMessageDialog(null, "Invalid phone number!");
+
+        }}
                 else{
         try{
                  String sql = "insert into drivers(fname,sname,phoneno ) values (?,?,?)";

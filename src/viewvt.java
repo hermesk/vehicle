@@ -22,10 +22,10 @@ public class viewvt extends javax.swing.JFrame {
 
     private void update_table(){
       try{
-          String sql = "select date as 'Date',driver as 'Driver',runs as 'No of Runs',tor1 as 'TimeOut R1',"
-                  + "tir1 as 'TimeIn R1', fwr1 as'Factory Weight',tor2 as 'TimeOut R2',tir2 as 'TimeIn R2', fwr2 as'Factory Weight'"
-                  + ",tor3 as 'TimeOut R3',tir3 as 'TimeIn R3', fwr3 as'Factory Weight',tor4 as 'TimeOut R4',tir4 as 'TimeIn R4', "
-                  + "fwr4 as'Factory Weight',tfw as 'Total Factory Weight',vt as 'Vehicleturnabout'from vt";
+          String sql = "select date as 'Date',driver as 'Driver',runs as 'Runs',tor1 as 'TimeOut R1',"
+                  + "tir1 as 'TimeIn R1',tor2 as 'TimeOut R2',tir2 as 'TimeIn R2'"
+                  + ",tor3 as 'TimeOut R3',tir3 as 'TimeIn R3',tor4 as 'TimeOut R4',tir4 as 'TimeIn R4', "
+                  + "tfw as 'Total Factory Weight',vt as 'Vehicleturnabout'from vt";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));

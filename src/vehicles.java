@@ -225,24 +225,17 @@ public class vehicles extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-                    
-               if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
-                   {
-                  jLabel1.setText("Enter  Vehicle Registration Number");
-                  jLabel1.setForeground(Color.RED);
-                   }
-                if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
-                    {jLabel2.setText("Date of Purchase");
-                     jLabel2.setForeground(Color.RED);
-
-                    }
-             if   (txt_make.getText().isEmpty())
-                    {
-                    jLabel3.setText("Make");
-                    jLabel3.setForeground(Color.RED);
-                    }
-                 
+              
+             if(txt_make.getText().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
+             {           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+             
+             if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
+                        {   
+                           JOptionPane.showMessageDialog(null, "Invalid registration number!");
+                        }
+             }
            else{
+                   
               try{
                  String sql = "insert into vehicles(Regno,DOP,Make ) values (?,?,?)";
                  
