@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,6 +62,12 @@ public class vehicles extends javax.swing.JFrame {
         cmd_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmd_saveActionPerformed(evt);
+            }
+        });
+
+        txt_make.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_makeKeyPressed(evt);
             }
         });
 
@@ -333,6 +340,43 @@ public class vehicles extends javax.swing.JFrame {
       ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
         txt_make.setText("");
     }//GEN-LAST:event_cmdclearActionPerformed
+
+    private void txt_makeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_makeKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+             
+             if(txt_make.getText().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
+             {           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+             
+             if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
+                        {   
+                           JOptionPane.showMessageDialog(null, "Invalid registration number!");
+                        }
+             }
+           else{
+                   
+              try{
+                 String sql = "insert into vehicles(Regno,DOP,Make ) values (?,?,?)";
+                 
+                pst=conn.prepareStatement(sql);
+                
+                pst.setString(1, txt_regno.getText().toUpperCase()); 
+                
+                pst.setString(2, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
+                
+                pst.setString(3, txt_make.getText().toUpperCase());
+                
+               
+                 pst.execute();
+               
+                 JOptionPane.showMessageDialog(null, "Saved");
+         }
+        catch(SQLException | HeadlessException e){
+                    //JOptionPane.showMessageDialog(null, );
+
+        }} 
+        }
+    }//GEN-LAST:event_txt_makeKeyPressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

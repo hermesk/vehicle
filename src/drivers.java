@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class drivers extends javax.swing.JFrame {
@@ -248,7 +250,20 @@ public class drivers extends javax.swing.JFrame {
             
         if(phoneno.getText().length()>10||phoneno.getText().length()<10)
         {              JOptionPane.showMessageDialog(null, "Invalid phone number!");
-
+        
+                  try {
+                        String sql ="SELECT COUNT(*) AS total FROM drivers  where phoneno = '"+phoneno.getText()+"'"; 
+                        pst=conn.prepareStatement(sql);
+                        rs = pst.executeQuery();
+                        while(rs.next()){
+                        if(rs.getInt("total")>0){
+                            JOptionPane.showMessageDialog(null, "phone number already exist!");
+                        }
+                        }
+                } catch (SQLException e) {
+                               JOptionPane.showMessageDialog(null, e);
+                           }
+         
         }}
                 else{
         try{

@@ -1,6 +1,7 @@
 
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -45,6 +46,12 @@ public class login extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Password");
+
+        txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,6 +136,37 @@ public class login extends javax.swing.JFrame {
 
    }
     }//GEN-LAST:event_cmd_loginActionPerformed
+
+    private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            String sql = "select * from users where username=? and password=?";
+        
+        try{
+             pst = conn.prepareStatement(sql);
+             pst.setString(1,txt_user.getText());
+             pst.setString(2,txt_password.getText());
+             
+             rs =pst.executeQuery(); 
+             if(rs.next()){
+                 vehiclet vt = new  vehiclet();
+                 vt.setVisible(true);
+                        close();
+               
+             }
+
+             else {
+                            JOptionPane.showMessageDialog(null,"Incorrect login details");
+}
+            
+        
+    }                                         
+   catch(SQLException | HeadlessException e){
+                      JOptionPane.showMessageDialog(null,e);
+
+   }
+        }
+    }//GEN-LAST:event_txt_passwordKeyPressed
 
     /**
      * @param args the command line arguments

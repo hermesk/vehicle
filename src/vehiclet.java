@@ -107,6 +107,9 @@ public class vehiclet extends javax.swing.JFrame {
         jLabel15.setText("Enter factory Weight for run 4");
 
         wt4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                wt4KeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 wt4KeyTyped(evt);
             }
@@ -679,6 +682,118 @@ public class vehiclet extends javax.swing.JFrame {
          getToolkit().beep();}
     }//GEN-LAST:event_txt_DateKeyTyped
 
+    private void wt4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+             if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
+               wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
+        {
+             JOptionPane.showMessageDialog(null, "Fill all the fields!");
+
+        }
+          else{          
+              try{
+             
+              Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
+              Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
+  
+         
+            String sql = "insert into vt(date,vehicle,driver,runs,tor1,tir1,fwr1"
+                    + ",tor2,tir2,fwr2,tor3,tir3,fwr3,tor4,tir4,fwr4,tfw,vt)"
+                    
+            + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            pst=conn.prepareStatement(sql);
+            
+          SimpleDateFormat sdf=new SimpleDateFormat("kk:mm");
+          sdf.setTimeZone(TimeZone.getDefault());
+          String tt11=sdf.format(t11.getValue());
+          String tt12=sdf.format(t12.getValue());
+          String tt21=sdf.format(t21.getValue());          
+          String tt22=sdf.format(t22.getValue());
+          String tt31=sdf.format(t31.getValue()); 
+          String tt32=sdf.format(t32.getValue());
+          String tt41=sdf.format(t41.getValue());
+          String tt42=sdf.format(t42.getValue()); 
+          //FT RUN1
+                 Date d11 = sdf.parse(tt11);
+	         Date d12= sdf.parse(tt12);
+                 long diff1 = d12.getTime()-d11.getTime();
+                 long diffH1 = diff1 / (60 * 60 * 1000) % 24;
+                 long diffM1 = diff1 / (60 * 1000) % 60;
+                 th1 = th+diffH1;
+                 tm1 = tm+diffM1;
+                 tmh1 = tm1/60;
+                 TH1 = tmh1 +th1;
+          //FT RUN2
+                 Date d21 = sdf.parse(tt21);
+	         Date d22= sdf.parse(tt22);
+                 long diff2 = d22.getTime() - d21.getTime();
+                 long diffH2 = diff2 / (60 * 60 * 1000) % 24;
+                 long diffM2 = diff2 / (60 * 1000) % 60;
+                 th2 = th+diffH2;
+                 tm2 = tm+diffM2;
+                 tmh2 = tm2/60;
+                 TH2 = tmh2 +th2;
+           //FT RUN3      
+                 Date d31 = sdf.parse(tt31);
+	         Date d32= sdf.parse(tt32);
+                 long diff3 = d32.getTime() - d31.getTime();
+                 long diffH3 = diff3 / (60 * 60 * 1000) % 24;
+                 long diffM3 = diff3 / (60 * 1000) % 60;
+                 th3 = th+diffH3;
+                 tm3 = tm+diffM3;
+                 tmh3 = tm3/60;
+                 TH3 = tmh3 +th3; 
+           //FT RUN4      
+                 Date d41 = sdf.parse(tt41);
+	         Date d42= sdf.parse(tt42);
+                 long diff4 = d42.getTime() - d41.getTime();
+                 long diffH4 = diff4 / (60 * 60 * 1000) % 24;//hrs
+                 long diffM4 = diff4 / (60 * 1000) % 60;//mins
+                 th4 = th+diffH4;
+                 tm4 = tm+diffM4;
+                 tmh4 = tm4/60;
+                 TH4 = tmh4 +th4; 
+                 tt = TH1+TH2+TH3+TH4;
+                 
+                int run =(int)runs.getValue();
+                 vt = (float)tt/run;
+            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
+            pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
+            pst.setString(3, ComboBox_driver.getSelectedItem().toString());
+            pst.setString(4,  runs.getValue().toString());
+            
+            pst.setString(5,tt11 );
+            pst.setString(6, tt12);
+            pst.setString(7, wt1.getText());
+            
+            pst.setString(8, tt21);
+            pst.setString(9, tt22);
+            pst.setString(10,wt2.getText());
+            
+            pst.setString(11, tt31);
+            pst.setString(12, tt32);
+            pst.setString(13, wt3.getText());
+            
+            pst.setString(14, tt41);
+            pst.setString(15, tt42);
+            pst.setString(16, wt4.getText());
+            pst.setFloat(17, tfw);
+            pst.setDouble(18,vt );
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Saved Successfully");
+
+        }
+              catch(NumberFormatException | SQLException | ParseException | HeadlessException e){
+              JOptionPane.showMessageDialog(null, e);
+
+        }}
+    }                                        
+
+        
+    }//GEN-LAST:event_wt4KeyPressed
+
+        
     /**
      * @param args the command line arguments
      */

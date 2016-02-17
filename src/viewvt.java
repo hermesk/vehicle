@@ -120,6 +120,7 @@ public class viewvt extends javax.swing.JFrame {
       MessageFormat footer = new MessageFormat("Page{0,number,integer}");
 
       try{
+          
            tablevt.print(JTable.PrintMode.NORMAL,header,footer);
          }
       catch(java.awt.print.PrinterException e)
