@@ -37,7 +37,7 @@ public class drivers extends javax.swing.JFrame {
         cmd_clear = new javax.swing.JButton();
         fname = new javax.swing.JTextField();
         phoneno = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        cmd_update = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         cmd_save = new javax.swing.JButton();
@@ -84,10 +84,10 @@ public class drivers extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cmd_update.setText("Update");
+        cmd_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cmd_updateActionPerformed(evt);
             }
         });
 
@@ -132,8 +132,7 @@ public class drivers extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(fname, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                            .addComponent(sname)
-                            .addComponent(phoneno))
+                            .addComponent(sname))
                         .addGap(18, 18, 18)
                         .addComponent(search)
                         .addGap(18, 18, 18)
@@ -141,12 +140,12 @@ public class drivers extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cmdexit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmd_clear)))))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmd_clear)
+                        .addGap(41, 41, 41)
+                        .addComponent(cmd_update))
+                    .addComponent(phoneno, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -163,22 +162,22 @@ public class drivers extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(sname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(phoneno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(phoneno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmd_save)
-                            .addComponent(jButton1)
-                            .addComponent(cmdexit))
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(cmd_clear)
-                        .addGap(21, 21, 21))))
+                        .addGap(21, 21, 21))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmd_save)
+                                .addComponent(jButton1)
+                                .addComponent(cmdexit))
+                            .addComponent(cmd_update))
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -243,46 +242,51 @@ public class drivers extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-        if(fname.getText().isEmpty()||sname.getText().isEmpty())
+        if(fname.getText().isEmpty()||sname.getText().isEmpty()||phoneno.getText().isEmpty())
             {
                        JOptionPane.showMessageDialog(null, "Fill all the fields!");
-
+            }
             
-        if(phoneno.getText().length()>10||phoneno.getText().length()<10)
-        {              JOptionPane.showMessageDialog(null, "Invalid phone number!");
+            else if(phoneno.getText().length()>10||phoneno.getText().length()<10)
+              {
+            JOptionPane.showMessageDialog(null, "Invalid phone number!");
+              } 
+            else if(phoneno.getText().length()==10){
         
                   try {
                         String sql ="SELECT COUNT(*) AS total FROM drivers  where phoneno = '"+phoneno.getText()+"'"; 
                         pst=conn.prepareStatement(sql);
                         rs = pst.executeQuery();
                         while(rs.next()){
-                        if(rs.getInt("total")>0){
-                            JOptionPane.showMessageDialog(null, "phone number already exist!");
+                        if(rs.getInt("total")>0)
+                        {
+                          JOptionPane.showMessageDialog(null, "phone number already exist!");
                         }
-                        }
-                } catch (SQLException e) {
-                               JOptionPane.showMessageDialog(null, e);
-                           }
-         
-        }}
-                else{
-        try{
-                 String sql = "insert into drivers(fname,sname,phoneno ) values (?,?,?)";
+          else{
+               try{
+                 String add = "insert into drivers(fname,sname,phoneno ) values (?,?,?)";
                  
-                 pst=conn.prepareStatement(sql);
+                 pst=conn.prepareStatement(add);
                  pst.setString(1, fname.getText().toUpperCase());
                  pst.setString(2, sname.getText().toUpperCase());
                  pst.setString(3, phoneno.getText().toUpperCase());
                  
                  pst.execute();
                  JOptionPane.showMessageDialog(null, "Saved");
-
-        
-        }
+           }
         catch(SQLException | HeadlessException e){
                     JOptionPane.showMessageDialog(null, e);
 
         }}
+                        }
+                } catch (SQLException e) {
+                               JOptionPane.showMessageDialog(null, e);
+                           }
+         
+        }
+        else
+            {};
+                
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -305,13 +309,14 @@ public class drivers extends javax.swing.JFrame {
           }}
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
         // TODO add your handling code here:
    try{
-        String  value1 = fname.getText();
-        String  value3 = phoneno.getText();
+        String  value1 = fname.getText().toUpperCase();
+        String  value2 = sname.getText().toUpperCase();
+        String  value3 = phoneno.getText().toUpperCase();
         
-         String sql = "update drivers set fname='"+value1+"',sname='"+value1+"',phoneno='"+value3+"'WHERE phoneno='"+value3+"'";
+         String sql = "update drivers set fname='"+value1+"',sname='"+value2+"',phoneno='"+value3+"'WHERE phoneno='"+value3+"'";
          
          pst = conn.prepareStatement(sql);
          pst.execute();
@@ -322,7 +327,7 @@ public class drivers extends javax.swing.JFrame {
           {
                JOptionPane.showMessageDialog(null, e);
             }   
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cmd_updateActionPerformed
 
     private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
         // TODO add your handling code here:
@@ -452,10 +457,10 @@ public class drivers extends javax.swing.JFrame {
     private javax.swing.JMenuItem closedr;
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_save;
+    private javax.swing.JButton cmd_update;
     private javax.swing.JButton cmdexit;
     private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -472,7 +472,7 @@ public class vehiclet extends javax.swing.JFrame {
         {
              JOptionPane.showMessageDialog(null, "Fill all the fields!");
 
-        }
+        } 
           else{          
               try{
              
