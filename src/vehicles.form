@@ -122,7 +122,7 @@
                           <Group type="102" attributes="0">
                               <Component id="cmdclear" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmd_delete" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txt_make" min="-2" pref="142" max="-2" attributes="0"/>
@@ -172,7 +172,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cmd_save" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmdexit" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmd_delete" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmdclear" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="143" max="32767" attributes="0"/>
@@ -228,12 +228,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdexitActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="cmd_delete">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmd_deleteActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_search">

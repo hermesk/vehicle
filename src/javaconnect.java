@@ -7,10 +7,7 @@ public class javaconnect {
     
     Connection conn = null;
     
-    /**
-     *
-     * @return
-     */
+  
     public static Connection connecrDb()
     {
         try{ 

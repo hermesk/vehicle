@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -39,7 +40,7 @@ public class vehicles extends javax.swing.JFrame {
         txt_regno = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         cmdexit = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        cmd_delete = new javax.swing.JButton();
         txt_search = new javax.swing.JTextField();
         cmdsearch = new javax.swing.JButton();
         cmdclear = new javax.swing.JButton();
@@ -91,10 +92,10 @@ public class vehicles extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Delete");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cmd_delete.setText("Delete");
+        cmd_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cmd_deleteActionPerformed(evt);
             }
         });
 
@@ -128,7 +129,7 @@ public class vehicles extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cmdclear)
                         .addGap(22, 22, 22)
-                        .addComponent(jButton1))
+                        .addComponent(cmd_delete))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txt_make, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -166,7 +167,7 @@ public class vehicles extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmd_save)
                     .addComponent(cmdexit)
-                    .addComponent(jButton1)
+                    .addComponent(cmd_delete)
                     .addComponent(cmdclear))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
@@ -316,18 +317,27 @@ public class vehicles extends javax.swing.JFrame {
                       
           }
         }
-        catch(Exception e){
+        catch(SQLException | ParseException e){
                 JOptionPane.showMessageDialog(null, e);
            
         }
     }//GEN-LAST:event_cmdsearchActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cmd_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_deleteActionPerformed
         // TODO add your handling code here:
-        int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
+         if(txt_make.getText().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||
+                     txt_regno.getText().isEmpty())
+             {           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+             }
+             else if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
+                        {   
+                           JOptionPane.showMessageDialog(null, "Invalid registration number!");
+                        }
+             else{
+                   int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
          
-        if(d==0){
-        String sql = "delete from vehicles where Regno=?";
+                 if(d==0){
+                 String sql = "delete from vehicles where Regno=?";
         
           try {
               pst=conn.prepareStatement(sql);
@@ -339,8 +349,8 @@ public class vehicles extends javax.swing.JFrame {
           } catch (SQLException e) {
                    JOptionPane.showMessageDialog(null, e);
 
-          }}
-    }//GEN-LAST:event_jButton1ActionPerformed
+          }}}
+    }//GEN-LAST:event_cmd_deleteActionPerformed
 
     private void txt_regnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_regnoKeyTyped
         // TODO add your handling code here:
@@ -402,11 +412,11 @@ public class vehicles extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmd_delete;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmdclear;
     private javax.swing.JButton cmdexit;
     private javax.swing.JButton cmdsearch;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
