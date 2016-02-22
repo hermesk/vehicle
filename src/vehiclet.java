@@ -79,14 +79,6 @@ public class vehiclet extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        addr = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        viewdr = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        addvh = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        viewvh = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("VehicleTurnabout"); // NOI18N
@@ -393,48 +385,6 @@ public class vehiclet extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Drivers");
-
-        addr.setText("Add");
-        addr.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                addrMousePressed(evt);
-            }
-        });
-        jMenu3.add(addr);
-        jMenu3.add(jSeparator3);
-
-        viewdr.setText("View");
-        viewdr.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                viewdrMousePressed(evt);
-            }
-        });
-        jMenu3.add(viewdr);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Vehicles");
-
-        addvh.setText("Add");
-        addvh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                addvhMousePressed(evt);
-            }
-        });
-        jMenu4.add(addvh);
-        jMenu4.add(jSeparator2);
-
-        viewvh.setText("View");
-        viewvh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                viewvhMousePressed(evt);
-            }
-        });
-        jMenu4.add(viewvh);
-
-        jMenuBar1.add(jMenu4);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -605,30 +555,6 @@ public class vehiclet extends javax.swing.JFrame {
          viewkmr vkmr = new viewkmr();
                 vkmr.setVisible(true);
     }//GEN-LAST:event_jMenuItem2MousePressed
-
-    private void addvhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addvhMousePressed
-        // TODO add your handling code here:
-        vehicles v = new vehicles();
-                 v.setVisible(true);
-    }//GEN-LAST:event_addvhMousePressed
-
-    private void viewvhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewvhMousePressed
-        // TODO add your handling code here:
-        viewvehicles vwvh = new viewvehicles();
-                     vwvh.setVisible(true);
-    }//GEN-LAST:event_viewvhMousePressed
-
-    private void addrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addrMousePressed
-        // TODO add your handling code here:
-        drivers dr = new drivers();
-                 dr.setVisible(true);
-    }//GEN-LAST:event_addrMousePressed
-
-    private void viewdrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewdrMousePressed
-        // TODO add your handling code here:
-        viewdrivers view = new viewdrivers();
-           view.setVisible(true);
-    }//GEN-LAST:event_viewdrMousePressed
 
     private void cmdviewvtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdviewvtActionPerformed
         // TODO add your handling code here:
@@ -876,8 +802,6 @@ public class vehiclet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox_driver;
     private javax.swing.JComboBox ComboBox_vehicle;
-    private javax.swing.JMenuItem addr;
-    private javax.swing.JMenuItem addvh;
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_save;
@@ -900,16 +824,12 @@ public class vehiclet extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JMenuItem logout;
     private javax.swing.JSpinner runs;
     private javax.swing.JSpinner t11;
@@ -921,8 +841,6 @@ public class vehiclet extends javax.swing.JFrame {
     private javax.swing.JSpinner t41;
     private javax.swing.JSpinner t42;
     private com.toedter.calendar.JDateChooser txt_Date;
-    private javax.swing.JMenuItem viewdr;
-    private javax.swing.JMenuItem viewvh;
     private javax.swing.JTextField wt1;
     private javax.swing.JTextField wt2;
     private javax.swing.JTextField wt3;
