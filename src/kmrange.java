@@ -1,5 +1,4 @@
 
-import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

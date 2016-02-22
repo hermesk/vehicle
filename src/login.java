@@ -113,16 +113,25 @@ public class login extends javax.swing.JFrame {
         String sql = "select * from users where username=? and password=?";
         
         try{
+             //int l = rs.getInt("al");
              pst = conn.prepareStatement(sql);
              pst.setString(1,txt_user.getText());
              pst.setString(2,txt_password.getText());
              
              rs =pst.executeQuery(); 
+             
              if(rs.next()){
-                 vehiclet vt = new  vehiclet();
+                 String name =  rs.getString("username"); 
+                 if(name.equals("admin")){
+                adminvt vt = new  adminvt();
                  vt.setVisible(true);
-                        close();
-               
+                        close();}
+                 else{
+                     vehiclet vt = new  vehiclet();
+                     vt.setVisible(true);
+                        close();}
+                   
+                    
              }
 
              else {

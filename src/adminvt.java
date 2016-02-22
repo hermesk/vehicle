@@ -106,6 +106,7 @@ public class adminvt extends javax.swing.JFrame {
         kmr = new javax.swing.JMenu();
         vehicle = new javax.swing.JMenu();
         dr = new javax.swing.JMenu();
+        adduser = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -449,6 +450,14 @@ public class adminvt extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(dr);
+
+        adduser.setText("Add User");
+        adduser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                adduserMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(adduser);
 
         setJMenuBar(jMenuBar1);
 
@@ -960,9 +969,15 @@ public class adminvt extends javax.swing.JFrame {
 
     private void drMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drMouseClicked
         // TODO add your handling code here:
-        admindrivers dr = new admindrivers();
-                   dr.setVisible(true);
+        admindrivers adr = new admindrivers();
+                   adr.setVisible(true);
     }//GEN-LAST:event_drMouseClicked
+
+    private void adduserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adduserMouseClicked
+        // TODO add your handling code here:
+        register rg = new register();
+                 rg.setVisible(true);
+    }//GEN-LAST:event_adduserMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1044,6 +1059,7 @@ public class adminvt extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox_driver;
     private javax.swing.JComboBox ComboBox_vehicle;
+    private javax.swing.JMenu adduser;
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_delete;
     private javax.swing.JButton cmd_print;
