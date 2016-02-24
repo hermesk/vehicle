@@ -113,7 +113,6 @@ public class login extends javax.swing.JFrame {
         String sql = "select * from users where username=? and password=?";
         
         try{
-             //int l = rs.getInt("al");
              pst = conn.prepareStatement(sql);
              pst.setString(1,txt_user.getText());
              pst.setString(2,txt_password.getText());
@@ -122,7 +121,7 @@ public class login extends javax.swing.JFrame {
              
              if(rs.next()){
                  String name =  rs.getString("username"); 
-                 if(name.equals("admin")){
+                 if(name.equals("admin")||name.equals("root")){
                 adminvt vt = new  adminvt();
                  vt.setVisible(true);
                         close();}

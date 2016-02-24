@@ -1,5 +1,7 @@
 
 import java.awt.HeadlessException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,7 +49,9 @@ public class register extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         uname = new javax.swing.JTextField();
         cmd_register = new javax.swing.JButton();
+        cmd_del = new javax.swing.JButton();
         cmd_clear = new javax.swing.JButton();
+        cmd_update = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableusers = new javax.swing.JTable();
 
@@ -68,10 +72,24 @@ public class register extends javax.swing.JFrame {
             }
         });
 
+        cmd_del.setText("Delete");
+        cmd_del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_delActionPerformed(evt);
+            }
+        });
+
         cmd_clear.setText("Clear");
         cmd_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmd_clearActionPerformed(evt);
+            }
+        });
+
+        cmd_update.setText("Update");
+        cmd_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_updateActionPerformed(evt);
             }
         });
 
@@ -82,21 +100,24 @@ public class register extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(cmd_register))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pwd, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                             .addComponent(uname, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cpwd)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cmd_register)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmd_clear)
-                        .addGap(0, 97, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmd_update)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmd_del)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -114,10 +135,13 @@ public class register extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cpwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmd_register)
-                    .addComponent(cmd_clear)))
+                    .addComponent(cmd_clear)
+                    .addComponent(cmd_del)
+                    .addComponent(cmd_update))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         tableusers.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,7 +169,7 @@ public class register extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -156,7 +180,7 @@ public class register extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,13 +209,13 @@ public class register extends javax.swing.JFrame {
                         }
               else{
          try{
-                 String sql = "insert into users(username,password,al ) values (?,?,?)";
+                 String sql = "insert into users(username,password) values (?,?)";
                 // String mpwd = (pwd.getText());
                  //String mypwd =md5(mpwd);
                  
                 pst=conn.prepareStatement(sql);
                 pst.setString(1, uname.getText()); 
-                pst.setString(2,pwd.getText());
+                pst.setString(2,md5(pwd.getText()));
                 
                 pst.execute();
                
@@ -242,6 +266,75 @@ public class register extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmd_clearActionPerformed
 
+    private void cmd_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_delActionPerformed
+        // TODO add your handling code here:
+        if(uname.getText().isEmpty()||pwd.getText().isEmpty()||cpwd.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+        }
+        else if(!pwd.getText().equals(cpwd.getText())){
+            JOptionPane.showMessageDialog(null, "Password Mismatch!");
+        }
+        else{
+             int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
+
+            if(d==0){
+                String sql = "delete from users where username=?";
+
+            try {
+                String name =  rs.getString("username"); 
+                 if(!name.equals("admin")&&!name.equals("root"))
+                 {
+                     pst=conn.prepareStatement(sql);
+                     pst.setString(1, uname.getText());
+                     
+                     pst.execute();
+                     JOptionPane.showMessageDialog(null, "Deleted");
+ 
+                                   }
+                 else{
+                          JOptionPane.showMessageDialog(null, "Cannot Delete Admin Account");
+  
+                     }
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+
+            }
+            update_table();
+            }}
+    }//GEN-LAST:event_cmd_delActionPerformed
+
+    private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
+        // TODO add your handling code here:
+         if(uname.getText().isEmpty()||pwd.getText().isEmpty()||cpwd.getText().isEmpty()){
+           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           }
+        else if(!pwd.getText().equals(cpwd.getText())){
+        JOptionPane.showMessageDialog(null, "Password Mismatch!");
+        }
+               
+       else{
+        try{
+                String  value1 = uname.getText().trim();
+                String  value2 = md5(pwd.getText().trim());
+
+                String sql = "update users set username='"+value1+"',password='"+value2+"'WHERE username='"+value1+"'";
+
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Password  Changed");
+
+                     }
+               catch(NumberFormatException | SQLException e){
+        JOptionPane.showMessageDialog(null, e);
+        }
+        
+        update_table();
+
+        }
+           
+    }//GEN-LAST:event_cmd_updateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,10 +370,28 @@ public class register extends javax.swing.JFrame {
             }
         });
     }
+      private String md5(String c) 
+      {
+       try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[]messageDigest =md.digest(c.getBytes());
+            BigInteger number =new BigInteger(1,messageDigest);
+            String hashtext = number.toString(16);
+            while(hashtext.length()<32){
+            hashtext ="0"+hashtext;
+            }
+            return hashtext;
+          }
+          catch(Exception ex){
+          }
+        return null;
 
+       }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_clear;
+    private javax.swing.JButton cmd_del;
     private javax.swing.JButton cmd_register;
+    private javax.swing.JButton cmd_update;
     private javax.swing.JPasswordField cpwd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
