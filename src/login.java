@@ -135,8 +135,9 @@ public class login extends javax.swing.JFrame {
                     }
 
              else {
-                      JOptionPane.showMessageDialog(null,"Incorrect login details");
-}
+         JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Incorrect login details!</font></h2></html>");
+     
+               }
             
         
     }                                         
@@ -165,8 +166,9 @@ public class login extends javax.swing.JFrame {
              }
 
              else {
-                            JOptionPane.showMessageDialog(null,"Incorrect login details");
-}
+               JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Incorrect login details!</font></h2></html>");
+
+                }
             
         
     }                                         
