@@ -3,6 +3,8 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.*;
 import javax.swing.JOptionPane;
 public class login extends javax.swing.JFrame {
@@ -10,8 +12,6 @@ public class login extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
-    
     
     public login() {
         super("Login");
@@ -115,26 +115,27 @@ public class login extends javax.swing.JFrame {
         try{
              pst = conn.prepareStatement(sql);
              pst.setString(1,txt_user.getText());
-             pst.setString(2,txt_password.getText());
+             pst.setString(2,md5(txt_password.getText()));
              
              rs =pst.executeQuery(); 
              
              if(rs.next()){
                  String name =  rs.getString("username"); 
-                 if(name.equals("admin")||name.equals("root")){
+                 if(name.equals("admin")||name.equals("root"))
+                 {
                 adminvt vt = new  adminvt();
                  vt.setVisible(true);
-                        close();}
+                        close();
+                 }
                  else{
                      vehiclet vt = new  vehiclet();
                      vt.setVisible(true);
-                        close();}
-                   
-                    
-             }
+                        close();
+                     }      
+                    }
 
              else {
-                            JOptionPane.showMessageDialog(null,"Incorrect login details");
+                      JOptionPane.showMessageDialog(null,"Incorrect login details");
 }
             
         
@@ -176,34 +177,7 @@ public class login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_passwordKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -218,6 +192,26 @@ public class login extends javax.swing.JFrame {
      
      
      }
+    
+      private String md5(String c) 
+      {
+       try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[]messageDigest =md.digest(c.getBytes());
+            BigInteger number =new BigInteger(1,messageDigest);
+            String hashtext = number.toString(16);
+            
+            while(hashtext.length()<32)
+            {
+            hashtext ="0"+hashtext;
+            }
+            return hashtext;
+          }
+          catch(Exception ex){
+          }
+        return null;
+
+       }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_login;
     private javax.swing.JLabel jLabel1;

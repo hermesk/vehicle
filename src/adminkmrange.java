@@ -7,11 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -72,7 +69,11 @@ public class adminkmrange extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablekmr = new javax.swing.JTable();
+        tablekmr = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowindex, int colIndex)
+            { return false;}
+        };
+        ;
         jPanel1 = new javax.swing.JPanel();
         diesel = new javax.swing.JTextField();
         tkm = new javax.swing.JTextField();
@@ -95,8 +96,6 @@ public class adminkmrange extends javax.swing.JFrame {
         cmd_save = new javax.swing.JButton();
         cmd_update = new javax.swing.JButton();
         cmd_print = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tablekmr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

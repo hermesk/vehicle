@@ -53,7 +53,11 @@ public class register extends javax.swing.JFrame {
         cmd_clear = new javax.swing.JButton();
         cmd_update = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableusers = new javax.swing.JTable();
+        tableusers = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowindex, int colIndex)
+            { return false;}
+        };
+        ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 

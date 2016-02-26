@@ -251,6 +251,9 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="table_driversMouseClicked"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowindex, int colIndex)&#xa;    { return false;}&#xa;};&#xa;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

@@ -58,7 +58,11 @@ public class admindrivers extends javax.swing.JFrame {
         cmd_save = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_drivers = new javax.swing.JTable();
+        table_drivers = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowindex, int colIndex)
+            { return false;}
+        };
+        ;
         cmd_print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);

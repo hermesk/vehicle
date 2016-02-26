@@ -99,7 +99,12 @@ public class adminvt extends javax.swing.JFrame {
         cmd_update = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablevt = new javax.swing.JTable();
+        tablevt = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowindex, int colIndex)
+            { return false;}
+        };
+        ;
+        print = new javax.swing.JButton();
         cmd_print = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -255,6 +260,13 @@ public class adminvt extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablevt);
 
+        print.setText("Print");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -270,7 +282,10 @@ public class adminvt extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cmd_update)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmd_delete))
+                        .addComponent(cmd_delete)
+                        .addGap(147, 147, 147)
+                        .addComponent(print)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -385,11 +400,13 @@ public class adminvt extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmd_save)
-                    .addComponent(cmd_clear)
-                    .addComponent(cmd_update)
-                    .addComponent(cmd_delete))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmd_save)
+                        .addComponent(cmd_clear)
+                        .addComponent(cmd_update)
+                        .addComponent(cmd_delete))
+                    .addComponent(print))
                 .addContainerGap())
         );
 
@@ -979,6 +996,24 @@ public class adminvt extends javax.swing.JFrame {
                  rg.setVisible(true);
     }//GEN-LAST:event_adduserMouseClicked
 
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        // TODO add your handling code here:
+                                                            
+     MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
+      MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+
+      try{
+          
+           tablevt.print(JTable.PrintMode.NORMAL,header,footer);
+         }
+      catch(java.awt.print.PrinterException e)
+      {
+         PrintStream format = System.err.format("Cannot print %s%n");
+      }
+      
+    
+    }//GEN-LAST:event_printActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1088,6 +1123,7 @@ public class adminvt extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu kmr;
+    private javax.swing.JButton print;
     private javax.swing.JSpinner runs;
     private javax.swing.JSpinner t11;
     private javax.swing.JSpinner t12;
