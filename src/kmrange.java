@@ -274,7 +274,7 @@ public class kmrange extends javax.swing.JFrame {
                 dibal.getText().isEmpty()||tfw.getText().isEmpty()||tfw.getText().isEmpty()||
                 ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty())
         {
-           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
         
      }
           else{

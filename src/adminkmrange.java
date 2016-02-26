@@ -406,7 +406,7 @@ public class adminkmrange extends javax.swing.JFrame {
                 dibal.getText().isEmpty()||tfw.getText().isEmpty()||
                 ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
         {
-           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
         
      }
           else{
@@ -438,7 +438,7 @@ public class adminkmrange extends javax.swing.JFrame {
             dibal.getText().isEmpty()||tfw.getText().isEmpty()||tfw.getText().isEmpty()||
             ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
 
         }
         else{

@@ -1,5 +1,4 @@
 
-import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -80,7 +79,7 @@ public class vehiclet extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("VehicleTurnabout"); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -420,7 +419,7 @@ public class vehiclet extends javax.swing.JFrame {
         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
                wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
-             JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
 
         } 
           else{          
@@ -614,7 +613,7 @@ public class vehiclet extends javax.swing.JFrame {
              if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
                wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
-             JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
 
         }
           else{          

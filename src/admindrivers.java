@@ -246,12 +246,12 @@ public class admindrivers extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(fname.getText().isEmpty()||sname.getText().isEmpty()||phoneno.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
         }
 
         else if(phoneno.getText().length()>10||phoneno.getText().length()<10)
         {
-            JOptionPane.showMessageDialog(null, "Invalid phone number!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Invalid Phone Number!</font></h2></html>");
         }
         else if(phoneno.getText().length()==10){
 
@@ -262,7 +262,7 @@ public class admindrivers extends javax.swing.JFrame {
                 while(rs.next()){
                     if(rs.getInt("total")>0)
                     {
-                        JOptionPane.showMessageDialog(null, "phone number already exist!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Phone Number already exist!</font></h2></html>");
                     }
                     else{
                         try{
@@ -294,12 +294,12 @@ public class admindrivers extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(fname.getText().isEmpty()||sname.getText().isEmpty()||phoneno.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
         }
 
         else if(phoneno.getText().length()>10||phoneno.getText().length()<10)
         {
-            JOptionPane.showMessageDialog(null, "Invalid phone number!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Invalid Phone Number!</font></h2></html>");
         }
         else{
             int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
@@ -325,12 +325,12 @@ public class admindrivers extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(fname.getText().isEmpty()||sname.getText().isEmpty()||phoneno.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
         }
 
         else if(phoneno.getText().length()>10||phoneno.getText().length()<10)
         {
-            JOptionPane.showMessageDialog(null, "Invalid phone number!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Invalid Phone Number!</font></h2></html>");
         }
        
         else{

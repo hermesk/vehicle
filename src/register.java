@@ -194,10 +194,10 @@ public class register extends javax.swing.JFrame {
     private void cmd_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_registerActionPerformed
         // TODO add your handling code here:
         if(uname.getText().isEmpty()||pwd.getText().isEmpty()||cpwd.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
            }
         else if(!pwd.getText().equals(cpwd.getText())){
-        JOptionPane.showMessageDialog(null, "Password Mismatch!");
+       JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Password Mismatch!</font></h2></html>");
         }
         else if(uname.getText().length()>0){
         
@@ -273,10 +273,11 @@ public class register extends javax.swing.JFrame {
     private void cmd_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_delActionPerformed
         // TODO add your handling code here:
         if(uname.getText().isEmpty()||pwd.getText().isEmpty()||cpwd.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
         }
         else if(!pwd.getText().equals(cpwd.getText())){
-            JOptionPane.showMessageDialog(null, "Password Mismatch!");
+            
+       JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Password Mismatch!</font></h2></html>");
         }
         else{
              int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
@@ -295,9 +296,9 @@ public class register extends javax.swing.JFrame {
                      JOptionPane.showMessageDialog(null, "Deleted");
  
                                    }
-                 else{
-                          JOptionPane.showMessageDialog(null, "Cannot Delete Admin Account");
-  
+                 else{     
+               JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Cannot Delete Admin Account</font></h2></html>");
+
                      }
 
             } catch (SQLException e) {
@@ -311,10 +312,11 @@ public class register extends javax.swing.JFrame {
     private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
         // TODO add your handling code here:
          if(uname.getText().isEmpty()||pwd.getText().isEmpty()||cpwd.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
            }
         else if(!pwd.getText().equals(cpwd.getText())){
-        JOptionPane.showMessageDialog(null, "Password Mismatch!");
+       JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Password Mismatch!</font></h2></html>");
+
         }
                
        else{
