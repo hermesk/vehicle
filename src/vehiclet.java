@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -22,11 +23,15 @@ public class vehiclet extends javax.swing.JFrame {
     float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,vt,tt;
     float th1,th2,th3,th4,tm1,tm2,tm3,tm4,tmh1,tmh2,tmh3,tmh4;
     public vehiclet() {
+        
       super("Fill Vehicleturnabout");
       conn = javaconnect.connecrDb();
        initComponents();
         ComboDriver();
         fillCombo();
+         setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setVisible(true);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -80,10 +85,12 @@ public class vehiclet extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
         setName("VehicleTurnabout"); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicleturnabout", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel1.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel8.setText("Enter timein for run 2");
 
@@ -219,51 +226,55 @@ public class vehiclet extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel9))
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ComboBox_driver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Date, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(t22)
-                            .addComponent(t21)
-                            .addComponent(runs, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(t11)
-                            .addComponent(t12)
-                            .addComponent(wt1)
-                            .addComponent(t32, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(t31)
-                            .addComponent(wt2)
-                            .addComponent(t42, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(t41)
-                            .addComponent(wt3)
-                            .addComponent(wt4)))
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cmd_save)
-                        .addComponent(jLabel15)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(cmd_clear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(cmdviewvt)
-                .addGap(18, 18, 18)
-                .addComponent(cmd_exit)
-                .addGap(21, 21, 21))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel9))
+                                .addGap(60, 60, 60)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ComboBox_driver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_Date, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(t22)
+                                    .addComponent(t21)
+                                    .addComponent(runs)
+                                    .addComponent(t11)
+                                    .addComponent(t12)
+                                    .addComponent(wt1)
+                                    .addComponent(t32)
+                                    .addComponent(t31)
+                                    .addComponent(wt2)
+                                    .addComponent(t42)
+                                    .addComponent(t41)
+                                    .addComponent(wt3)
+                                    .addComponent(wt4)))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(cmd_save)
+                                .addGap(28, 28, 28)
+                                .addComponent(cmd_clear)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmdviewvt)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmd_exit)))
+                        .addGap(0, 94, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,14 +348,14 @@ public class vehiclet extends javax.swing.JFrame {
                     .addComponent(cmd_exit)
                     .addComponent(cmdviewvt)
                     .addComponent(cmd_save))
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 357, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,22 +402,23 @@ public class vehiclet extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(491, 491, 491)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 227, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(516, 727));
+        setSize(new java.awt.Dimension(864, 729));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -416,10 +428,10 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-        if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
-               wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
+        if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||wt1.getText().trim().isEmpty()||
+               wt2.getText().trim().isEmpty()||wt3.getText().trim().isEmpty()||wt4.getText().trim().isEmpty() )
         {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
 
         } 
           else{          
@@ -489,26 +501,26 @@ public class vehiclet extends javax.swing.JFrame {
                  
                 int run =(int)runs.getValue();
                  vt = (float)tt/run;
-            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
+            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim());
             pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
             pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-            pst.setString(4,  runs.getValue().toString());
+            pst.setString(4,  runs.getValue().toString().trim());
             
             pst.setString(5,tt11 );
             pst.setString(6, tt12);
-            pst.setString(7, wt1.getText());
+            pst.setString(7, wt1.getText().trim());
             
             pst.setString(8, tt21);
             pst.setString(9, tt22);
-            pst.setString(10,wt2.getText());
+            pst.setString(10,wt2.getText().trim());
             
             pst.setString(11, tt31);
             pst.setString(12, tt32);
-            pst.setString(13, wt3.getText());
+            pst.setString(13, wt3.getText().trim());
             
             pst.setString(14, tt41);
             pst.setString(15, tt42);
-            pst.setString(16, wt4.getText());
+            pst.setString(16, wt4.getText().trim());
             pst.setFloat(17, tfw);
             pst.setDouble(18,vt );
             pst.execute();
@@ -522,7 +534,6 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
-        // TODO add your handling code here:
         ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
         wt1.setText("");
         wt2.setText("");
@@ -531,38 +542,32 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_clearActionPerformed
 
     private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_cmd_exitActionPerformed
 
     private void logoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMousePressed
-        // TODO add your handling code here:
         login lg = new login();
               lg.setVisible(true);
               this.dispose();
     }//GEN-LAST:event_logoutMousePressed
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
-        // TODO add your handling code here:
          kmrange kmrg = new kmrange();
                kmrg.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem1MousePressed
 
     private void jMenuItem2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MousePressed
-        // TODO add your handling code here:
          viewkmr vkmr = new viewkmr();
                 vkmr.setVisible(true);
     }//GEN-LAST:event_jMenuItem2MousePressed
 
     private void cmdviewvtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdviewvtActionPerformed
-        // TODO add your handling code here:
          viewvt vwvt = new viewvt();
                vwvt.setVisible(true);
     }//GEN-LAST:event_cmdviewvtActionPerformed
 
     private void wt1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt1KeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
         (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
@@ -572,7 +577,6 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_wt1KeyTyped
 
     private void wt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt2KeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
         (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
@@ -581,7 +585,6 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_wt2KeyTyped
 
     private void wt3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt3KeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
         (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
@@ -590,7 +593,6 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_wt3KeyTyped
 
     private void wt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
         (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
@@ -599,7 +601,6 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_wt4KeyTyped
 
     private void txt_DateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_DateKeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if((Character.isDigit(c)||
         (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '/'||evt.getKeyChar() == '-')){
@@ -608,12 +609,11 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_DateKeyTyped
 
     private void wt4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyPressed
-        // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-             if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
-               wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
+             if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||wt1.getText().trim().isEmpty()||
+               wt2.getText().trim().isEmpty()||wt3.getText().trim().isEmpty()||wt4.getText().trim().isEmpty() )
         {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
 
         }
           else{          
@@ -683,26 +683,26 @@ public class vehiclet extends javax.swing.JFrame {
                  
                 int run =(int)runs.getValue();
                  vt = (float)tt/run;
-            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
+            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim());
             pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
             pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-            pst.setString(4,  runs.getValue().toString());
+            pst.setString(4,  runs.getValue().toString().trim());
             
             pst.setString(5,tt11 );
             pst.setString(6, tt12);
-            pst.setString(7, wt1.getText());
+            pst.setString(7, wt1.getText().trim());
             
             pst.setString(8, tt21);
             pst.setString(9, tt22);
-            pst.setString(10,wt2.getText());
+            pst.setString(10,wt2.getText().trim());
             
             pst.setString(11, tt31);
             pst.setString(12, tt32);
-            pst.setString(13, wt3.getText());
+            pst.setString(13, wt3.getText().trim());
             
             pst.setString(14, tt41);
             pst.setString(15, tt42);
-            pst.setString(16, wt4.getText());
+            pst.setString(16, wt4.getText().trim());
             pst.setFloat(17, tfw);
             pst.setDouble(18,vt );
             pst.execute();
@@ -781,8 +781,8 @@ public class vehiclet extends javax.swing.JFrame {
          rs =pst.executeQuery();
          while(rs.next())
          {
-          String fname = rs.getString("fname");
-          String sname = rs.getString("sname");
+          String fname = rs.getString("fname").trim();
+          String sname = rs.getString("sname").trim();
           String name = fname+ " "+sname;
           ComboBox_driver.addItem(name);
          }

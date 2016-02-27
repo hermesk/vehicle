@@ -32,7 +32,7 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18), new java.awt.Color(0, 51, 51))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(51, 51, 0));
 
@@ -91,36 +91,40 @@ public class login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(118, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(40, 40, 40)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(261, 221));
+        setSize(new java.awt.Dimension(443, 296));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
-        // TODO add your handling code here:
-        String sql = "select * from users where username=? and password=?";
+        if(txt_user.getText().trim().isEmpty()||txt_password.getText().trim().isEmpty())
+         {
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
+         }       
+        else{
+       String sql = "select * from users where username=? and password=?";
         
         try{
              pst = conn.prepareStatement(sql);
-             pst.setString(1,txt_user.getText());
-             pst.setString(2,md5(txt_password.getText()));
+             pst.setString(1,txt_user.getText().trim());
+             pst.setString(2,md5(txt_password.getText().trim()));
              
              rs =pst.executeQuery(); 
              
              if(rs.next()){
-                 String name =  rs.getString("username"); 
+                 String name =  rs.getString("username").trim(); 
                  if(name.equals("admin")||name.equals("root"))
                  {
                 adminvt vt = new  adminvt();
@@ -144,39 +148,47 @@ public class login extends javax.swing.JFrame {
    catch(SQLException | HeadlessException e){
                       JOptionPane.showMessageDialog(null,e);
 
-   }
+   }}
     }//GEN-LAST:event_cmd_loginActionPerformed
 
     private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            String sql = "select * from users where username=? and password=?";
+               String sql = "select * from users where username=? and password=?";
         
         try{
              pst = conn.prepareStatement(sql);
-             pst.setString(1,txt_user.getText());
-             pst.setString(2,txt_password.getText());
+             pst.setString(1,txt_user.getText().trim());
+             pst.setString(2,md5(txt_password.getText().trim()));
              
              rs =pst.executeQuery(); 
+             
              if(rs.next()){
-                 vehiclet vt = new  vehiclet();
+                 String name =  rs.getString("username").trim(); 
+                 if(name.equals("admin")||name.equals("root"))
+                 {
+                adminvt vt = new  adminvt();
                  vt.setVisible(true);
                         close();
-               
-             }
+                 }
+                 else{
+                     vehiclet vt = new  vehiclet();
+                     vt.setVisible(true);
+                        close();
+                     }      
+                    }
 
              else {
-               JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Incorrect login details!</font></h2></html>");
-
-                }
+         JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Incorrect login details!</font></h2></html>");
+     
+               }
             
         
     }                                         
    catch(SQLException | HeadlessException e){
                       JOptionPane.showMessageDialog(null,e);
 
-   }
-        }
+   }}
     }//GEN-LAST:event_txt_passwordKeyPressed
 
     public static void main(String args[]) {

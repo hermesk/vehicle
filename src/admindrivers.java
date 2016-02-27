@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import net.proteanit.sql.DbUtils;
@@ -24,11 +25,13 @@ public class admindrivers extends javax.swing.JFrame {
            initComponents();
            conn = javaconnect.connecrDb();
            update_table();
-       
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setVisible(true);
+        setResizable(false);
     }
  private void update_table(){
       try{
-          String sql = "select rowid,fname as 'First Name',sname as 'Sirname',phoneno as 'Phone No'from drivers";
+          String sql = "select rowid as 'No',fname as 'First Name',sname as 'Sirname',phoneno as 'Phone No'from drivers";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           table_drivers.setModel( DbUtils.resultSetToTableModel(rs));
@@ -69,7 +72,7 @@ public class admindrivers extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drivers", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setForeground(new java.awt.Color(51, 51, 0));
 
         jLabel1.setText("First Name");
@@ -82,6 +85,9 @@ public class admindrivers extends javax.swing.JFrame {
         });
 
         phoneno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                phonenoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 phonenoKeyTyped(evt);
             }
@@ -166,9 +172,10 @@ public class admindrivers extends javax.swing.JFrame {
                         .addComponent(cmd_save)
                         .addComponent(cmd_clear)
                         .addComponent(cmd_update)))
-                .addGap(21, 21, 21))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
+        table_drivers.setBackground(new java.awt.Color(204, 204, 204));
         table_drivers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -213,13 +220,16 @@ public class admindrivers extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(cmd_print)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(26, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmd_print))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,7 +237,7 @@ public class admindrivers extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -235,7 +245,7 @@ public class admindrivers extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,9 +279,9 @@ public class admindrivers extends javax.swing.JFrame {
                             String add = "insert into drivers(fname,sname,phoneno ) values (?,?,?)";
 
                             pst=conn.prepareStatement(add);
-                            pst.setString(1, fname.getText().toUpperCase());
-                            pst.setString(2, sname.getText().toUpperCase());
-                            pst.setString(3, phoneno.getText().toUpperCase());
+                            pst.setString(1, fname.getText().toUpperCase().trim());
+                            pst.setString(2, sname.getText().toUpperCase().trim());
+                            pst.setString(3, phoneno.getText().toUpperCase().trim());
 
                             pst.execute();
                             JOptionPane.showMessageDialog(null, "Saved");
@@ -335,9 +345,9 @@ public class admindrivers extends javax.swing.JFrame {
        
         else{
             try{
-                String  value1 = fname.getText().toUpperCase();
-                String  value2 = sname.getText().toUpperCase();
-                String  value3 = phoneno.getText().toUpperCase();
+                String  value1 = fname.getText().toUpperCase().trim();
+                String  value2 = sname.getText().toUpperCase().trim();
+                String  value3 = phoneno.getText().toUpperCase().trim();
 
                 String sql = "update drivers set fname='"+value1+"',sname='"+value2+"',phoneno='"+value3+"'WHERE phoneno='"+value3+"'";
 
@@ -385,9 +395,9 @@ public class admindrivers extends javax.swing.JFrame {
              pst=conn.prepareStatement(sql);
              rs = pst.executeQuery();
          if(rs.next()){
-           fname.setText(rs.getString("fname"));
-           sname.setText(rs.getString("sname"));
-           phoneno.setText(rs.getString("phoneno"));
+           fname.setText(rs.getString("fname").trim());
+           sname.setText(rs.getString("sname").trim());
+           phoneno.setText(rs.getString("phoneno").trim());
                }
     }                                     
            catch(Exception e){
@@ -409,6 +419,55 @@ public class admindrivers extends javax.swing.JFrame {
       }
     
     }//GEN-LAST:event_cmd_printActionPerformed
+
+      @SuppressWarnings("empty-statement")
+    private void phonenoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phonenoKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+         if(fname.getText().isEmpty()||sname.getText().isEmpty()||phoneno.getText().isEmpty())
+        {
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
+        }
+
+        else if(phoneno.getText().length()>10||phoneno.getText().length()<10)
+        {
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Invalid Phone Number!</font></h2></html>");
+        }
+        else if(phoneno.getText().length()==10){
+
+            try {
+                String sql ="SELECT COUNT(*) AS total FROM drivers  where phoneno = '"+phoneno.getText()+"'";
+                pst=conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    if(rs.getInt("total")>0)
+                    {
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Phone Number already exist!</font></h2></html>");
+                    }
+                    else{
+                        try{
+                            String add = "insert into drivers(fname,sname,phoneno ) values (?,?,?)";
+
+                            pst=conn.prepareStatement(add);
+                            pst.setString(1, fname.getText().toUpperCase().trim());
+                            pst.setString(2, sname.getText().toUpperCase().trim());
+                            pst.setString(3, phoneno.getText().toUpperCase().trim());
+
+                            pst.execute();
+                            JOptionPane.showMessageDialog(null, "Saved");
+                        }
+                        catch(SQLException | HeadlessException e){
+                            JOptionPane.showMessageDialog(null, e);
+
+                        }}
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+
+            }
+           
+        }
+    }//GEN-LAST:event_phonenoKeyPressed
 
     /**
      * @param args the command line arguments

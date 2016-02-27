@@ -9,26 +9,16 @@ import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import net.proteanit.sql.DbUtils;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author jeam
- */
 public class adminkmrange extends javax.swing.JFrame {
 
-    /**
-     * Creates new form adminkmrange
-     */
+    
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
@@ -40,6 +30,9 @@ public class adminkmrange extends javax.swing.JFrame {
         ComboDriver();
         fillCombo();
         update_table();
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setVisible(true);
+        setResizable(false);
     }
   private void update_table(){
       try{
@@ -97,6 +90,8 @@ public class adminkmrange extends javax.swing.JFrame {
         cmd_update = new javax.swing.JButton();
         cmd_print = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         tablekmr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -148,6 +143,9 @@ public class adminkmrange extends javax.swing.JFrame {
         });
 
         tfw.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfwKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfwKeyTyped(evt);
             }
@@ -217,16 +215,15 @@ public class adminkmrange extends javax.swing.JFrame {
                             .addComponent(jLabel15)
                             .addComponent(jLabel16))
                         .addGap(124, 124, 124)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfw, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dibal, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(diesel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboBox_vehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(tkm, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(kmgl, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(ComboBox_driver, javax.swing.GroupLayout.Alignment.LEADING, 0, 134, Short.MAX_VALUE))
-                            .addComponent(txt_Date, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tkm)
+                            .addComponent(kmgl)
+                            .addComponent(txt_Date, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ComboBox_driver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(diesel)
+                            .addComponent(dibal)
+                            .addComponent(tfw)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(cmd_save)
@@ -236,7 +233,7 @@ public class adminkmrange extends javax.swing.JFrame {
                         .addComponent(cmd_update)
                         .addGap(29, 29, 29)
                         .addComponent(cmd_del)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,8 +296,8 @@ public class adminkmrange extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
-                .addGap(32, 32, 32))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmd_print)
@@ -309,14 +306,13 @@ public class adminkmrange extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmd_print)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addComponent(cmd_print))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -331,9 +327,8 @@ public class adminkmrange extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -402,11 +397,11 @@ public class adminkmrange extends javax.swing.JFrame {
 
     private void cmd_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_delActionPerformed
         // TODO add your handling code here:
-        if(kmgl.getText().isEmpty()||tkm.getText().isEmpty()||diesel.getText().isEmpty()||
-                dibal.getText().isEmpty()||tfw.getText().isEmpty()||
-                ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
+        if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
+                dibal.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
+                ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
         {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
         
      }
           else{
@@ -434,11 +429,11 @@ public class adminkmrange extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
-        if(kmgl.getText().isEmpty()||tkm.getText().isEmpty()||diesel.getText().isEmpty()||
-            dibal.getText().isEmpty()||tfw.getText().isEmpty()||tfw.getText().isEmpty()||
-            ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
+        if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
+            dibal.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
+            ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
         {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all Fields!</font></h2></html>");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
 
         }
         else{
@@ -447,17 +442,17 @@ public class adminkmrange extends javax.swing.JFrame {
                 String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh,kgl)"
                 + "values(?,?,?,?,?,?,?,?,?,?)";
                 pst=conn.prepareStatement(sql);
-                float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText()));
-                float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText()));
+                float kml = (Float.parseFloat(tkm.getText().trim()))/ (Float.parseFloat(diesel.getText().trim()));
+                float kgl = (Float.parseFloat(tfw.getText().trim()))/ (Float.parseFloat(diesel.getText().trim()));
 
                 pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                 pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
                 pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-                pst.setString(4, kmgl.getText());
-                pst.setString(5, tkm.getText());
-                pst.setString(6, diesel.getText());
-                pst.setString(7, dibal.getText());
-                pst.setString(8, tfw.getText());
+                pst.setString(4, kmgl.getText().trim());
+                pst.setString(5, tkm.getText().trim());
+                pst.setString(6, diesel.getText().trim());
+                pst.setString(7, dibal.getText().trim());
+                pst.setString(8, tfw.getText().trim());
                 pst.setFloat(9, kml);
                 pst.setFloat(10, kgl);
 
@@ -503,11 +498,11 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     }       
     private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
         // TODO add your handling code here:
-          if(kmgl.getText().isEmpty()||tkm.getText().isEmpty()||diesel.getText().isEmpty()||
-                dibal.getText().isEmpty()||tfw.getText().isEmpty()||tfw.getText().isEmpty()||
-                ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
+          if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
+                dibal.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
+                ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
         {
-           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
         
      }
           else{
@@ -520,14 +515,14 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                  float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText()));
                 
                 String v = rs.getString("id");
-                String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText();
+                String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim();
                 String v2 =ComboBox_vehicle.getSelectedItem().toString();
                 String v3 =ComboBox_driver.getSelectedItem().toString();
-                String v4 =kmgl.getText();
-                String v5 =tkm.getText();
-                String v6 =diesel.getText();
-                String v7 =dibal.getText();
-                String v8 =tfw.getText();
+                String v4 =kmgl.getText().trim();
+                String v5 =tkm.getText().trim();
+                String v6 =diesel.getText().trim();
+                String v7 =dibal.getText().trim();
+                String v8 =tfw.getText().trim();
                 
                 String sql = "update kmrange set date= '"+v1+"',vehicle='"+v2+"',driver='"+v3+"',glkm='"+v4+"',"
                         + "tkm='"+v5+"',diesel='"+v6+"',dbal='"+v7+"',tfw='"+v8+"',kmh='"+kml+"',kgl='"+kgl+"'"
@@ -562,6 +557,50 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
       }
     
     }//GEN-LAST:event_cmd_printActionPerformed
+
+    private void tfwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfwKeyPressed
+         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+          if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
+            dibal.getText().isEmpty()||tfw.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
+            ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+        {
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
+
+        }
+        else{
+
+            try{
+                String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh,kgl)"
+                + "values(?,?,?,?,?,?,?,?,?,?)";
+                pst=conn.prepareStatement(sql);
+                float kml = (Float.parseFloat(tkm.getText().trim()))/ (Float.parseFloat(diesel.getText().trim()));
+                float kgl = (Float.parseFloat(tfw.getText().trim()))/ (Float.parseFloat(diesel.getText().trim()));
+
+                pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
+                pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
+                pst.setString(3, ComboBox_driver.getSelectedItem().toString());
+                pst.setString(4, kmgl.getText().trim());
+                pst.setString(5, tkm.getText().trim());
+                pst.setString(6, diesel.getText().trim());
+                pst.setString(7, dibal.getText().trim());
+                pst.setString(8, tfw.getText().trim());
+                pst.setFloat(9, kml);
+                pst.setFloat(10, kgl);
+
+                pst.execute();
+
+                JOptionPane.showMessageDialog(null, "Saved Successfully");
+    }                                        
+catch(  SQLException | NumberFormatException | HeadlessException e){
+              JOptionPane.showMessageDialog(null, e);
+              
+
+        }
+        update_table();
+        }
+         
+         }
+    }//GEN-LAST:event_tfwKeyPressed
  
     /**
      * @param args the command line arguments
@@ -603,7 +642,7 @@ private void fillCombo(){
          pst = conn.prepareStatement(sql);
          rs =pst.executeQuery();
          while(rs.next()){
-          String Regno = rs.getString("Regno");
+          String Regno = rs.getString("Regno").trim();
           ComboBox_vehicle.addItem(Regno);
          
          }
@@ -624,8 +663,8 @@ private void fillCombo(){
          pst = conn.prepareStatement(sql);
          rs =pst.executeQuery();
          while(rs.next()){
-          String fname = rs.getString("fname");
-          String sname = rs.getString("sname");
+          String fname = rs.getString("fname").trim();
+          String sname = rs.getString("sname").trim();
           String name = fname+ " "+sname;
           ComboBox_driver.addItem(name);
          

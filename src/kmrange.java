@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 
 public class kmrange extends javax.swing.JFrame {
 
@@ -20,6 +21,9 @@ public class kmrange extends javax.swing.JFrame {
         conn = javaconnect.connecrDb();
         ComboDriver();
         fillCombo();
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setVisible(true);
+        setResizable(false);
     
     }
 
@@ -90,6 +94,9 @@ public class kmrange extends javax.swing.JFrame {
         });
 
         tfw.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfwKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfwKeyTyped(evt);
             }
@@ -169,7 +176,7 @@ public class kmrange extends javax.swing.JFrame {
                         .addComponent(cmd_clear)
                         .addGap(49, 49, 49)
                         .addComponent(cmd_exit)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,8 +251,8 @@ public class kmrange extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(180, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -264,7 +271,7 @@ public class kmrange extends javax.swing.JFrame {
                 .addGap(106, 106, 106))
         );
 
-        setSize(new java.awt.Dimension(586, 550));
+        setSize(new java.awt.Dimension(861, 550));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -283,17 +290,17 @@ public class kmrange extends javax.swing.JFrame {
             String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh,kgl)"
                     + "values(?,?,?,?,?,?,?,?,?,?)";
          pst=conn.prepareStatement(sql);
-         float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText()));
-         float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText()));
+         float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText().trim()));
+         float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText().trim()));
          
-            pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText());
-            pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
-            pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-            pst.setString(4, kmgl.getText());
-            pst.setString(5, tkm.getText());
-            pst.setString(6, diesel.getText());
-            pst.setString(7, dibal.getText());
-            pst.setString(8, tfw.getText());
+            pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().trim());
+            pst.setString(2, ComboBox_vehicle.getSelectedItem().toString().trim());
+            pst.setString(3, ComboBox_driver.getSelectedItem().toString().trim());
+            pst.setString(4, kmgl.getText().trim().trim());
+            pst.setString(5, tkm.getText().trim().trim());
+            pst.setString(6, diesel.getText().trim().trim());
+            pst.setString(7, dibal.getText().trim().trim());
+            pst.setString(8, tfw.getText().trim().trim());
             pst.setFloat(9, kml);
             pst.setFloat(10, kgl);
 
@@ -373,6 +380,47 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     private void tkmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tkmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tkmActionPerformed
+
+    private void tfwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfwKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+        if(kmgl.getText().isEmpty()||tkm.getText().isEmpty()||diesel.getText().isEmpty()||
+                dibal.getText().isEmpty()||tfw.getText().isEmpty()||tfw.getText().isEmpty()||
+                ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty())
+        {
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
+        
+     }
+          else{
+            
+              try{
+            String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh,kgl)"
+                    + "values(?,?,?,?,?,?,?,?,?,?)";
+         pst=conn.prepareStatement(sql);
+         float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText().trim()));
+         float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText().trim()));
+         
+            pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().trim());
+            pst.setString(2, ComboBox_vehicle.getSelectedItem().toString().trim());
+            pst.setString(3, ComboBox_driver.getSelectedItem().toString().trim());
+            pst.setString(4, kmgl.getText().trim().trim());
+            pst.setString(5, tkm.getText().trim().trim());
+            pst.setString(6, diesel.getText().trim().trim());
+            pst.setString(7, dibal.getText().trim().trim());
+            pst.setString(8, tfw.getText().trim().trim());
+            pst.setFloat(9, kml);
+            pst.setFloat(10, kgl);
+
+            pst.execute();
+
+             JOptionPane.showMessageDialog(null, "Saved Successfully");
+    }                                        
+catch(  SQLException | NumberFormatException | HeadlessException e){
+              JOptionPane.showMessageDialog(null, e);
+
+        }}
+        }
+    }//GEN-LAST:event_tfwKeyPressed
     
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt){

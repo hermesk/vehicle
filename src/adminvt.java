@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -36,9 +37,13 @@ public class adminvt extends javax.swing.JFrame {
        ComboDriver();
        fillCombo();
         update_table();
+        //deactivate maxmize
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setVisible(true);
+        setResizable(false);
     }
 
-    private void update_table(){
+    private void update_table(){ //update jtable
       try{
           String sql;
           sql = "select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TimeOut R1',"
@@ -537,12 +542,12 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_wt3KeyTyped
 
     private void wt4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyPressed
-        // TODO add your handling code here:
+      
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
                 wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
             {
-                JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
 
             }
             else{
@@ -614,23 +619,23 @@ public class adminvt extends javax.swing.JFrame {
                     pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                     pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
                     pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-                    pst.setString(4,  runs.getValue().toString());
+                    pst.setString(4,  runs.getValue().toString().trim());
 
                     pst.setString(5,tt11 );
                     pst.setString(6, tt12);
-                    pst.setString(7, wt1.getText());
+                    pst.setString(7, wt1.getText().trim());
 
                     pst.setString(8, tt21);
                     pst.setString(9, tt22);
-                    pst.setString(10,wt2.getText());
+                    pst.setString(10,wt2.getText().trim());
 
                     pst.setString(11, tt31);
                     pst.setString(12, tt32);
-                    pst.setString(13, wt3.getText());
+                    pst.setString(13, wt3.getText().trim());
 
                     pst.setString(14, tt41);
                     pst.setString(15, tt42);
-                    pst.setString(16, wt4.getText());
+                    pst.setString(16, wt4.getText().trim());
                     pst.setFloat(17, tfw);
                     pst.setDouble(18,vt );
                     pst.execute();
@@ -659,7 +664,7 @@ public class adminvt extends javax.swing.JFrame {
         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
             wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
-            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
 
         }
         else{
@@ -731,23 +736,23 @@ public class adminvt extends javax.swing.JFrame {
                 pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                 pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
                 pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-                pst.setString(4,  runs.getValue().toString());
+                pst.setString(4,  runs.getValue().toString().trim());
 
                 pst.setString(5,tt11 );
                 pst.setString(6, tt12);
-                pst.setString(7, wt1.getText());
+                pst.setString(7, wt1.getText().trim());
 
                 pst.setString(8, tt21);
                 pst.setString(9, tt22);
-                pst.setString(10,wt2.getText());
+                pst.setString(10,wt2.getText().trim());
 
                 pst.setString(11, tt31);
                 pst.setString(12, tt32);
-                pst.setString(13, wt3.getText());
+                pst.setString(13, wt3.getText().trim());
 
                 pst.setString(14, tt41);
                 pst.setString(15, tt42);
-                pst.setString(16, wt4.getText());
+                pst.setString(16, wt4.getText().trim());
                 pst.setFloat(17, tfw);
                 pst.setDouble(18,vt );
                 pst.execute();
@@ -829,7 +834,7 @@ public class adminvt extends javax.swing.JFrame {
          if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
             wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
-            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
 
         }
         else{
@@ -859,7 +864,7 @@ public class adminvt extends javax.swing.JFrame {
          if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
             wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
-            JOptionPane.showMessageDialog(null, "Fill all the fields!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
 
         }
         else{
@@ -874,19 +879,19 @@ public class adminvt extends javax.swing.JFrame {
                 String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText();
                 String v2 =ComboBox_vehicle.getSelectedItem().toString();
                 String v3 =ComboBox_driver.getSelectedItem().toString();
-                String v4 =runs.getValue().toString();
+                String v4 =runs.getValue().toString().trim();
                 String v5 =sdf.format(t11.getValue());
                 String v6 =sdf.format(t12.getValue());
-                String v7 =wt1.getText();
+                String v7 =wt1.getText().trim();
                 String v8=sdf.format(t21.getValue());
                 String v9=sdf.format(t22.getValue());
-                String v10 =wt2.getText();
+                String v10 =wt2.getText().trim();
                 String v11=sdf.format(t31.getValue());
                 String v12=sdf.format(t32.getValue());
-                String v13 =wt3.getText();
+                String v13 =wt3.getText().trim();
                 String v14=sdf.format(t41.getValue());
                 String v15=sdf.format(t42.getValue());  
-                String v16 =wt3.getText();
+                String v16 =wt3.getText().trim();
                 //FT RUN1
                 Date d11 = sdf.parse(v5);
                 Date d12= sdf.parse(v6);

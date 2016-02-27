@@ -291,15 +291,16 @@ public class vehicles extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
               
-             if(txt_make.getText().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||
-                     txt_regno.getText().isEmpty())
-             {           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+             if(txt_make.getText().trim().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||
+                     txt_regno.getText().trim().isEmpty())
+             {        
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
              }
-             else if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
+             else if(txt_regno.getText().trim().length()>8||txt_regno.getText().trim().length()<8)
                         {   
-                           JOptionPane.showMessageDialog(null, "Invalid registration number!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Invalid registration number!</font></h2></html>");
                         }
-                else if(txt_regno.getText().length()==8){
+                else if(txt_regno.getText().trim().length()==8){
                      try
                      {
                         String check ="SELECT COUNT(*) AS total FROM vehicles  where Regno = '"+txt_regno.getText()+"'"; 
@@ -308,17 +309,18 @@ public class vehicles extends javax.swing.JFrame {
                         while(rs.next()){
                         if(rs.getInt("total")>0)
                         {
-                          JOptionPane.showMessageDialog(null, "vehicle already exist!");
-                        }
+                          JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>vehicle already exist!</font></h2></html>");
+          
+                       }
               else{
                    
               try{
                  String sql = "insert into vehicles(Regno,DOP,Make ) values (?,?,?)";
                  
                 pst=conn.prepareStatement(sql);
-                pst.setString(1, txt_regno.getText().toUpperCase()); 
-                pst.setString(2, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
-                pst.setString(3, txt_make.getText().toUpperCase());
+                pst.setString(1, txt_regno.getText().trim().toUpperCase()); 
+                pst.setString(2, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim());
+                pst.setString(3, txt_make.getText().trim().toUpperCase());
                 
                 pst.execute();
                
@@ -330,9 +332,9 @@ public class vehicles extends javax.swing.JFrame {
         }}}
                      }catch (SQLException e) {
                                JOptionPane.showMessageDialog(null, e);
-                               update_table();
+                               
                            }
-         
+         update_table();
         }
                      else{}
     }//GEN-LAST:event_cmd_saveActionPerformed
@@ -348,13 +350,14 @@ public class vehicles extends javax.swing.JFrame {
 
     private void cmd_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_deleteActionPerformed
         // TODO add your handling code here:
-         if(txt_make.getText().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||
-                     txt_regno.getText().isEmpty())
-             {           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+         if(txt_make.getText().trim().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||
+                     txt_regno.getText().trim().isEmpty())
+             {    
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
              }
-             else if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
+             else if(txt_regno.getText().trim().length()>8||txt_regno.getText().trim().length()<8)
                         {   
-                           JOptionPane.showMessageDialog(null, "Invalid registration number!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Invalid registration number!</font></h2></html>");
                         }
              else{
                    int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
@@ -389,15 +392,16 @@ public class vehicles extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdclearActionPerformed
 
     private void txt_makeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_makeKeyPressed
-        // TODO add your handling code here:
+       
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
              
-             if(txt_make.getText().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty())
-             {           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+             if(txt_make.getText().trim().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+             {           
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
              
-             if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
+             if(txt_regno.getText().trim().length()>8||txt_regno.getText().trim().length()<8)
                         {   
-                           JOptionPane.showMessageDialog(null, "Invalid registration number!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Invalid registration number!</font></h2></html>");
                         }
              }
            else{
@@ -407,11 +411,11 @@ public class vehicles extends javax.swing.JFrame {
                  
                 pst=conn.prepareStatement(sql);
                 
-                pst.setString(1, txt_regno.getText().toUpperCase()); 
+                pst.setString(1, txt_regno.getText().trim().toUpperCase()); 
                 
-                pst.setString(2, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
+                pst.setString(2, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim());
                 
-                pst.setString(3, txt_make.getText().toUpperCase());
+                pst.setString(3, txt_make.getText().trim().toUpperCase());
                 
                
                  pst.execute();
@@ -449,23 +453,37 @@ public class vehicles extends javax.swing.JFrame {
 
     private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
         // TODO add your handling code here:
-         if(txt_make.getText().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||
-                     txt_regno.getText().isEmpty())
-             {           JOptionPane.showMessageDialog(null, "Fill all the fields!");
+         if(txt_make.getText().trim().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||
+                     txt_regno.getText().trim().isEmpty())
+             {         
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
              }
-             else if(txt_regno.getText().length()>8||txt_regno.getText().length()<8)
+             else if(txt_regno.getText().trim().length()>8||txt_regno.getText().trim().length()<8)
                         {   
-                           JOptionPane.showMessageDialog(null, "Invalid registration number!");
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Invalid registration number!</font></h2></html>");
                         }
+             else if(txt_regno.getText().trim().length()==8){
+                     try
+                     {
+                        String check ="SELECT COUNT(*) AS total FROM vehicles  where Regno = '"+txt_regno.getText()+"'"; 
+                        pst=conn.prepareStatement(check);
+                        rs = pst.executeQuery();
+                        while(rs.next()){
+                        if(rs.getInt("total")==0)
+                        {
+                        JOptionPane.showMessageDialog(null, 
+                                "<html><h2><font color='red'>vehicle does not exist!</font></h2></html>");
+          
+                       }
                
              else{
                    
             try
         {      
                 
-                String v = txt_regno.getText();
-                String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText();
-                String v2 =txt_make.getText();
+                String v = txt_regno.getText().trim();
+                String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim();
+                String v2 =txt_make.getText().trim().toUpperCase();
                 
                 String sql = "update vehicles set Regno='"+v+"',DOP='"+v1+"',Make='"+v2+"' where Regno='"+v+"'";
                 pst=conn.prepareStatement(sql);
@@ -473,11 +491,17 @@ public class vehicles extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Updated");
                       }
+            
                catch(NumberFormatException | SQLException e){
         JOptionPane.showMessageDialog(null, e);
         }
           update_table();             
-          }     
+          }}}
+              catch (SQLException e) 
+              {
+                      JOptionPane.showMessageDialog(null, e);
+                               
+                           }}
                
     }//GEN-LAST:event_cmd_updateActionPerformed
 
