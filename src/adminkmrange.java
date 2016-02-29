@@ -482,9 +482,9 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
              java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
              txt_Date.setDate(date);
           
-             ComboBox_vehicle.addItem(rs.getString("vehicle"));
+             ComboBox_vehicle.setSelectedItem(rs.getString("vehicle"));
            
-             ComboBox_driver.addItem(rs.getString("driver"));
+             ComboBox_driver.setSelectedItem(rs.getString("driver"));
              kmgl.setText(rs.getString("glkm"));
              tkm.setText(rs.getString("tkm"));
              diesel.setText(rs.getString("diesel"));

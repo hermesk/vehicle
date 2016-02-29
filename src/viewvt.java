@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.MessageFormat;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
 public class viewvt extends javax.swing.JFrame {
@@ -18,14 +21,24 @@ public class viewvt extends javax.swing.JFrame {
         initComponents();
         conn = javaconnect.connecrDb();
           update_table();
+        fixWidth(tablevt, 0, 80);
+        fixWidth(tablevt, 1, 130);
+        fixWidth(tablevt, 2, 50);
+        fixWidth(tablevt, 11, 100);
+        fixWidth(tablevt, 12, 100);
+
+
+     setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setVisible(true);
+        setResizable(false);      
     }
 
     private void update_table(){
       try{
-          String sql = "select date as 'Date',driver as 'Driver',runs as 'Runs',tor1 as 'TimeOut R1',"
-                  + "tir1 as 'TimeIn R1',tor2 as 'TimeOut R2',tir2 as 'TimeIn R2'"
-                  + ",tor3 as 'TimeOut R3',tir3 as 'TimeIn R3',tor4 as 'TimeOut R4',tir4 as 'TimeIn R4', "
-                  + "tfw as 'Total Factory Weight',vt as 'Vehicleturnabout'from vt";
+          String sql = "select date as 'Date',driver as 'Driver',runs as 'Runs',tor1 as 'Timeout R1',"
+                  + "tir1 as 'TimeinR1',tor2 as 'Timeout R2',tir2 as 'Timein R2'"
+                  + ",tor3 as 'Timeout R3',tir3 as 'Timein R3',tor4 as 'Timeout R4',tir4 as 'Timein R4', "
+                  + "tfw as 'T.Factory Weight',vt as 'Vehicleturnabout'from vt";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
@@ -116,13 +129,18 @@ public class viewvt extends javax.swing.JFrame {
 
     private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed
         // TODO add your handling code here:
-                                                        
+        JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);                                                
      MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
       MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+      
+         boolean fitWidth = fitWidthBox.isSelected();
+        
+
 
       try{
-          
-           tablevt.print(JTable.PrintMode.NORMAL,header,footer);
+          JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH
+                                         : JTable.PrintMode.NORMAL;
+           tablevt.print(mode,header,footer);
          }
       catch(java.awt.print.PrinterException e)
       {
@@ -139,6 +157,12 @@ public class viewvt extends javax.swing.JFrame {
                 
             }
         });
+    }
+     private void fixWidth(final JTable table, final int columnIndex, final int width) {
+        TableColumn column = table.getColumnModel().getColumn(columnIndex);
+        column.setMinWidth(width);
+        column.setMaxWidth(width);
+        column.setPreferredWidth(width);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

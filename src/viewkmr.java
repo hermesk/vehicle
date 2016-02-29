@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.MessageFormat;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import net.proteanit.sql.DbUtils;
@@ -19,6 +20,11 @@ public class viewkmr extends javax.swing.JFrame {
         initComponents();
         conn = javaconnect.connecrDb();
         update_table();
+         //deactivate maxmize
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setVisible(true);
+        setResizable(false);
+ 
     }
     private void update_table(){
       try{
@@ -89,9 +95,9 @@ public class viewkmr extends javax.swing.JFrame {
                         .addGap(68, 68, 68)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(377, 377, 377)
+                        .addGap(386, 386, 386)
                         .addComponent(cmdprint)
-                        .addGap(55, 55, 55)
+                        .addGap(56, 56, 56)
                         .addComponent(cmdexit)))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
@@ -99,15 +105,15 @@ public class viewkmr extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdprint)
-                    .addComponent(cmdexit))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(cmdexit)
+                    .addComponent(cmdprint))
+                .addGap(47, 47, 47))
         );
 
-        setSize(new java.awt.Dimension(1072, 339));
+        setSize(new java.awt.Dimension(1072, 535));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

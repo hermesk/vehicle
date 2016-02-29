@@ -113,6 +113,7 @@ public class adminvt extends javax.swing.JFrame {
         cmd_print = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         kmr = new javax.swing.JMenu();
         vehicle = new javax.swing.JMenu();
         dr = new javax.swing.JMenu();
@@ -293,6 +294,11 @@ public class adminvt extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -304,7 +310,8 @@ public class adminvt extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel16)
-                                    .addComponent(jLabel9))
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10))
                                 .addGap(33, 33, 33)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -317,18 +324,12 @@ public class adminvt extends javax.swing.JFrame {
                                     .addComponent(t12)
                                     .addComponent(wt1)
                                     .addComponent(t32)
-                                    .addComponent(t31)
-                                    .addComponent(wt2)
                                     .addComponent(t42)
                                     .addComponent(t41)
                                     .addComponent(wt3)
-                                    .addComponent(wt4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
+                                    .addComponent(wt4, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(wt2)
+                                    .addComponent(t31))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -378,9 +379,10 @@ public class adminvt extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(wt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(t31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(t31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
@@ -447,6 +449,15 @@ public class adminvt extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Logout");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         kmr.setText("KM Overhaul");
@@ -791,9 +802,9 @@ public class adminvt extends javax.swing.JFrame {
              java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(add1);
              txt_Date.setDate(date);
           
-             ComboBox_vehicle.addItem(rs.getString("vehicle"));
+             ComboBox_vehicle.setSelectedItem(rs.getString("vehicle"));
            
-             ComboBox_driver.addItem(rs.getString("driver"));
+             ComboBox_driver.setSelectedItem(rs.getString("driver"));
           
             runs.setValue(rs.getInt("runs"));
               
@@ -1019,6 +1030,12 @@ public class adminvt extends javax.swing.JFrame {
     
     }//GEN-LAST:event_printActionPerformed
 
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+           login lg = new login();
+              lg.setVisible(true);
+              this.dispose();
+    }//GEN-LAST:event_jMenuItem1MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -1124,6 +1141,7 @@ public class adminvt extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
