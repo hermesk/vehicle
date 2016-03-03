@@ -130,8 +130,8 @@ public class viewvt extends javax.swing.JFrame {
     private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed
         // TODO add your handling code here:
         JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);                                                
-     MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
-      MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+        MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
+        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
       
          boolean fitWidth = fitWidthBox.isSelected();
         

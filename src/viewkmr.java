@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.MessageFormat;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
 public class viewkmr extends javax.swing.JFrame {
@@ -20,6 +22,10 @@ public class viewkmr extends javax.swing.JFrame {
         initComponents();
         conn = javaconnect.connecrDb();
         update_table();
+        //set column width
+        fixWidth(tablekmr, 0, 80);
+        fixWidth(tablekmr, 1, 80);
+        fixWidth(tablekmr, 2, 150); 
          //deactivate maxmize
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
@@ -43,6 +49,12 @@ public class viewkmr extends javax.swing.JFrame {
       
       }
      }
+    private void fixWidth(final JTable table, final int columnIndex, final int width) {
+        TableColumn column = table.getColumnModel().getColumn(columnIndex);
+        column.setMinWidth(width);
+        column.setMaxWidth(width);
+        column.setPreferredWidth(width);
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -123,13 +135,19 @@ public class viewkmr extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdexitActionPerformed
 
     private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed
-        // TODO add your handling code here:
-         MessageFormat header = new MessageFormat("Ragati Tea Factory Vehicle Km Overhaul");
-      MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+       
+        JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);                                                
+        MessageFormat header = new MessageFormat("Ragati Tea Factory Vehicle Km Overhaul");
+        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+        
+         boolean fitWidth = fitWidthBox.isSelected();
+
 
       try{
-           tablekmr.print(JTable.PrintMode.NORMAL,header,footer);
-         }
+             JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH
+                                         : JTable.PrintMode.NORMAL;
+           tablekmr.print(mode,header,footer);
+                  }
       catch(java.awt.print.PrinterException e)
       {
          PrintStream format = System.err.format("Cannot print %s%n");

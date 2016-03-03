@@ -9,10 +9,12 @@ import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
 
@@ -30,9 +32,16 @@ public class adminkmrange extends javax.swing.JFrame {
         ComboDriver();
         fillCombo();
         update_table();
+            
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
+    }
+    private void fixWidth(final JTable table, final int columnIndex, final int width) {
+        TableColumn column = table.getColumnModel().getColumn(columnIndex);
+        column.setMinWidth(width);
+        column.setMaxWidth(width);
+        column.setPreferredWidth(width);
     }
   private void update_table(){
       try{
@@ -43,6 +52,17 @@ public class adminkmrange extends javax.swing.JFrame {
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablekmr.setModel( DbUtils.resultSetToTableModel(rs));
+          
+        fixWidth(tablekmr, 0, 50);
+        fixWidth(tablekmr, 1, 80);
+        fixWidth(tablekmr, 2, 80);
+        fixWidth(tablekmr, 3, 150); 
+        fixWidth(tablekmr, 4, 70);
+        fixWidth(tablekmr, 5, 70);
+        fixWidth(tablekmr, 6, 70);
+        fixWidth(tablekmr, 7, 80);
+        fixWidth(tablekmr, 8, 100);
+
 
       }
       catch(Exception e)
@@ -61,12 +81,6 @@ public class adminkmrange extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablekmr = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowindex, int colIndex)
-            { return false;}
-        };
-        ;
         jPanel1 = new javax.swing.JPanel();
         diesel = new javax.swing.JTextField();
         tkm = new javax.swing.JTextField();
@@ -89,26 +103,14 @@ public class adminkmrange extends javax.swing.JFrame {
         cmd_save = new javax.swing.JButton();
         cmd_update = new javax.swing.JButton();
         cmd_print = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablekmr = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowindex, int colIndex)
+            { return false;}
+        };
+        ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        tablekmr.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tablekmr.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablekmrMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tablekmr);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicle KM Range Overhaul", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -288,6 +290,26 @@ public class adminkmrange extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        tablekmr.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablekmr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablekmrMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablekmr);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -296,8 +318,8 @@ public class adminkmrange extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmd_print)
@@ -306,12 +328,11 @@ public class adminkmrange extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmd_print))
         );
 
@@ -321,8 +342,8 @@ public class adminkmrange extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +504,6 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
              txt_Date.setDate(date);
           
              ComboBox_vehicle.setSelectedItem(rs.getString("vehicle"));
-           
              ComboBox_driver.setSelectedItem(rs.getString("driver"));
              kmgl.setText(rs.getString("glkm"));
              tkm.setText(rs.getString("tkm"));
@@ -544,17 +564,23 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     }//GEN-LAST:event_cmd_updateActionPerformed
 
     private void cmd_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_printActionPerformed
-        // TODO add your handling code here:
-           MessageFormat header = new MessageFormat("Ragati Tea Factory Vehicle Km Overhaul");
-           MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+        JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);                                                
+        MessageFormat header = new MessageFormat("Ragati Tea Factory Vehicle Km Overhaul");
+        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+        
+         boolean fitWidth = fitWidthBox.isSelected();
+
 
       try{
-           tablekmr.print(JTable.PrintMode.NORMAL,header,footer);
-         }
+             JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH
+                                         : JTable.PrintMode.NORMAL;
+           tablekmr.print(mode,header,footer);
+                  }
       catch(java.awt.print.PrinterException e)
       {
          PrintStream format = System.err.format("Cannot print %s%n");
       }
+    
     
     }//GEN-LAST:event_cmd_printActionPerformed
 
@@ -696,6 +722,7 @@ private void fillCombo(){
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField kmgl;
     private javax.swing.JTable tablekmr;
     private javax.swing.JTextField tfw;

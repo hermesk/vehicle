@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,12 +14,14 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
+import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
 
@@ -28,7 +31,7 @@ public class adminvt extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,vt,tt;
+    float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,tt;
     float th1,th2,th3,th4,tm1,tm2,tm3,tm4,tmh1,tmh2,tmh3,tmh4;
     public adminvt() {
      super("Fill Vehicleturnabout");
@@ -36,7 +39,9 @@ public class adminvt extends javax.swing.JFrame {
        initComponents();
        ComboDriver();
        fillCombo();
+       
         update_table();
+        
         //deactivate maxmize
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
@@ -46,13 +51,22 @@ public class adminvt extends javax.swing.JFrame {
     private void update_table(){ //update jtable
       try{
           String sql;
-          sql = "select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TimeOut R1',"
-                  + "tir1 as 'TimeIn R1',fwr1 as 'FW1',tor2 as 'TimeOut R2',tir2 as 'TimeIn R2'"
-                  + ",fwr2 as 'FW2',tor3 as 'TimeOut R3',tir3 as 'TimeIn R3',fwr3 as'FW3',tor4 as 'TimeOut R4',tir4 as 'TimeIn R4', "
-                  + "fwr4 as 'FW4',tfw as 'Total Factory Weight',vt as 'Vehicleturnabout'from vt";
+          sql = "select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'Timeout R1',"
+                  + "tir1 as 'Timein R1',tor2 as 'Timeout R2',tir2 as 'Timein R2'"
+                  + ",tor3 as 'Timeout R3',tir3 as 'Timein R3',tor4 as 'Timeout R4',tir4 as 'Timein R4', "
+                  + "tfw as 'Total Factory Weight',vt as 'Vehicleturnabout'from vt";
+          
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
+         
+        fixWidth(tablevt, 0, 30);
+        fixWidth(tablevt, 1, 80);
+        fixWidth(tablevt, 2, 80); 
+        fixWidth(tablevt, 3, 120); 
+        fixWidth(tablevt, 4, 50); 
+        fixWidth(tablevt, 5, 70);
+       // fixWidth(tablevt, 14, 90);
 
       }
       catch(Exception e)
@@ -65,6 +79,7 @@ public class adminvt extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         t32 = new javax.swing.JSpinner();
@@ -103,13 +118,13 @@ public class adminvt extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         cmd_update = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        print = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
         tablevt = new javax.swing.JTable(){
             public boolean isCellEditable(int rowindex, int colIndex)
             { return false;}
         };
         ;
-        print = new javax.swing.JButton();
         cmd_print = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -120,6 +135,8 @@ public class adminvt extends javax.swing.JFrame {
         adduser = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicleturnabout", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
@@ -248,6 +265,15 @@ public class adminvt extends javax.swing.JFrame {
 
         jLabel5.setText("Enter timein for run 1");
 
+        print.setText("Print");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
+
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
         tablevt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -264,14 +290,7 @@ public class adminvt extends javax.swing.JFrame {
                 tablevtMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tablevt);
-
-        print.setText("Print");
-        print.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printActionPerformed(evt);
-            }
-        });
+        jScrollPane3.setViewportView(tablevt);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -291,7 +310,7 @@ public class adminvt extends javax.swing.JFrame {
                         .addComponent(cmd_delete)
                         .addGap(147, 147, 147)
                         .addComponent(print)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap(847, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -316,7 +335,7 @@ public class adminvt extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(ComboBox_driver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_Date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_Date, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                                     .addComponent(t22)
                                     .addComponent(t21)
                                     .addComponent(runs)
@@ -327,12 +346,12 @@ public class adminvt extends javax.swing.JFrame {
                                     .addComponent(t42)
                                     .addComponent(t41)
                                     .addComponent(wt3)
-                                    .addComponent(wt4, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(wt4)
                                     .addComponent(wt2)
                                     .addComponent(t31))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1047, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,7 +424,7 @@ public class adminvt extends javax.swing.JFrame {
                             .addComponent(wt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -430,8 +449,8 @@ public class adminvt extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(978, 978, 978)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1496, Short.MAX_VALUE)
                 .addComponent(cmd_print)
                 .addGap(962, 962, 962))
         );
@@ -447,6 +466,8 @@ public class adminvt extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
+
+        jScrollPane2.setViewportView(jPanel1);
 
         jMenu1.setText("File");
 
@@ -498,14 +519,14 @@ public class adminvt extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 3311, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -563,6 +584,7 @@ public class adminvt extends javax.swing.JFrame {
             }
             else{
                 try{
+         	     DecimalFormat df = new DecimalFormat("###.##");
 
                     Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
                     Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
@@ -626,7 +648,10 @@ public class adminvt extends javax.swing.JFrame {
                     tt = TH1+TH2+TH3+TH4;
 
                     int run =(int)runs.getValue();
-                    vt = (float)tt/run;
+                    float vht = (float)tt/run;
+                    String vt = df.format(vht);
+
+                    
                     pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                     pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
                     pst.setString(3, ComboBox_driver.getSelectedItem().toString());
@@ -648,7 +673,7 @@ public class adminvt extends javax.swing.JFrame {
                     pst.setString(15, tt42);
                     pst.setString(16, wt4.getText().trim());
                     pst.setFloat(17, tfw);
-                    pst.setDouble(18,vt );
+                    pst.setString(18,vt );
                     pst.execute();
                     JOptionPane.showMessageDialog(null, "Saved Successfully");
 
@@ -680,6 +705,7 @@ public class adminvt extends javax.swing.JFrame {
         }
         else{
             try{
+                DecimalFormat df = new DecimalFormat("###.##");
 
                 Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
                 Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
@@ -743,7 +769,9 @@ public class adminvt extends javax.swing.JFrame {
                 tt = TH1+TH2+TH3+TH4;
 
                 int run =(int)runs.getValue();
-                vt = (float)tt/run;
+                float vht = (float)tt/run;
+                String vt = df.format(vht);
+
                 pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                 pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
                 pst.setString(3, ComboBox_driver.getSelectedItem().toString());
@@ -765,7 +793,7 @@ public class adminvt extends javax.swing.JFrame {
                 pst.setString(15, tt42);
                 pst.setString(16, wt4.getText().trim());
                 pst.setFloat(17, tfw);
-                pst.setDouble(18,vt );
+                pst.setString(18,vt );
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Saved Successfully");
 
@@ -947,7 +975,7 @@ public class adminvt extends javax.swing.JFrame {
                 Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
                 Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
                 int run =(int)runs.getValue();
-                 vt = (float)tt/run;
+                float vt = (float)tt/run;
 
           
     String sql = "update vt set date= '"+v1+"',vehicle='"+v2+"',driver='"+v3+"',runs='"+v4+"',tor1='"+v5+"',tir1='"+v6+"',"
@@ -1013,21 +1041,24 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_adduserMouseClicked
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-        // TODO add your handling code here:
-                                                            
-     MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
-      MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+     JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);                                                
+        MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
+        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+      
+         boolean fitWidth = fitWidthBox.isSelected();
+        
+
 
       try{
-          
-           tablevt.print(JTable.PrintMode.NORMAL,header,footer);
+          JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH
+                                         : JTable.PrintMode.NORMAL;
+           tablevt.print(mode,header,footer);
          }
       catch(java.awt.print.PrinterException e)
       {
          PrintStream format = System.err.format("Cannot print %s%n");
       }
       
-    
     }//GEN-LAST:event_printActionPerformed
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
@@ -1112,6 +1143,12 @@ public class adminvt extends javax.swing.JFrame {
      
      }
           }
+private void fixWidth(final JTable table, final int columnIndex, final int width) {
+        TableColumn column = table.getColumnModel().getColumn(columnIndex);
+        column.setMinWidth(width);
+        column.setMaxWidth(width);
+        column.setPreferredWidth(width);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox_driver;
@@ -1145,6 +1182,8 @@ public class adminvt extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenu kmr;
     private javax.swing.JButton print;
     private javax.swing.JSpinner runs;
