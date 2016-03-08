@@ -1,6 +1,4 @@
 package javafiles;
-
-
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.PrintStream;
@@ -40,10 +38,11 @@ public class admindrivers extends javax.swing.JFrame {
           
       }
       catch(Exception e)
-      {
-             JOptionPane.showMessageDialog(null,e);
+      {             JOptionPane.showMessageDialog(null,e);
+            }
       
-      }
+      
+      
      }
    
     @SuppressWarnings("unchecked")
@@ -290,8 +289,9 @@ public class admindrivers extends javax.swing.JFrame {
                         }
                         catch(SQLException | HeadlessException e){
                             JOptionPane.showMessageDialog(null, e);
-
-                        }}
+                        }
+                      
+                    }
                     }
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
@@ -304,7 +304,8 @@ public class admindrivers extends javax.swing.JFrame {
                  catch(Exception ex){
                   }
                 }
-       
+               update_table();
+
             }
             else
             {};
@@ -457,6 +458,7 @@ public class admindrivers extends javax.swing.JFrame {
 
       @SuppressWarnings("empty-statement")
     private void phonenoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phonenoKeyPressed
+       
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
          if(fname.getText().isEmpty()||sname.getText().isEmpty()||phoneno.getText().isEmpty())
         {
@@ -492,10 +494,9 @@ public class admindrivers extends javax.swing.JFrame {
                         }
                         catch(SQLException | HeadlessException e){
                             JOptionPane.showMessageDialog(null, e);
-
                         }
-                     finally {
-                try{
+              finally {
+                   try{
                   rs.close();
                   pst.close();
                   }
@@ -508,7 +509,7 @@ public class admindrivers extends javax.swing.JFrame {
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
-
+              
             }
            
         }
