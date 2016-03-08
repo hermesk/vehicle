@@ -60,8 +60,16 @@ public class viewkmr extends javax.swing.JFrame {
       catch(Exception e)
       {
              JOptionPane.showMessageDialog(null,e);
-      
-      }
+            }
+       finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
    
     @SuppressWarnings("unchecked")
@@ -248,6 +256,15 @@ public class viewkmr extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null,e);
 
                     }
+                     finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
                     else {
                         JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
 

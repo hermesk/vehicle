@@ -313,7 +313,17 @@ public class kmrange extends javax.swing.JFrame {
 catch(  SQLException | NumberFormatException | HeadlessException e){
               JOptionPane.showMessageDialog(null, e);
 
-        }}}
+        }
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+        }}
         /*
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
         // TODO add your handling code here:
@@ -420,7 +430,17 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 catch(  SQLException | NumberFormatException | HeadlessException e){
               JOptionPane.showMessageDialog(null, e);
 
-        }}
+        }
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+        }
         }
     }//GEN-LAST:event_tfwKeyPressed
     
@@ -464,6 +484,15 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
          JOptionPane.showMessageDialog(null, e);
 
       }
+      finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
     
     
@@ -484,6 +513,15 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
      {
                  JOptionPane.showMessageDialog(null, e);
     }
+           finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
           }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

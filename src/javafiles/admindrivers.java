@@ -296,7 +296,15 @@ public class admindrivers extends javax.swing.JFrame {
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
-
+      finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
             }
             else
             {};
@@ -329,7 +337,17 @@ public class admindrivers extends javax.swing.JFrame {
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
 
-                }}
+                }
+             finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+            }
         update_table();}
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -361,11 +379,17 @@ public class admindrivers extends javax.swing.JFrame {
                catch(NumberFormatException | SQLException e){
         JOptionPane.showMessageDialog(null, e);
         }
-        
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
         update_table();
-
-         
-          }     
+    }     
                 
     }//GEN-LAST:event_cmd_updateActionPerformed
 
@@ -405,6 +429,15 @@ public class admindrivers extends javax.swing.JFrame {
            catch(Exception e){
                JOptionPane.showMessageDialog(null, e);
            }
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
     }//GEN-LAST:event_table_driversMouseClicked
 
     private void cmd_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_printActionPerformed
@@ -460,7 +493,17 @@ public class admindrivers extends javax.swing.JFrame {
                         catch(SQLException | HeadlessException e){
                             JOptionPane.showMessageDialog(null, e);
 
-                        }}
+                        }
+                     finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+                    }
                     }
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);

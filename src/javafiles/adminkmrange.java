@@ -68,6 +68,15 @@ public class adminkmrange extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null,e);
       
       }
+       finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -482,9 +491,18 @@ public class adminkmrange extends javax.swing.JFrame {
 
           } catch (SQLException e) {
                    JOptionPane.showMessageDialog(null, e);
-                   
-
-          }}
+                 
+         }
+          finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+                        
+                 }
          
          update_table();
     }
@@ -492,13 +510,19 @@ public class adminkmrange extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
+        String a =kmgl.getText().trim();
+        String b =tkm.getText().trim();
+
         if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
             dibal.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
             ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
         {
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
 
-        }
+        } 
+     /*   else if(ab){
+           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
+                                         }*/
         else{
 
             try{
@@ -524,10 +548,17 @@ public class adminkmrange extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Saved Successfully");
     }//GEN-LAST:event_cmd_saveActionPerformed
 catch(  SQLException | NumberFormatException | HeadlessException e){
-              JOptionPane.showMessageDialog(null, e);
-              
-
-        }
+              JOptionPane.showMessageDialog(null, e);     
+       }
+             finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
         update_table();
         }}
     private void tablekmrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablekmrMouseClicked
@@ -558,6 +589,15 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
            catch(Exception e){
                JOptionPane.showMessageDialog(null, e);
            }
+           finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
     }       
     private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
         // TODO add your handling code here:
@@ -598,7 +638,15 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
           catch(NumberFormatException | SQLException e){
         JOptionPane.showMessageDialog(null, e);
         }
-        
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
         update_table();
 
          
@@ -659,6 +707,15 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
               
 
         }
+             finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
         update_table();
         }
          
@@ -718,6 +775,15 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                     JOptionPane.showMessageDialog(null,e);
 
                 }
+                 finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
                 else {
                     JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
 
@@ -783,6 +849,15 @@ private void fillCombo(){
          JOptionPane.showMessageDialog(null, e);
 
       }
+      finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
     
     
@@ -803,6 +878,15 @@ private void fillCombo(){
      {
                  JOptionPane.showMessageDialog(null, e);
     }
+           finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
           }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox_driver;

@@ -43,8 +43,16 @@ public class register extends javax.swing.JFrame {
       catch(Exception e)
       {
              JOptionPane.showMessageDialog(null,e);
-      
-      }
+            }
+       finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
   
     @SuppressWarnings("unchecked")
@@ -246,11 +254,30 @@ public class register extends javax.swing.JFrame {
               
         catch(SQLException | HeadlessException e){
 
-        }}}
+        }
+                         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+                        }}
                      }catch (SQLException e) {
                                JOptionPane.showMessageDialog(null, e);
                                
                            }
+          finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
          update_table();
         }
                      else{}
@@ -276,7 +303,15 @@ public class register extends javax.swing.JFrame {
           catch(Exception e){
                JOptionPane.showMessageDialog(null, e);
            }
-   
+    finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
     }//GEN-LAST:event_tableusersMouseClicked
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
@@ -323,6 +358,15 @@ public class register extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
 
             }
+             finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
             update_table();
             }}
     }//GEN-LAST:event_cmd_delActionPerformed
@@ -352,7 +396,15 @@ public class register extends javax.swing.JFrame {
                catch(NumberFormatException | SQLException e){
         JOptionPane.showMessageDialog(null, e);
         }
-        
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
         update_table();
 
         }
@@ -397,11 +449,30 @@ public class register extends javax.swing.JFrame {
               
         catch(SQLException | HeadlessException e){
 
-        }}}
+        }
+              finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+             }}
                      }catch (SQLException e) {
                                JOptionPane.showMessageDialog(null, e);
                                
                            }
+          finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
          update_table();
         }
                      else{}

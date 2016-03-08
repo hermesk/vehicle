@@ -1,10 +1,12 @@
 package javafiles;
 
 
+import java.awt.HeadlessException;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.MessageFormat;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -52,6 +54,15 @@ public class viewvt extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null,e);
       
       }
+       finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -205,10 +216,71 @@ public class viewvt extends javax.swing.JFrame {
             int tr =rs.getInt("total");
             JOptionPane.showMessageDialog(null, tr+" "+"records found");
 
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+         while(rs.next()){
+                if(rs.getInt("total")>0)
+
+      try{
+                  String sql = "select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
+                  + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
+                  + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
+                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt where date between '"+start+"' and '"+end+"'";
+          pst = conn.prepareStatement(sql);
+          rs=pst.executeQuery();
+          tablevt.setModel( DbUtils.resultSetToTableModel(rs));
+        fixWidth(tablevt, 0, 30);
+        fixWidth(tablevt, 1, 80);
+        fixWidth(tablevt, 2, 70); 
+        fixWidth(tablevt, 3, 120); 
+        fixWidth(tablevt, 4, 40); 
+        fixWidth(tablevt, 5, 55);
+        fixWidth(tablevt, 6, 50);
+        fixWidth(tablevt, 7, 48);
+        fixWidth(tablevt, 8, 55);
+        fixWidth(tablevt, 9, 50);
+        fixWidth(tablevt, 10,48);
+        fixWidth(tablevt, 11, 55);
+        fixWidth(tablevt, 12, 50);
+        fixWidth(tablevt, 13, 48);
+        fixWidth(tablevt, 14, 55);
+        fixWidth(tablevt, 15, 50);
+        fixWidth(tablevt, 16, 48);
+        fixWidth(tablevt, 17, 50);
+        fixWidth(tablevt, 18, 50);
+                }
+                catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
+
+                }
+                 finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+                else {
+                    JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
+
+                }
+
+            }}
+            catch (SQLException | HeadlessException ex) {
+
+                JOptionPane.showMessageDialog(null, ex);
+
+            }
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
     }//GEN-LAST:event_cmd_searchActionPerformed
 
     public static void main(String args[]) {

@@ -82,6 +82,15 @@ public class adminvt extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null,e);
       
       }
+       finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -702,12 +711,23 @@ public class adminvt extends javax.swing.JFrame {
             }
             catch(NumberFormatException | SQLException e){
                 JOptionPane.showMessageDialog(null, e);
-            } catch (ParseException ex) {
+            } 
+            
+            
+            catch (ParseException ex) {
                 Logger.getLogger(adminvt.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
             update_table();
-
+          
         }
     }//GEN-LAST:event_cmd_updateActionPerformed
 
@@ -837,7 +857,16 @@ public class adminvt extends javax.swing.JFrame {
                 catch(NumberFormatException | SQLException | ParseException | HeadlessException e){
                     JOptionPane.showMessageDialog(null, e);
 
-                }}
+                }
+             finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       }
             }
     }//GEN-LAST:event_wt4KeyPressed
 
@@ -888,7 +917,17 @@ public class adminvt extends javax.swing.JFrame {
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
 
-                }}
+                }
+             finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+            }
             }
             update_table();
     }//GEN-LAST:event_cmd_deleteActionPerformed
@@ -1000,8 +1039,19 @@ public class adminvt extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
 
             }
-            update_table();
-        }
+             finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+            
+            update_table();}
+            
+        
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void wt3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt3KeyTyped
@@ -1069,8 +1119,7 @@ public class adminvt extends javax.swing.JFrame {
      
          }
         }
-        
-        catch(SQLException | ParseException e){
+                catch(SQLException | ParseException e){
         JOptionPane.showMessageDialog(null, e);}    }//GEN-LAST:event_tablevtMouseClicked
 
     private void cmd_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_searchActionPerformed
@@ -1094,7 +1143,7 @@ public class adminvt extends javax.swing.JFrame {
                   String sql = "select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
                   + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
                   + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
-                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vtwhere date between '"+start+"' and '"+end+"'";
+                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt where date between '"+start+"' and '"+end+"'";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
@@ -1123,6 +1172,15 @@ public class adminvt extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,e);
 
                 }
+                 finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
                 else {
                     JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
 
@@ -1134,6 +1192,15 @@ public class adminvt extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex);
 
             }
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
     }//GEN-LAST:event_cmd_searchActionPerformed
 
     /**
@@ -1186,6 +1253,15 @@ public class adminvt extends javax.swing.JFrame {
      {
         JOptionPane.showMessageDialog(null, e);
      }
+      finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
     
     
@@ -1207,9 +1283,17 @@ public class adminvt extends javax.swing.JFrame {
      catch(Exception e)
      {
                  JOptionPane.showMessageDialog(null, e);
-
-     
+    
      }
+           finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
           }
 private void fixWidth(final JTable table, final int columnIndex, final int width) {
         TableColumn column = table.getColumnModel().getColumn(columnIndex);

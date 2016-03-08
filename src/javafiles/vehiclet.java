@@ -538,7 +538,17 @@ public class vehiclet extends javax.swing.JFrame {
               catch(NumberFormatException | SQLException | ParseException | HeadlessException e){
               JOptionPane.showMessageDialog(null, e);
 
-        }}
+        }
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+        }
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
@@ -720,7 +730,17 @@ public class vehiclet extends javax.swing.JFrame {
               catch(NumberFormatException | SQLException | ParseException | HeadlessException e){
               JOptionPane.showMessageDialog(null, e);
 
-        }}
+        }
+              finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
+             }
     }                                        
 
         
@@ -783,6 +803,16 @@ public class vehiclet extends javax.swing.JFrame {
      {
         JOptionPane.showMessageDialog(null, e);
      }
+      finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                
+                }
+       
      }
     
     
@@ -807,6 +837,15 @@ public class vehiclet extends javax.swing.JFrame {
 
      
      }
+           finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
           }
    
 

@@ -42,6 +42,15 @@ public class viewdrivers extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null,e);
       
       }
+       finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       
      }
 
     @SuppressWarnings("unchecked")

@@ -162,7 +162,16 @@ public class login extends javax.swing.JFrame {
    catch(SQLException | HeadlessException e){
                       JOptionPane.showMessageDialog(null,e);
 
-   }}
+   }
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       }
     }//GEN-LAST:event_cmd_loginActionPerformed
 
     private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
@@ -203,7 +212,16 @@ public class login extends javax.swing.JFrame {
    catch(SQLException | HeadlessException e){
                       JOptionPane.showMessageDialog(null,e);
 
-   }}
+   }
+         finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+       }
     }//GEN-LAST:event_txt_passwordKeyPressed
 
     public static void main(String args[]) {
@@ -238,7 +256,8 @@ public class login extends javax.swing.JFrame {
           }
           catch(Exception ex){
           }
-        return null;
+       return null;
+        
 
        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
