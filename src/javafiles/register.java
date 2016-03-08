@@ -1,3 +1,5 @@
+package javafiles;
+
 
 import java.awt.Frame;
 import java.awt.HeadlessException;
@@ -24,15 +26,12 @@ public class register extends javax.swing.JFrame {
         initComponents();
         conn = javaconnect.connecrDb();
         update_table();
-        setIcon();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
        }
     
-    private void setIcon(){
-     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("vt.ico")));
-    }
+   
  private void update_table(){
       try{
           String sql = "select  username,password from users";

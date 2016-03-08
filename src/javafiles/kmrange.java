@@ -1,3 +1,5 @@
+package javafiles;
+
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -7,7 +9,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.KeyEvent;
-import java.text.DecimalFormat;
 import javax.swing.JFrame;
 
 public class kmrange extends javax.swing.JFrame {
@@ -291,12 +292,9 @@ public class kmrange extends javax.swing.JFrame {
             String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh,kgl)"
                     + "values(?,?,?,?,?,?,?,?,?,?)";
          pst=conn.prepareStatement(sql);
-         	DecimalFormat df = new DecimalFormat("###.##");
-         float kmpl = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText().trim()));
-         float kgpl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText().trim()));
-           String  kml = df.format(kmpl);
-           String  kgl = df.format(kgpl);
-
+         float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText().trim()));
+         float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText().trim()));
+         
             pst.setString(1, ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().trim());
             pst.setString(2, ComboBox_vehicle.getSelectedItem().toString().trim());
             pst.setString(3, ComboBox_driver.getSelectedItem().toString().trim());
@@ -305,8 +303,8 @@ public class kmrange extends javax.swing.JFrame {
             pst.setString(6, diesel.getText().trim().trim());
             pst.setString(7, dibal.getText().trim().trim());
             pst.setString(8, tfw.getText().trim().trim());
-            pst.setString(9, kml);
-            pst.setString(10, kgl);
+            pst.setFloat(9, kml);
+            pst.setFloat(10, kgl);
 
             pst.execute();
 

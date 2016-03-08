@@ -1,3 +1,5 @@
+package javafiles;
+
 
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -15,7 +17,6 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -31,7 +32,7 @@ public class adminvt extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,tt;
+    float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,vt,tt;
     float th1,th2,th3,th4,tm1,tm2,tm3,tm4,tmh1,tmh2,tmh3,tmh4;
     public adminvt() {
      super("Fill Vehicleturnabout");
@@ -39,34 +40,42 @@ public class adminvt extends javax.swing.JFrame {
        initComponents();
        ComboDriver();
        fillCombo();
-       
         update_table();
-        
         //deactivate maxmize
-        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        /*setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
-        setResizable(false);
+        setResizable(false);*/
     }
 
     private void update_table(){ //update jtable
       try{
           String sql;
-          sql = "select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'Timeout R1',"
-                  + "tir1 as 'Timein R1',tor2 as 'Timeout R2',tir2 as 'Timein R2'"
-                  + ",tor3 as 'Timeout R3',tir3 as 'Timein R3',tor4 as 'Timeout R4',tir4 as 'Timein R4', "
-                  + "tfw as 'Total Factory Weight',vt as 'Vehicleturnabout'from vt";
-          
+          sql = "select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
+                  + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
+                  + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
+                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
-         
         fixWidth(tablevt, 0, 30);
         fixWidth(tablevt, 1, 80);
-        fixWidth(tablevt, 2, 80); 
+        fixWidth(tablevt, 2, 70); 
         fixWidth(tablevt, 3, 120); 
-        fixWidth(tablevt, 4, 50); 
-        fixWidth(tablevt, 5, 70);
-       // fixWidth(tablevt, 14, 90);
+        fixWidth(tablevt, 4, 40); 
+        fixWidth(tablevt, 5, 55);
+        fixWidth(tablevt, 6, 50);
+        fixWidth(tablevt, 7, 48);
+        fixWidth(tablevt, 8, 55);
+        fixWidth(tablevt, 9, 50);
+        fixWidth(tablevt, 10,48);
+        fixWidth(tablevt, 11, 55);
+        fixWidth(tablevt, 12, 50);
+        fixWidth(tablevt, 13, 48);
+        fixWidth(tablevt, 14, 55);
+        fixWidth(tablevt, 15, 50);
+        fixWidth(tablevt, 16, 48);
+        fixWidth(tablevt, 17, 50);
+        fixWidth(tablevt, 18, 50);
 
       }
       catch(Exception e)
@@ -79,8 +88,8 @@ public class adminvt extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         t32 = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
@@ -119,13 +128,17 @@ public class adminvt extends javax.swing.JFrame {
         cmd_update = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         print = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         tablevt = new javax.swing.JTable(){
             public boolean isCellEditable(int rowindex, int colIndex)
             { return false;}
-        };
+        }
         ;
-        cmd_print = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        stdate = new com.toedter.calendar.JDateChooser();
+        endate = new com.toedter.calendar.JDateChooser();
+        txt_search = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -136,9 +149,10 @@ public class adminvt extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicleturnabout", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         t32.setModel(new SpinnerDateModel());
         t32.setEditor(new JSpinner.DateEditor(t32, "HH:mm"));
@@ -272,8 +286,6 @@ public class adminvt extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-
         tablevt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -290,7 +302,22 @@ public class adminvt extends javax.swing.JFrame {
                 tablevtMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tablevt);
+        jScrollPane2.setViewportView(tablevt);
+
+        jLabel17.setText("From");
+
+        stdate.setDateFormatString("yyyy-MM-dd\n");
+
+        endate.setDateFormatString("yyyy-MM-dd");
+
+        txt_search.setText("Search");
+        txt_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_searchActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("To");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -302,56 +329,67 @@ public class adminvt extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(cmd_save)
-                        .addGap(31, 31, 31)
-                        .addComponent(cmd_clear)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmd_update)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmd_delete)
-                        .addGap(147, 147, 147)
-                        .addComponent(print)
-                        .addContainerGap(847, Short.MAX_VALUE))
+                        .addComponent(cmd_clear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmd_update)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmd_delete))
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10))
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ComboBox_driver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_Date, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                    .addComponent(t22)
-                                    .addComponent(t21)
-                                    .addComponent(runs)
-                                    .addComponent(t11)
-                                    .addComponent(t12)
-                                    .addComponent(wt1)
-                                    .addComponent(t32)
-                                    .addComponent(t42)
-                                    .addComponent(t41)
-                                    .addComponent(wt3)
-                                    .addComponent(wt4)
-                                    .addComponent(wt2)
-                                    .addComponent(t31))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ComboBox_vehicle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ComboBox_driver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_Date, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(t22)
+                            .addComponent(t21)
+                            .addComponent(runs)
+                            .addComponent(t11)
+                            .addComponent(t12)
+                            .addComponent(wt1)
+                            .addComponent(t32)
+                            .addComponent(t42)
+                            .addComponent(t41)
+                            .addComponent(wt3)
+                            .addComponent(wt4)
+                            .addComponent(wt2)
+                            .addComponent(t31))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
+                        .addComponent(stdate, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(endate, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(txt_search))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(279, 279, 279)
+                        .addComponent(print))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1047, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1083, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(738, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,7 +399,6 @@ public class adminvt extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txt_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -421,53 +458,44 @@ public class adminvt extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(wt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(wt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmd_delete)
+                            .addComponent(cmd_update)
+                            .addComponent(cmd_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmd_save)
+                            .addComponent(print)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmd_save)
-                        .addComponent(cmd_clear)
-                        .addComponent(cmd_update)
-                        .addComponent(cmd_delete))
-                    .addComponent(print))
-                .addContainerGap())
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(endate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(stdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_search, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
-        cmd_print.setText("Print");
-        cmd_print.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmd_printActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(jPanel2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1496, Short.MAX_VALUE)
-                .addComponent(cmd_print)
-                .addGap(962, 962, 962))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(462, 462, 462)
-                        .addComponent(cmd_print))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 55, Short.MAX_VALUE))
         );
-
-        jScrollPane2.setViewportView(jPanel1);
 
         jMenu1.setText("File");
 
@@ -519,18 +547,170 @@ public class adminvt extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 3311, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+   
+    private void kmrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kmrMouseClicked
+        // TODO add your handling code here:
+        adminkmrange kmrg = new adminkmrange();
+               kmrg.setVisible(true);
+
+    }//GEN-LAST:event_kmrMouseClicked
+
+    private void vehicleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehicleMouseClicked
+        // TODO add your handling code here:
+        vehicles v = new vehicles();
+                v.setVisible(true);
+    }//GEN-LAST:event_vehicleMouseClicked
+
+    private void drMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drMouseClicked
+        // TODO add your handling code here:
+        admindrivers adr = new admindrivers();
+                   adr.setVisible(true);
+    }//GEN-LAST:event_drMouseClicked
+
+    private void adduserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adduserMouseClicked
+        // TODO add your handling code here:
+        register rg = new register();
+                 rg.setVisible(true);
+    }//GEN-LAST:event_adduserMouseClicked
+
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+           login lg = new login();
+              lg.setVisible(true);
+              this.dispose();
+    }//GEN-LAST:event_jMenuItem1MousePressed
+
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);
+        MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
+        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+
+        boolean fitWidth = fitWidthBox.isSelected();
+
+        try{
+            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH
+            : JTable.PrintMode.NORMAL;
+            tablevt.print(mode,header,footer);
+        }
+        catch(java.awt.print.PrinterException e)
+        {
+            PrintStream format = System.err.format("Cannot print %s%n");
+        }
+    }//GEN-LAST:event_printActionPerformed
+
+    private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
+        // TODO add your handling code here:
+        if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
+            wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
+        {
+            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
+
+        }
+        else{
+
+            try
+            {
+
+                SimpleDateFormat sdf=new SimpleDateFormat("kk:mm");
+                sdf.setTimeZone(TimeZone.getDefault());
+
+                String v = rs.getString("id");
+                String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText();
+                String v2 =ComboBox_vehicle.getSelectedItem().toString();
+                String v3 =ComboBox_driver.getSelectedItem().toString();
+                String v4 =runs.getValue().toString().trim();
+                String v5 =sdf.format(t11.getValue());
+                String v6 =sdf.format(t12.getValue());
+                String v7 =wt1.getText().trim();
+                String v8=sdf.format(t21.getValue());
+                String v9=sdf.format(t22.getValue());
+                String v10 =wt2.getText().trim();
+                String v11=sdf.format(t31.getValue());
+                String v12=sdf.format(t32.getValue());
+                String v13 =wt3.getText().trim();
+                String v14=sdf.format(t41.getValue());
+                String v15=sdf.format(t42.getValue());
+                String v16 =wt3.getText().trim();
+                //FT RUN1
+                Date d11 = sdf.parse(v5);
+                Date d12= sdf.parse(v6);
+                long diff1 = d12.getTime()-d11.getTime();
+                long diffH1 = diff1 / (60 * 60 * 1000) % 24;
+                long diffM1 = diff1 / (60 * 1000) % 60;
+                th1 = th+diffH1;
+                tm1 = tm+diffM1;
+                tmh1 = tm1/60;
+                TH1 = tmh1 +th1;
+                //FT RUN2
+                Date d21 = sdf.parse(v8);
+                Date d22= sdf.parse(v9);
+                long diff2 = d22.getTime() - d21.getTime();
+                long diffH2 = diff2 / (60 * 60 * 1000) % 24;
+                long diffM2 = diff2 / (60 * 1000) % 60;
+                th2 = th+diffH2;
+                tm2 = tm+diffM2;
+                tmh2 = tm2/60;
+                TH2 = tmh2 +th2;
+                //FT RUN3
+                Date d31 = sdf.parse(v11);
+                Date d32= sdf.parse(v12);
+                long diff3 = d32.getTime() - d31.getTime();
+                long diffH3 = diff3 / (60 * 60 * 1000) % 24;
+                long diffM3 = diff3 / (60 * 1000) % 60;
+                th3 = th+diffH3;
+                tm3 = tm+diffM3;
+                tmh3 = tm3/60;
+                TH3 = tmh3 +th3;
+                //FT RUN4
+                Date d41 = sdf.parse(v14);
+                Date d42= sdf.parse(v15);
+                long diff4 = d42.getTime() - d41.getTime();
+                long diffH4 = diff4 / (60 * 60 * 1000) % 24;//hrs
+                long diffM4 = diff4 / (60 * 1000) % 60;//mins
+                th4 = th+diffH4;
+                tm4 = tm+diffM4;
+                tmh4 = tm4/60;
+                TH4 = tmh4 +th4;
+                tt = TH1+TH2+TH3+TH4;
+                Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
+                Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
+                DecimalFormat df = new DecimalFormat("###.##");
+                    int run =(int)runs.getValue();
+                    float vht = (float)tt/run;
+                    String vta = df.format(vht);
+
+                String sql = "update vt set date= '"+v1+"',vehicle='"+v2+"',driver='"+v3+"',runs='"+v4+"',tor1='"+v5+"',tir1='"+v6+"',"
+                + "fwr1='"+v7+"',tor2='"+v8+"',tir2='"+v9+"',fwr2='"+v10+"',tor3='"+v11+"',tir3='"+v12+"',fwr3='"+v13+"',"
+                + "tor4='"+v14+"',tir4='"+v15+"',fwr4='"+v16+"', tfw='"+tfw+"', vt='"+vta+"' where id ='"+v+"'";
+
+                pst=conn.prepareStatement(sql);
+                pst.execute();
+
+                JOptionPane.showMessageDialog(null, "Updated");
+            }
+            catch(NumberFormatException | SQLException e){
+                JOptionPane.showMessageDialog(null, e);
+            } catch (ParseException ex) {
+                Logger.getLogger(adminvt.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            update_table();
+
+        }
+    }//GEN-LAST:event_cmd_updateActionPerformed
 
     private void txt_DateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_DateKeyTyped
         // TODO add your handling code here:
@@ -541,50 +721,26 @@ public class adminvt extends javax.swing.JFrame {
         getToolkit().beep();}
     }//GEN-LAST:event_txt_DateKeyTyped
 
-    private void wt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wt1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_wt1ActionPerformed
-
-    private void wt1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt1KeyTyped
-        // TODO add your handling code here:
-        char c=evt.getKeyChar();
-        if(!(Character.isDigit(c)||
-            (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
-        evt.consume();
-        getToolkit().beep();
-        }
-    }//GEN-LAST:event_wt1KeyTyped
-
-    private void wt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt2KeyTyped
+    private void wt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyTyped
         // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
             (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
         evt.consume();
         getToolkit().beep();}
-    }//GEN-LAST:event_wt2KeyTyped
-
-    private void wt3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt3KeyTyped
-        // TODO add your handling code here:
-        char c=evt.getKeyChar();
-        if(!(Character.isDigit(c)||
-            (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
-        evt.consume();
-        getToolkit().beep();}
-    }//GEN-LAST:event_wt3KeyTyped
+    }//GEN-LAST:event_wt4KeyTyped
 
     private void wt4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyPressed
-      
+
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
                 wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
             {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
+                JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
 
             }
             else{
                 try{
-         	     DecimalFormat df = new DecimalFormat("###.##");
 
                     Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
                     Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
@@ -646,12 +802,13 @@ public class adminvt extends javax.swing.JFrame {
                     tmh4 = tm4/60;
                     TH4 = tmh4 +th4;
                     tt = TH1+TH2+TH3+TH4;
-
+       
+                    DecimalFormat df = new DecimalFormat("###.##");
+ 
                     int run =(int)runs.getValue();
                     float vht = (float)tt/run;
-                    String vt = df.format(vht);
+                    String vta = df.format(vht);
 
-                    
                     pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                     pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
                     pst.setString(3, ComboBox_driver.getSelectedItem().toString());
@@ -673,7 +830,7 @@ public class adminvt extends javax.swing.JFrame {
                     pst.setString(15, tt42);
                     pst.setString(16, wt4.getText().trim());
                     pst.setFloat(17, tfw);
-                    pst.setString(18,vt );
+                    pst.setString(18,vta );
                     pst.execute();
                     JOptionPane.showMessageDialog(null, "Saved Successfully");
 
@@ -683,24 +840,66 @@ public class adminvt extends javax.swing.JFrame {
 
                 }}
             }
-
     }//GEN-LAST:event_wt4KeyPressed
 
-    private void wt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyTyped
+    private void wt1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt1KeyTyped
         // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
             (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
         evt.consume();
-        getToolkit().beep();}
-    }//GEN-LAST:event_wt4KeyTyped
+        getToolkit().beep();
+        }
+    }//GEN-LAST:event_wt1KeyTyped
+
+    private void wt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wt1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_wt1ActionPerformed
+
+    private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
+        // TODO add your handling code here:
+        ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        wt1.setText("");
+        wt2.setText("");
+        wt3.setText("");
+        wt4.setText("");
+    }//GEN-LAST:event_cmd_clearActionPerformed
+
+    private void cmd_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_deleteActionPerformed
+        // TODO add your handling code here:
+        if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
+            wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
+        {
+            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
+
+        }
+        else{
+            int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
+
+            if(d==0){
+                String sql = "delete from vt where id=?";
+
+                try {
+                    pst=conn.prepareStatement(sql);
+                    pst.setString(1, rs.getString("id"));
+
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "deleted");
+
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e);
+
+                }}
+            }
+            update_table();
+    }//GEN-LAST:event_cmd_deleteActionPerformed
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
         // TODO add your handling code here:
         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
             wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
+            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
 
         }
         else{
@@ -769,8 +968,8 @@ public class adminvt extends javax.swing.JFrame {
                 tt = TH1+TH2+TH3+TH4;
 
                 int run =(int)runs.getValue();
-                float vht = (float)tt/run;
-                String vt = df.format(vht);
+                    float vht = (float)tt/run;
+                    String vta = df.format(vht);
 
                 pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                 pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
@@ -793,7 +992,7 @@ public class adminvt extends javax.swing.JFrame {
                 pst.setString(15, tt42);
                 pst.setString(16, wt4.getText().trim());
                 pst.setFloat(17, tfw);
-                pst.setString(18,vt );
+                pst.setString(18,vta );
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Saved Successfully");
 
@@ -802,22 +1001,30 @@ public class adminvt extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
 
             }
-        update_table();
+            update_table();
         }
     }//GEN-LAST:event_cmd_saveActionPerformed
 
-    private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
+    private void wt3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt3KeyTyped
         // TODO add your handling code here:
-        ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
-        wt1.setText("");
-        wt2.setText("");
-        wt3.setText("");
-        wt4.setText("");
-    }//GEN-LAST:event_cmd_clearActionPerformed
-   
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+            (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
+        evt.consume();
+        getToolkit().beep();}
+    }//GEN-LAST:event_wt3KeyTyped
+
+    private void wt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt2KeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c)||
+            (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
+        evt.consume();
+        getToolkit().beep();}
+    }//GEN-LAST:event_wt2KeyTyped
+
     private void tablevtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablevtMouseClicked
-        // TODO add your handling code here:
-        try{
+ try{
             int row = tablevt.getSelectedRow();
             int col = tablevt.getSelectedColumn();
 
@@ -865,207 +1072,81 @@ public class adminvt extends javax.swing.JFrame {
         }
         
         catch(Exception e){
-        JOptionPane.showMessageDialog(null, e);}
-    }//GEN-LAST:event_tablevtMouseClicked
+        JOptionPane.showMessageDialog(null, e);}    }//GEN-LAST:event_tablevtMouseClicked
 
-    private void cmd_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_deleteActionPerformed
-        // TODO add your handling code here:
-         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
-            wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
-        {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
-
-        }
-        else{
-             int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
-         
-                 if(d==0){
-                 String sql = "delete from vt where id=?";
-        
-          try {
-              pst=conn.prepareStatement(sql);
-              pst.setString(1, rs.getString("id"));
-              
-              pst.execute();
-                    JOptionPane.showMessageDialog(null, "deleted");
-
-          } catch (SQLException e) {
-                   JOptionPane.showMessageDialog(null, e);
-                   
-
-          }}
-         }
-         update_table();
-    }//GEN-LAST:event_cmd_deleteActionPerformed
-
-    private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
-        // TODO add your handling code here:
-         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
-            wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
-        {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
-
-        }
-        else{
-        
-        try
-        {      
-            
-               SimpleDateFormat sdf=new SimpleDateFormat("kk:mm");
-                sdf.setTimeZone(TimeZone.getDefault());
-                
-                String v = rs.getString("id");
-                String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText();
-                String v2 =ComboBox_vehicle.getSelectedItem().toString();
-                String v3 =ComboBox_driver.getSelectedItem().toString();
-                String v4 =runs.getValue().toString().trim();
-                String v5 =sdf.format(t11.getValue());
-                String v6 =sdf.format(t12.getValue());
-                String v7 =wt1.getText().trim();
-                String v8=sdf.format(t21.getValue());
-                String v9=sdf.format(t22.getValue());
-                String v10 =wt2.getText().trim();
-                String v11=sdf.format(t31.getValue());
-                String v12=sdf.format(t32.getValue());
-                String v13 =wt3.getText().trim();
-                String v14=sdf.format(t41.getValue());
-                String v15=sdf.format(t42.getValue());  
-                String v16 =wt3.getText().trim();
-                //FT RUN1
-                Date d11 = sdf.parse(v5);
-                Date d12= sdf.parse(v6);
-                long diff1 = d12.getTime()-d11.getTime();
-                long diffH1 = diff1 / (60 * 60 * 1000) % 24;
-                long diffM1 = diff1 / (60 * 1000) % 60;
-                th1 = th+diffH1;
-                tm1 = tm+diffM1;
-                tmh1 = tm1/60;
-                TH1 = tmh1 +th1;
-                //FT RUN2
-                Date d21 = sdf.parse(v8);
-                Date d22= sdf.parse(v9);
-                long diff2 = d22.getTime() - d21.getTime();
-                long diffH2 = diff2 / (60 * 60 * 1000) % 24;
-                long diffM2 = diff2 / (60 * 1000) % 60;
-                th2 = th+diffH2;
-                tm2 = tm+diffM2;
-                tmh2 = tm2/60;
-                TH2 = tmh2 +th2;
-                //FT RUN3
-                Date d31 = sdf.parse(v11);
-                Date d32= sdf.parse(v12);
-                long diff3 = d32.getTime() - d31.getTime();
-                long diffH3 = diff3 / (60 * 60 * 1000) % 24;
-                long diffM3 = diff3 / (60 * 1000) % 60;
-                th3 = th+diffH3;
-                tm3 = tm+diffM3;
-                tmh3 = tm3/60;
-                TH3 = tmh3 +th3;
-                //FT RUN4
-                Date d41 = sdf.parse(v14);
-                Date d42= sdf.parse(v15);
-                long diff4 = d42.getTime() - d41.getTime();
-                long diffH4 = diff4 / (60 * 60 * 1000) % 24;//hrs
-                long diffM4 = diff4 / (60 * 1000) % 60;//mins
-                th4 = th+diffH4;
-                tm4 = tm+diffM4;
-                tmh4 = tm4/60;
-                TH4 = tmh4 +th4;
-                tt = TH1+TH2+TH3+TH4;
-                Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
-                Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
-                int run =(int)runs.getValue();
-                float vt = (float)tt/run;
-
-          
-    String sql = "update vt set date= '"+v1+"',vehicle='"+v2+"',driver='"+v3+"',runs='"+v4+"',tor1='"+v5+"',tir1='"+v6+"',"
-            + "fwr1='"+v7+"',tor2='"+v8+"',tir2='"+v9+"',fwr2='"+v10+"',tor3='"+v11+"',tir3='"+v12+"',fwr3='"+v13+"',"
-            + "tor4='"+v14+"',tir4='"+v15+"',fwr4='"+v16+"', tfw='"+tfw+"', vt='"+vt+"' where id ='"+v+"'";
-             
-            pst=conn.prepareStatement(sql);
-            pst.execute();
-            
-            JOptionPane.showMessageDialog(null, "Updated");
-        }
-        catch(NumberFormatException | SQLException e){
-        JOptionPane.showMessageDialog(null, e);
-        } catch (ParseException ex) {
-            Logger.getLogger(adminvt.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        update_table();
-
-         }
-    }//GEN-LAST:event_cmd_updateActionPerformed
-
-    private void cmd_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_printActionPerformed
-        // TODO add your handling code here:
-                                                             
-     MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
-      MessageFormat footer = new MessageFormat("Page{0,number,integer}");
-
-      try{
-          
-           tablevt.print(JTable.PrintMode.NORMAL,header,footer);
-         }
-      catch(java.awt.print.PrinterException e)
-      {
-         PrintStream format = System.err.format("Cannot print %s%n");
-      }
+    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
       
-    }//GEN-LAST:event_cmd_printActionPerformed
+     /*   if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&
+               ((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()){
+           JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date and end date</font></html>");
+            }
+       else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+       {
+        JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date</font></html>");
+       }
+       else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+       {        JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill end date</font></html>");
+       }
+       else{*/
+        try {
+            String strt=((JTextField)stdate.getDateEditor().getUiComponent()).getText().trim();
+            String endt=((JTextField)endate.getDateEditor().getUiComponent()).getText().trim();
 
-    private void kmrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kmrMouseClicked
-        // TODO add your handling code here:
-        adminkmrange kmrg = new adminkmrange();
-               kmrg.setVisible(true);
+            String check = "select COUNT (*)as total from vt where date between '"+strt+"'and '"+endt+"'";
 
-    }//GEN-LAST:event_kmrMouseClicked
+            pst=conn.prepareStatement(check);
+            rs = pst.executeQuery();
+            int tr =rs.getInt("total");
+            JOptionPane.showMessageDialog(null, tr+" "+"records found");
 
-    private void vehicleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehicleMouseClicked
-        // TODO add your handling code here:
-        vehicles v = new vehicles();
-                v.setVisible(true);
-    }//GEN-LAST:event_vehicleMouseClicked
+            while(rs.next()){
+                if(rs.getInt("total")>0)
 
-    private void drMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drMouseClicked
-        // TODO add your handling code here:
-        admindrivers adr = new admindrivers();
-                   adr.setVisible(true);
-    }//GEN-LAST:event_drMouseClicked
+                try{
+                    String sql="select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
+                  + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
+                  + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
+                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt where  date between '"+strt+"'and '"+endt+"'";
+                    pst = conn.prepareStatement(sql);
+                    rs=pst.executeQuery();
+                    tablevt.setModel( DbUtils.resultSetToTableModel(rs));
+                    fixWidth(tablevt, 0, 30);
+                    fixWidth(tablevt, 1, 80);
+                    fixWidth(tablevt, 2, 70); 
+                    fixWidth(tablevt, 3, 120); 
+                    fixWidth(tablevt, 4, 40); 
+                    fixWidth(tablevt, 5, 55);
+                    fixWidth(tablevt, 6, 50);
+                    fixWidth(tablevt, 7, 48);
+                    fixWidth(tablevt, 8, 55);
+                    fixWidth(tablevt, 9, 50);
+                    fixWidth(tablevt, 10,48);
+                    fixWidth(tablevt, 11, 55);
+                    fixWidth(tablevt, 12, 50);
+                    fixWidth(tablevt, 13, 48);
+                    fixWidth(tablevt, 14, 55);
+                    fixWidth(tablevt, 15, 50);
+                    fixWidth(tablevt, 16, 48);
+                    fixWidth(tablevt, 17, 50);
 
-    private void adduserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adduserMouseClicked
-        // TODO add your handling code here:
-        register rg = new register();
-                 rg.setVisible(true);
-    }//GEN-LAST:event_adduserMouseClicked
+                }
+                catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
 
-    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-     JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);                                                
-        MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
-        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
-      
-         boolean fitWidth = fitWidthBox.isSelected();
-        
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
 
+                }
 
-      try{
-          JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH
-                                         : JTable.PrintMode.NORMAL;
-           tablevt.print(mode,header,footer);
-         }
-      catch(java.awt.print.PrinterException e)
-      {
-         PrintStream format = System.err.format("Cannot print %s%n");
-      }
-      
-    }//GEN-LAST:event_printActionPerformed
+            }}
+            catch (SQLException | HeadlessException ex) {
 
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
-           login lg = new login();
-              lg.setVisible(true);
-              this.dispose();
-    }//GEN-LAST:event_jMenuItem1MousePressed
+                JOptionPane.showMessageDialog(null, ex);
+
+            }
+    }//GEN-LAST:event_txt_searchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1149,17 +1230,16 @@ private void fixWidth(final JTable table, final int columnIndex, final int width
         column.setMaxWidth(width);
         column.setPreferredWidth(width);
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox_driver;
     private javax.swing.JComboBox ComboBox_vehicle;
     private javax.swing.JMenu adduser;
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_delete;
-    private javax.swing.JButton cmd_print;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmd_update;
     private javax.swing.JMenu dr;
+    private com.toedter.calendar.JDateChooser endate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1168,6 +1248,8 @@ private void fixWidth(final JTable table, final int columnIndex, final int width
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1183,10 +1265,10 @@ private void fixWidth(final JTable table, final int columnIndex, final int width
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenu kmr;
     private javax.swing.JButton print;
     private javax.swing.JSpinner runs;
+    private com.toedter.calendar.JDateChooser stdate;
     private javax.swing.JSpinner t11;
     private javax.swing.JSpinner t12;
     private javax.swing.JSpinner t21;
@@ -1197,6 +1279,7 @@ private void fixWidth(final JTable table, final int columnIndex, final int width
     private javax.swing.JSpinner t42;
     private javax.swing.JTable tablevt;
     private com.toedter.calendar.JDateChooser txt_Date;
+    private javax.swing.JButton txt_search;
     private javax.swing.JMenu vehicle;
     private javax.swing.JTextField wt1;
     private javax.swing.JTextField wt2;
