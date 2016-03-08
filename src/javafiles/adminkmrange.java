@@ -667,10 +667,10 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 
     private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
  
-        /*if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&
-               ((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()){
-            
-                JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date and end date</font></html>");
+        if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&
+               ((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+            {
+             JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date and end date</font></html>");
             }
        else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
        {
@@ -679,7 +679,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
        else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
        {        JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill end date</font></html>");
        }
-       else{*/
+       else{
         try {
             String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
             String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
@@ -695,8 +695,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                 if(rs.getInt("total")>0)
 
                 try{
-                    String sql;
-                    sql = "select id,date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
+                    String sql= "select id,date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
                     + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
                     + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where  date between '"+start+"'and '"+end+"' ";
                     pst = conn.prepareStatement(sql);
@@ -729,7 +728,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 
                 JOptionPane.showMessageDialog(null, ex);
 
-            }
+            }}
     }//GEN-LAST:event_txt_searchActionPerformed
  
     /**
