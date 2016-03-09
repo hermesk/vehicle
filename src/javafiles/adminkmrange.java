@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
@@ -15,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
@@ -43,6 +45,47 @@ public class adminkmrange extends javax.swing.JFrame {
         column.setMaxWidth(width);
         column.setPreferredWidth(width);
     }
+     public double getSum(){
+         
+         DefaultTableModel model = (DefaultTableModel)tablekmr.getModel();
+        double fw=0,glkm=0,Tkm=0,fuel=0,lpkm=0,kgpl=0;
+        for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 8).toString();
+            double d1=Double.parseDouble(d);
+            fw+=d1;
+            }
+        for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 5).toString();
+            double d1=Double.parseDouble(d);
+          Tkm+=d1;
+            }
+        for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 6).toString();
+            double d1=Double.parseDouble(d);
+          fuel+=d1;
+            }
+        for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 4).toString();
+            double d1=Double.parseDouble(d);
+          glkm+=d1;
+            }
+         for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 9).toString();
+            double d1=Double.parseDouble(d);
+          lpkm+=d1;
+            }
+          for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 10).toString();
+            double d1=Double.parseDouble(d);
+          kgpl+=d1;
+            }
+
+
+               Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>", "","", "", glkm,Tkm,fuel,"",fw,lpkm,kgpl};
+                model.addRow(row);
+
+        return fw;
+    }
   private void update_table(){
       try{
           String sql;
@@ -61,7 +104,9 @@ public class adminkmrange extends javax.swing.JFrame {
         fixWidth(tablekmr, 6, 70);
         fixWidth(tablekmr, 7, 80);
         fixWidth(tablekmr, 8, 100);
-
+        getSum();
+        
+        
       }
       catch(Exception e)
       {
@@ -87,6 +132,7 @@ public class adminkmrange extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablekmr = new javax.swing.JTable(){
@@ -345,7 +391,7 @@ public class adminkmrange extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
                         .addGap(14, 14, 14))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
@@ -386,21 +432,23 @@ public class adminkmrange extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
+        jScrollPane2.setViewportView(jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1329, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -529,9 +577,11 @@ public class adminkmrange extends javax.swing.JFrame {
                 String sql = "insert into kmrange (date,vehicle,driver,glkm,tkm,diesel,dbal,tfw,kmh,kgl)"
                 + "values(?,?,?,?,?,?,?,?,?,?)";
                 pst=conn.prepareStatement(sql);
+                DecimalFormat df = new DecimalFormat("###.##");
                 float kml = (Float.parseFloat(tkm.getText().trim()))/ (Float.parseFloat(diesel.getText().trim()));
                 float kgl = (Float.parseFloat(tfw.getText().trim()))/ (Float.parseFloat(diesel.getText().trim()));
-
+                String kpl = df.format(kml);
+                String kgpl = df.format(kml);
                 pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                 pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
                 pst.setString(3, ComboBox_driver.getSelectedItem().toString());
@@ -539,9 +589,9 @@ public class adminkmrange extends javax.swing.JFrame {
                 pst.setString(5, tkm.getText().trim());
                 pst.setString(6, diesel.getText().trim());
                 pst.setString(7, dibal.getText().trim());
-                pst.setString(8, tfw.getText().trim());
-                pst.setFloat(9, kml);
-                pst.setFloat(10, kgl);
+                pst.setFloat(8, (Float.parseFloat(tfw.getText().trim())));
+                pst.setString(9, kpl);
+                pst.setString(10, kgpl);
 
                 pst.execute();
 
@@ -767,7 +817,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                     fixWidth(tablekmr, 6, 70);
                     fixWidth(tablekmr, 7, 80);
                     fixWidth(tablekmr, 8, 100);
-
+                    getSum();
 
                 }
                 catch(Exception e)
@@ -911,6 +961,7 @@ private void fillCombo(){
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField kmgl;
     private com.toedter.calendar.JDateChooser sdate;
     private javax.swing.JTable tablekmr;

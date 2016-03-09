@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
@@ -38,6 +39,48 @@ public class viewkmr extends javax.swing.JFrame {
         column.setMaxWidth(width);
         column.setPreferredWidth(width);
     }
+    public double getSum(){
+         
+         DefaultTableModel model = (DefaultTableModel)tablekmr.getModel();
+        double fw=0,glkm=0,Tkm=0,fuel=0,lpkm=0,kgpl=0;
+        for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 7).toString();
+            double d1=Double.parseDouble(d);
+            fw+=d1;
+            }
+        for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 4).toString();
+            double d1=Double.parseDouble(d);
+          Tkm+=d1;
+            }
+        for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 5).toString();
+            double d1=Double.parseDouble(d);
+          fuel+=d1;
+            }
+        for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 3).toString();
+            double d1=Double.parseDouble(d);
+          glkm+=d1;
+            }
+         for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 8).toString();
+            double d1=Double.parseDouble(d);
+          lpkm+=d1;
+            }
+          for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 9).toString();
+            double d1=Double.parseDouble(d);
+          kgpl+=d1;
+            }
+
+
+               Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>","", "", glkm,Tkm,fuel,"",fw,lpkm,kgpl};
+                model.addRow(row);
+
+        return fw;
+    }
+    
     private void update_table(){
       try{
           String sql;
@@ -55,6 +98,7 @@ public class viewkmr extends javax.swing.JFrame {
                         fixWidth(tablekmr, 5, 70);
                         fixWidth(tablekmr, 6, 80);
                         fixWidth(tablekmr, 7, 100);
+                        getSum();
 
       }
       catch(Exception e)
@@ -249,7 +293,7 @@ public class viewkmr extends javax.swing.JFrame {
                         fixWidth(tablekmr, 5, 70);
                         fixWidth(tablekmr, 6, 80);
                         fixWidth(tablekmr, 7, 100);
-
+                           getSum();
                     }
                     catch(Exception e)
                     {
