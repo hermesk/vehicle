@@ -1,7 +1,6 @@
 package javafiles;
 
 
-import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.PrintStream;
@@ -10,9 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -45,6 +42,14 @@ public class vehicles extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null,e);
       
       }
+      finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
      }
   
     @SuppressWarnings("unchecked")

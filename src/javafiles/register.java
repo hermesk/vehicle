@@ -1,9 +1,7 @@
 package javafiles;
 
 
-import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -305,7 +303,7 @@ public class register extends javax.swing.JFrame {
            }
     finally {
                 try{
-                  rs.close();
+                  //rs.close();
                   pst.close();
                   }
                  catch(Exception ex){
@@ -336,12 +334,11 @@ public class register extends javax.swing.JFrame {
              int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
 
             if(d==0){
-                String sql = "delete from users where username=?";
 
             try {
                 String name =  rs.getString("username").trim(); 
                  if(!name.equals("admin")&&!name.equals("root"))
-                 {
+                 {  String sql = "delete from users where username=?";
                      pst=conn.prepareStatement(sql);
                      pst.setString(1, uname.getText().trim());
                      
@@ -480,6 +477,11 @@ public class register extends javax.swing.JFrame {
             
  }
     }//GEN-LAST:event_cpwdKeyPressed
+public void refreshConnection() {
+		if (conn == null) {
+        conn = javaconnect.connecrDb();
+		}
+	}
 
     /**
      * @param args the command line arguments

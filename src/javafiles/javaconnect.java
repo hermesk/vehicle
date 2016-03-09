@@ -12,12 +12,10 @@ public class javaconnect {
   
     public static Connection connecrDb()
     {
-        try{ 
-               Class.forName("org.sqlite.JDBC");
-               Connection conn = DriverManager.getConnection
-              ("jdbc:sqlite:vehicle.sqlite");     
-              //JOptionPane.showMessageDialog(null, "connection established");
-
+        try{   Class.forName("org.sqlite.JDBC");
+               Connection conn = DriverManager.getConnection("jdbc:sqlite:vehicle.sqlite");     
+;
+           //JOptionPane.showMessageDialog(null, "connection established");
             return conn;
         }
         

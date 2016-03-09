@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.MessageFormat;
+import java.text.MessageFormat; 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -39,7 +39,16 @@ public class admindrivers extends javax.swing.JFrame {
       }
       catch(Exception e)
       {             JOptionPane.showMessageDialog(null,e);
-            }
+       }
+      finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }
+      
       
       
       
@@ -307,8 +316,6 @@ public class admindrivers extends javax.swing.JFrame {
                update_table();
 
             }
-            else
-            {};
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

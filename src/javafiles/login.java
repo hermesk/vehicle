@@ -122,11 +122,20 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
-       
+           String rt =txt_user.getText().trim();
+           String pwd =txt_password.getText().trim();
+                
         if(txt_user.getText().trim().isEmpty()||txt_password.getText().trim().isEmpty())
          {
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
-         }       
+         } 
+        /*
+          if(rt.equals("root1")&& pwd.equals("root1");
+                 {
+                adminvt vt = new  adminvt();
+                 vt.setVisible(true);
+                        close();
+                 }*/
         else{
        String sql = "select * from users where username=? and password=?";
         
@@ -145,6 +154,7 @@ public class login extends javax.swing.JFrame {
                  vt.setVisible(true);
                         close();
                  }
+               
                  else{
                      vehiclet vt = new  vehiclet();
                      vt.setVisible(true);
@@ -236,9 +246,7 @@ public class login extends javax.swing.JFrame {
     public void close(){
         WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
-     
-     
-     }
+         }
     
       private String md5(String c) 
       {

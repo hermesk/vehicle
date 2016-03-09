@@ -564,9 +564,14 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_exitActionPerformed
 
     private void logoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMousePressed
+        System.gc();
+        java.awt.Window win[]=java.awt.Window.getWindows();
+         for(int i=0;i<win.length;i++){
+             win[i].dispose();
+             win[i]=null;}
         login lg = new login();
               lg.setVisible(true);
-              this.dispose();
+        
     }//GEN-LAST:event_logoutMousePressed
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
