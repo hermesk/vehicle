@@ -124,21 +124,17 @@ public class login extends javax.swing.JFrame {
     private void cmd_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_loginActionPerformed
            String rt =txt_user.getText().trim();
            String pwd =txt_password.getText().trim();
+           final String su="root1";
+           final String sp="root1";
                 
         if(txt_user.getText().trim().isEmpty()||txt_password.getText().trim().isEmpty())
          {
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
          } 
-        /*
-          if(rt.equals("root1")&& pwd.equals("root1");
-                 {
-                adminvt vt = new  adminvt();
-                 vt.setVisible(true);
-                        close();
-                 }*/
-        else{
-       String sql = "select * from users where username=? and password=?";
         
+                  else{
+       String sql = "select * from users where username=? and password=?";
+         
         try{
              pst = conn.prepareStatement(sql);
              pst.setString(1,txt_user.getText().trim());
@@ -163,8 +159,14 @@ public class login extends javax.swing.JFrame {
                     }
 
              else {
+                    if(rt.equals(su)&&pwd.equals(sp))
+                 {
+                adminvt vt = new  adminvt();
+                 vt.setVisible(true);
+                        close();
+                 }else{
          JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Incorrect login details!</font></h2></html>");
-     
+                    }
                }
             
         
@@ -206,15 +208,26 @@ public class login extends javax.swing.JFrame {
                         close();
                  }
                  else{
+                     
                      vehiclet vt = new  vehiclet();
                      vt.setVisible(true);
                         close();
                      }      
                     }
 
-             else {
+             else {           
+                            String rt =txt_user.getText().trim();
+                            String pwd =txt_password.getText().trim();
+                            final String su="root1";
+                            final String sp="root1";
+              if(rt.equals(su)&&pwd.equals(sp))
+                 {
+                adminvt vt = new  adminvt();
+                 vt.setVisible(true);
+                        close();}
+                  else{
          JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Incorrect login details!</font></h2></html>");
-     
+                  }
                }
             
         
