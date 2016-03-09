@@ -574,6 +574,7 @@ public class adminvt extends javax.swing.JFrame {
         // TODO add your handling code here:
         adminkmrange kmrg = new adminkmrange();
                kmrg.setVisible(true);
+              
 
     }//GEN-LAST:event_kmrMouseClicked
 
@@ -596,9 +597,14 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_adduserMouseClicked
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
-           login lg = new login();
+        System.gc();
+        java.awt.Window win[]=java.awt.Window.getWindows();
+         for(int i=0;i<win.length;i++){
+             win[i].dispose();
+             win[i]=null;}
+        login lg = new login();
               lg.setVisible(true);
-              this.dispose();
+              
     }//GEN-LAST:event_jMenuItem1MousePressed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
@@ -887,6 +893,9 @@ public class adminvt extends javax.swing.JFrame {
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
         // TODO add your handling code here:
         ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)edate.getDateEditor().getUiComponent()).setText("");
+
         wt1.setText("");
         wt2.setText("");
         wt3.setText("");
@@ -1053,7 +1062,7 @@ public class adminvt extends javax.swing.JFrame {
             
         
     }//GEN-LAST:event_cmd_saveActionPerformed
-
+         
     private void wt3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt3KeyTyped
         // TODO add your handling code here:
         char c=evt.getKeyChar();
