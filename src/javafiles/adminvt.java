@@ -22,6 +22,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
@@ -46,6 +47,31 @@ public class adminvt extends javax.swing.JFrame {
         setVisible(true);
         setResizable(false);*/
     }
+    public double getSum(){
+         
+         DefaultTableModel model = (DefaultTableModel)tablevt.getModel();
+         DecimalFormat df = new DecimalFormat("###.##");
+        float vtp=0,vta=0,fw=0;
+        
+        for(int i=0;i<tablevt.getRowCount();i++)
+           {
+            String d= tablevt.getValueAt(i, 18).toString();
+            double d1=Double.parseDouble(d);
+            vtp+=d1;
+             vta = (float) (vtp/(i+1));
+             }
+        for(int i=0;i<tablevt.getRowCount();i++)
+           {
+            String d= tablevt.getValueAt(i, 17).toString();
+            double d1=Double.parseDouble(d);
+            fw+=d1;          
+            }
+                String vtab = df.format(vta);
+                Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>", "","", "","", "","","","", "","", "","", "","","", "",fw,vtab};
+                model.addRow(row);
+
+        return vta;
+    }
 
     private void update_table(){ //update jtable
       try{
@@ -56,7 +82,7 @@ public class adminvt extends javax.swing.JFrame {
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
-        fixWidth(tablevt, 0, 30);
+        fixWidth(tablevt, 0, 50);
         fixWidth(tablevt, 1, 80);
         fixWidth(tablevt, 2, 70); 
         fixWidth(tablevt, 3, 120); 
@@ -73,8 +99,9 @@ public class adminvt extends javax.swing.JFrame {
         fixWidth(tablevt, 14, 55);
         fixWidth(tablevt, 15, 50);
         fixWidth(tablevt, 16, 48);
-        fixWidth(tablevt, 17, 50);
+        fixWidth(tablevt, 17, 60);
         fixWidth(tablevt, 18, 50);
+        getSum();
 
       }
       catch(Exception e)
@@ -384,9 +411,6 @@ public class adminvt extends javax.swing.JFrame {
                         .addGap(279, 279, 279)
                         .addComponent(print))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1083, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -396,8 +420,11 @@ public class adminvt extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(cmd_search)))
-                .addContainerGap(738, Short.MAX_VALUE))
+                        .addComponent(cmd_search))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1023, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(798, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,10 +520,10 @@ public class adminvt extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,15 +583,15 @@ public class adminvt extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1156,6 +1183,7 @@ public class adminvt extends javax.swing.JFrame {
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
+          
         fixWidth(tablevt, 0, 30);
         fixWidth(tablevt, 1, 80);
         fixWidth(tablevt, 2, 70); 
@@ -1173,8 +1201,9 @@ public class adminvt extends javax.swing.JFrame {
         fixWidth(tablevt, 14, 55);
         fixWidth(tablevt, 15, 50);
         fixWidth(tablevt, 16, 48);
-        fixWidth(tablevt, 17, 50);
+        fixWidth(tablevt, 17, 60);
         fixWidth(tablevt, 18, 50);
+        getSum();
                 }
                 catch(Exception e)
                 {
@@ -1269,11 +1298,8 @@ public class adminvt extends javax.swing.JFrame {
                   }
                  catch(Exception ex){
                   }
-                }
-       
-     }
-    
-    
+                }  
+     }  
      private void ComboDriver(){
           try{
          String sql = "select *from drivers";
@@ -1286,9 +1312,7 @@ public class adminvt extends javax.swing.JFrame {
           String name = fname+ " "+sname;
           ComboBox_driver.addItem(name);
          }
-     
-     
-     }
+          }
      catch(Exception e)
      {
                  JOptionPane.showMessageDialog(null, e);
@@ -1301,8 +1325,7 @@ public class adminvt extends javax.swing.JFrame {
                   }
                  catch(Exception ex){
                   }
-                }
-       
+                }  
           }
 private void fixWidth(final JTable table, final int columnIndex, final int width) {
         TableColumn column = table.getColumnModel().getColumn(columnIndex);

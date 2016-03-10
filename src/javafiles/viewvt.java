@@ -1,18 +1,23 @@
 package javafiles;
 
 
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
@@ -26,28 +31,64 @@ public class viewvt extends javax.swing.JFrame {
         initComponents();
         conn = javaconnect.connecrDb();
           update_table();
-        fixWidth(tablevt, 0, 80);
-        fixWidth(tablevt, 1, 130);
-        fixWidth(tablevt, 2, 50);
-        fixWidth(tablevt, 11, 100);
-        fixWidth(tablevt, 12, 100);
-
+       
 
      setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);      
     }
+          public double getSum(){
+         
+         DefaultTableModel model = (DefaultTableModel)tablevt.getModel();
+         DecimalFormat df = new DecimalFormat("###.##");
 
+        float vtp=0,vta=0,fw=0;
+        for(int i=0;i<tablevt.getRowCount();i++){
+            String d= tablevt.getValueAt(i, 17).toString();
+            double d1=Double.parseDouble(d);
+            vtp+=d1;
+             vta = (float) (vtp/i);
+             }
+        for(int i=0;i<tablevt.getRowCount();i++){
+            String d= tablevt.getValueAt(i, 16).toString();
+            double d1=Double.parseDouble(d);
+            fw+=d1;          
+            }
+                String vtab = df.format(vta);
+                Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>", "","","", "","","","", "","", "","", "","","", "",fw,vtab};
+                model.addRow(row);
+                return vta;
+    }
+          
     private void update_table(){
       try{
-          String sql = "select date as 'Date',driver as 'Driver',runs as 'Runs',tor1 as 'Timeout R1',"
-                  + "tir1 as 'TimeinR1',tor2 as 'Timeout R2',tir2 as 'Timein R2'"
-                  + ",tor3 as 'Timeout R3',tir3 as 'Timein R3',tor4 as 'Timeout R4',tir4 as 'Timein R4', "
-                  + "tfw as 'T.Factory Weight',vt as 'Vehicleturnabout'from vt";
+          String sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
+                  + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
+                  + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
+                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
-
+        fixWidth(tablevt, 0, 80);
+        fixWidth(tablevt, 1, 80); 
+        fixWidth(tablevt, 2, 120); 
+        fixWidth(tablevt, 3, 40); 
+        fixWidth(tablevt, 4, 55);
+        fixWidth(tablevt, 5, 50);
+        fixWidth(tablevt, 6, 48);
+        fixWidth(tablevt, 7, 55);
+        fixWidth(tablevt, 8, 50);
+        fixWidth(tablevt, 9,48);
+        fixWidth(tablevt, 10, 55);
+        fixWidth(tablevt, 11, 50);
+        fixWidth(tablevt, 12, 48);
+        fixWidth(tablevt, 13, 55);
+        fixWidth(tablevt, 14, 50);
+        fixWidth(tablevt, 15, 48);
+        fixWidth(tablevt, 16, 60);
+        fixWidth(tablevt, 17, 50);
+        getSum();
+           
       }
       catch(Exception e)
       {
@@ -68,11 +109,6 @@ public class viewvt extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablevt = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowindex, int colIndex)
-            { return false;}
-        };
         cmdprint = new javax.swing.JButton();
         cmdexit = new javax.swing.JButton();
         sdate = new com.toedter.calendar.JDateChooser();
@@ -80,21 +116,13 @@ public class viewvt extends javax.swing.JFrame {
         cmd_search = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablevt = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowindex, int colIndex)
+            { return false;}
+        };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        tablevt.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablevt);
 
         cmdprint.setText("Print");
         cmdprint.addActionListener(new java.awt.event.ActionListener() {
@@ -125,34 +153,46 @@ public class viewvt extends javax.swing.JFrame {
 
         jLabel1.setText("From");
 
+        tablevt.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tablevt);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(389, 389, 389)
                         .addComponent(cmdprint)
                         .addGap(56, 56, 56)
-                        .addComponent(cmdexit)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(245, 245, 245)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(cmd_search)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cmdexit))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(cmd_search)))
+                .addContainerGap(407, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,9 +204,9 @@ public class viewvt extends javax.swing.JFrame {
                     .addComponent(cmd_search)
                     .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdexit)
                     .addComponent(cmdprint))
@@ -244,8 +284,9 @@ public class viewvt extends javax.swing.JFrame {
         fixWidth(tablevt, 13, 55);
         fixWidth(tablevt, 14, 50);
         fixWidth(tablevt, 15, 48);
-        fixWidth(tablevt, 16, 50);
+        fixWidth(tablevt, 16, 60);
         fixWidth(tablevt, 17, 50);
+         getSum();
                 }
                 catch(Exception e)
                 {
@@ -308,6 +349,7 @@ public class viewvt extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser sdate;
     private javax.swing.JTable tablevt;
     // End of variables declaration//GEN-END:variables

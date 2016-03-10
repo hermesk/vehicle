@@ -1,6 +1,7 @@
 package javafiles;
 
 
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.PrintStream;
@@ -46,9 +47,11 @@ public class adminkmrange extends javax.swing.JFrame {
         column.setPreferredWidth(width);
     }
      public double getSum(){
-         
+         DecimalFormat df = new DecimalFormat("###.##");
          DefaultTableModel model = (DefaultTableModel)tablekmr.getModel();
         double fw=0,glkm=0,Tkm=0,fuel=0,lpkm=0,kgpl=0;
+        float kg=0,kp=0;
+        int b=0;
         for(int i=0;i<tablekmr.getRowCount();i++){
             String d= tablekmr.getValueAt(i, 8).toString();
             double d1=Double.parseDouble(d);
@@ -72,18 +75,27 @@ public class adminkmrange extends javax.swing.JFrame {
          for(int i=0;i<tablekmr.getRowCount();i++){
             String d= tablekmr.getValueAt(i, 9).toString();
             double d1=Double.parseDouble(d);
-          lpkm+=d1;
+             lpkm+=d1;
+             kp =(float) (lpkm/(i+1));
             }
           for(int i=0;i<tablekmr.getRowCount();i++){
             String d= tablekmr.getValueAt(i, 10).toString();
-            double d1=Double.parseDouble(d);
-          kgpl+=d1;
-            }
-
-
-               Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>", "","", "", glkm,Tkm,fuel,"",fw,lpkm,kgpl};
+            float d1=Float.parseFloat(d);
+            kgpl+=d1;
+            kg = (float) (kgpl/(i+1));
+           b=(i++)+1;
+              } 
+          
+               String  kgppl = df.format(kg);
+               String  lpkma = df.format(kp);
+               Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>", "","", "", glkm,Tkm,fuel,"",fw,lpkma,kgppl};
                 model.addRow(row);
-
+                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,10) + "</b></html>", b, 10);
+                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,9) + "</b></html>", b, 9);
+                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,8) + "</b></html>", b, 8);           
+                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,6) + "</b></html>", b, 6);     
+                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,5) + "</b></html>", b, 5);
+                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,4) + "</b></html>", b, 4);
         return fw;
     }
   private void update_table(){
@@ -101,9 +113,11 @@ public class adminkmrange extends javax.swing.JFrame {
         fixWidth(tablekmr, 3, 150); 
         fixWidth(tablekmr, 4, 70);
         fixWidth(tablekmr, 5, 70);
-        fixWidth(tablekmr, 6, 70);
-        fixWidth(tablekmr, 7, 80);
+        fixWidth(tablekmr, 6, 60);
+        fixWidth(tablekmr, 7, 70);
         fixWidth(tablekmr, 8, 100);
+        fixWidth(tablekmr, 9, 60);
+        fixWidth(tablekmr, 10, 60);
         getSum();
         
         
@@ -581,7 +595,7 @@ public class adminkmrange extends javax.swing.JFrame {
                 float kml = (Float.parseFloat(tkm.getText().trim()))/ (Float.parseFloat(diesel.getText().trim()));
                 float kgl = (Float.parseFloat(tfw.getText().trim()))/ (Float.parseFloat(diesel.getText().trim()));
                 String kpl = df.format(kml);
-                String kgpl = df.format(kml);
+                String kgpl = df.format(kgl);
                 pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText());
                 pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
                 pst.setString(3, ComboBox_driver.getSelectedItem().toString());
