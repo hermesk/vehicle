@@ -1,7 +1,4 @@
 package javafiles;
-
-
-import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.PrintStream;
@@ -51,26 +48,27 @@ public class adminkmrange extends javax.swing.JFrame {
          DefaultTableModel model = (DefaultTableModel)tablekmr.getModel();
         double fw=0,glkm=0,Tkm=0,fuel=0,lpkm=0,kgpl=0;
         float kg=0,kp=0;
-        int b=0;
+               
         for(int i=0;i<tablekmr.getRowCount();i++){
-            String d= tablekmr.getValueAt(i, 8).toString();
-            double d1=Double.parseDouble(d);
-            fw+=d1;
+            String d= tablekmr.getValueAt(i, 4).toString();
+            double d1=Double.parseDouble(d);   
+          glkm+=d1;
             }
         for(int i=0;i<tablekmr.getRowCount();i++){
             String d= tablekmr.getValueAt(i, 5).toString();
             double d1=Double.parseDouble(d);
           Tkm+=d1;
             }
-        for(int i=0;i<tablekmr.getRowCount();i++){
+        for(int i=0;i<tablekmr.getRowCount();i++)
+           {
             String d= tablekmr.getValueAt(i, 6).toString();
             double d1=Double.parseDouble(d);
           fuel+=d1;
             }
-        for(int i=0;i<tablekmr.getRowCount();i++){
-            String d= tablekmr.getValueAt(i, 4).toString();
+          for(int i=0;i<tablekmr.getRowCount();i++){
+            String d= tablekmr.getValueAt(i, 8).toString();
             double d1=Double.parseDouble(d);
-          glkm+=d1;
+            fw+=d1;
             }
          for(int i=0;i<tablekmr.getRowCount();i++){
             String d= tablekmr.getValueAt(i, 9).toString();
@@ -78,26 +76,27 @@ public class adminkmrange extends javax.swing.JFrame {
              lpkm+=d1;
              kp =(float) (lpkm/(i+1));
             }
-          for(int i=0;i<tablekmr.getRowCount();i++){
-            String d= tablekmr.getValueAt(i, 10).toString();
+          for(int i=0;i<tablekmr.getRowCount();i++)
+           {
+            String d= tablekmr.getValueAt(i,10).toString();
             float d1=Float.parseFloat(d);
             kgpl+=d1;
             kg = (float) (kgpl/(i+1));
-           b=(i++)+1;
+        
               } 
           
                String  kgppl = df.format(kg);
                String  lpkma = df.format(kp);
-               Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>", "","", "", glkm,Tkm,fuel,"",fw,lpkma,kgppl};
+               Object[] row = { "","<html><h3><font color='black'>Total</font></h3></html>","", "", glkm,Tkm,fuel,"",fw,lpkma,kgppl};
                 model.addRow(row);
-                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,10) + "</b></html>", b, 10);
-                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,9) + "</b></html>", b, 9);
-                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,8) + "</b></html>", b, 8);           
-                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,6) + "</b></html>", b, 6);     
-                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,5) + "</b></html>", b, 5);
-                tablekmr.setValueAt("<html><b>" + tablekmr.getValueAt(b,4) + "</b></html>", b, 4);
+                int  b= tablekmr.getRowCount()-1;
+                 for(int i=10;i>=4;i--){
+                     tablekmr.setValueAt("<html><u><b>" + tablekmr.getValueAt(b,i) + "</b></u></html>",b,i);
+                 }
+
         return fw;
     }
+    
   private void update_table(){
       try{
           String sql;
@@ -408,13 +407,13 @@ public class adminkmrange extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
                         .addGap(14, 14, 14))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(45, 45, 45)
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(tdate, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(txt_search)
@@ -433,12 +432,12 @@ public class adminkmrange extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_search, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_search, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -519,7 +518,8 @@ public class adminkmrange extends javax.swing.JFrame {
     }//GEN-LAST:event_tfwKeyTyped
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
-        // TODO add your handling code here:
+        ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");        
         ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
         kmgl.setText("");
         diesel.setText("");
@@ -527,6 +527,7 @@ public class adminkmrange extends javax.swing.JFrame {
         tfw.setText("");
         tfw.setText("");
         tkm.setText("");
+           update_table();
     }//GEN-LAST:event_cmd_clearActionPerformed
 
     private void cmd_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_delActionPerformed
@@ -624,6 +625,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                 }
        
         update_table();
+        //bold();
         }}
     private void tablekmrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablekmrMouseClicked
         // TODO add your handling code here:
@@ -789,7 +791,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
  
         if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&
-               ((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+               ((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
             {
              JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date and end date</font></html>");
             }
@@ -797,7 +799,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
        {
         JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date</font></html>");
        }
-       else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+       else if(((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
        {        JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill end date</font></html>");
        }
        else{
@@ -810,6 +812,11 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
             int tt =rs.getInt("total");
+            
+            if(tt==0){
+                   JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
+                }
+            else{
             JOptionPane.showMessageDialog(null, tt+" "+"records found");
 
             while(rs.next()){
@@ -853,7 +860,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 
                 }
 
-            }}
+            }}}
             catch (SQLException | HeadlessException ex) {
 
                 JOptionPane.showMessageDialog(null, ex);

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -38,11 +39,14 @@ public class viewkmr extends javax.swing.JFrame {
         column.setMinWidth(width);
         column.setMaxWidth(width);
         column.setPreferredWidth(width);
+                        
     }
     public double getSum(){
          
          DefaultTableModel model = (DefaultTableModel)tablekmr.getModel();
-        double fw=0,glkm=0,Tkm=0,fuel=0,lpkm=0,kgpl=0;
+         DecimalFormat df = new DecimalFormat("###.##");
+         
+        float kg=0, fw=0,glkm=0,Tkm=0,fuel=0,lpkm=0,kgpl=0,kp=0;
         for(int i=0;i<tablekmr.getRowCount();i++){
             String d= tablekmr.getValueAt(i, 7).toString();
             double d1=Double.parseDouble(d);
@@ -64,19 +68,25 @@ public class viewkmr extends javax.swing.JFrame {
           glkm+=d1;
             }
          for(int i=0;i<tablekmr.getRowCount();i++){
-            String d= tablekmr.getValueAt(i, 8).toString();
+             String d= tablekmr.getValueAt(i, 8).toString();
             double d1=Double.parseDouble(d);
-          lpkm+=d1;
-            }
+             lpkm+=d1;
+             kp =(float) (lpkm/(i+1));
+           }
           for(int i=0;i<tablekmr.getRowCount();i++){
-            String d= tablekmr.getValueAt(i, 9).toString();
-            double d1=Double.parseDouble(d);
-          kgpl+=d1;
-            }
-
-
-               Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>","", "", glkm,Tkm,fuel,"",fw,lpkm,kgpl};
+           String d= tablekmr.getValueAt(i,9).toString();
+            float d1=Float.parseFloat(d);
+            kgpl+=d1;
+            kg = (float) (kgpl/(i+1));
+         }
+               String  kgppl = df.format(kg);
+               String  lpkma = df.format(kp);
+               Object[] row = { "","<html><h3><font color='black'>Total</font></h3></html>", "", glkm,Tkm,fuel,"",fw,lpkma,kgppl};
                 model.addRow(row);
+                int  b= tablekmr.getRowCount()-1;
+                 for(int i=9;i>=3;i--){
+                     tablekmr.setValueAt("<html><u><b>" + tablekmr.getValueAt(b,i) + "</b></u></html>",b,i);
+                 }
 
         return fw;
     }
@@ -132,6 +142,7 @@ public class viewkmr extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tdate = new com.toedter.calendar.JDateChooser();
         txt_search = new javax.swing.JButton();
+        cmd_clear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -177,6 +188,13 @@ public class viewkmr extends javax.swing.JFrame {
             }
         });
 
+        cmd_clear.setText("Clear");
+        cmd_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_clearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,7 +219,9 @@ public class viewkmr extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tdate, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_search)))
+                        .addComponent(txt_search)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmd_clear)))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -214,7 +234,9 @@ public class viewkmr extends javax.swing.JFrame {
                         .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_search, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_search)
+                        .addComponent(cmd_clear)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -250,41 +272,46 @@ public class viewkmr extends javax.swing.JFrame {
 
     private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
 
-        if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&
-            ((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date and end date</font></html>");
-        }
-        else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date</font></html>");
-        }
-        else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
-        {        JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill end date</font></html>");
-        }
-        else{
-            try {
-                String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
-                String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
+      if (((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+            {
+             JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date and end date</font></html>");
+            }
+       else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+             {
+             JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date</font></html>");
+             }
+       else if (((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+                 { 
+                    JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill end date</font></html>");
+                 }
+       else{
+        try {
+            String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
+            String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
+            
+            String check = "select COUNT (*)as total from kmrange where date >='"+start+"'and date <='"+end+"'";
 
-                String check = "select COUNT (*)as total from kmrange where date between '"+start+"'and '"+end+"'";
+            pst=conn.prepareStatement(check);
+            rs = pst.executeQuery();
+            int tt =rs.getInt("total");
+            
+            if(tt==0){
+                   JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
+                }
+            else{
+            JOptionPane.showMessageDialog(null, tt+" "+"records found");
 
-                pst=conn.prepareStatement(check);
-                rs = pst.executeQuery();
-                int tt =rs.getInt("total");
-                JOptionPane.showMessageDialog(null, tt+" "+"records found");
+            while(rs.next()){
+                if(rs.getInt("total")>0)
 
-                while(rs.next()){
-                    if(rs.getInt("total")>0)
-
-                    try{
-                        String sql;
-                        sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
-                        + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
-                        + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where  date between '"+start+"'and '"+end+"' ";
-                        pst = conn.prepareStatement(sql);
-                        rs=pst.executeQuery();
-                        tablekmr.setModel( DbUtils.resultSetToTableModel(rs));
+                try{
+                    String sql= "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
+                    + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
+                    + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where  date between '"+start+"'and '"+end+"' ";
+                    pst = conn.prepareStatement(sql);
+                    rs=pst.executeQuery();
+                    tablekmr.setModel( DbUtils.resultSetToTableModel(rs));
+                        
                         fixWidth(tablekmr, 0, 80);
                         fixWidth(tablekmr, 1, 80);
                         fixWidth(tablekmr, 2, 150);
@@ -293,14 +320,14 @@ public class viewkmr extends javax.swing.JFrame {
                         fixWidth(tablekmr, 5, 70);
                         fixWidth(tablekmr, 6, 80);
                         fixWidth(tablekmr, 7, 100);
-                           getSum();
-                    }
-                    catch(Exception e)
-                    {
-                        JOptionPane.showMessageDialog(null,e);
+                        getSum();
+                }
+                catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
 
-                    }
-                     finally {
+                }
+                 finally {
                 try{
                   rs.close();
                   pst.close();
@@ -308,19 +335,20 @@ public class viewkmr extends javax.swing.JFrame {
                  catch(Exception ex){
                   }
                 }
-       
-                    else {
-                        JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
+                   }}}
+            catch (SQLException | HeadlessException ex) {
 
-                    }
+                JOptionPane.showMessageDialog(null, ex);
 
-                }}
-                catch (SQLException | HeadlessException ex) {
-
-                    JOptionPane.showMessageDialog(null, ex);
-
-                }}
+            }}
     }//GEN-LAST:event_txt_searchActionPerformed
+
+    private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
+       ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");
+        update_table();
+        
+    }//GEN-LAST:event_cmd_clearActionPerformed
 
    
     public static void main(String args[]) {
@@ -334,6 +362,7 @@ public class viewkmr extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmdexit;
     private javax.swing.JButton cmdprint;
     private javax.swing.JLabel jLabel1;
