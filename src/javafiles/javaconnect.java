@@ -14,7 +14,7 @@ public class javaconnect {
     {
         try{   Class.forName("org.sqlite.JDBC");
                Connection conn = DriverManager.getConnection("jdbc:sqlite:vehicle.sqlite");     
-;
+
            //JOptionPane.showMessageDialog(null, "connection established");
             return conn;
         }
