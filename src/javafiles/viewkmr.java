@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -253,6 +255,11 @@ public class viewkmr extends javax.swing.JFrame {
     private void cmdexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexitActionPerformed
         // TODO add your handling code here:
         dispose();
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(viewkmr.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cmdexitActionPerformed
 
     private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed

@@ -1,9 +1,10 @@
 package javafiles;
 
 
-import java.awt.Component;
-import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
@@ -57,6 +57,11 @@ public class viewvt extends javax.swing.JFrame {
                 String vtab = df.format(vta);
                 Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>", "","","", "","","","", "","", "","", "","","", "",fw,vtab};
                 model.addRow(row);
+                 int  b= tablevt.getRowCount()-1;
+                 for(int i=17;i>=16;i--){
+                     tablevt.setValueAt("<html><u><b>" + tablevt.getValueAt(b,i) + "</b></u></html>",b,i);
+                 }
+
                 return vta;
     }
           
@@ -112,7 +117,7 @@ public class viewvt extends javax.swing.JFrame {
         cmdprint = new javax.swing.JButton();
         cmdexit = new javax.swing.JButton();
         sdate = new com.toedter.calendar.JDateChooser();
-        edate = new com.toedter.calendar.JDateChooser();
+        tdate = new com.toedter.calendar.JDateChooser();
         cmd_search = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -121,8 +126,10 @@ public class viewvt extends javax.swing.JFrame {
             public boolean isCellEditable(int rowindex, int colIndex)
             { return false;}
         };
+        cmd_clear = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setTitle("\n");
 
         cmdprint.setText("Print");
         cmdprint.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +147,7 @@ public class viewvt extends javax.swing.JFrame {
 
         sdate.setDateFormatString(" yyyy-MM-d");
 
-        edate.setDateFormatString(" yyyy-MM-d");
+        tdate.setDateFormatString(" yyyy-MM-d");
 
         cmd_search.setText("Search");
         cmd_search.addActionListener(new java.awt.event.ActionListener() {
@@ -166,33 +173,44 @@ public class viewvt extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablevt);
 
+        cmd_clear.setText("Clear");
+        cmd_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_clearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(389, 389, 389)
-                        .addComponent(cmdprint)
-                        .addGap(56, 56, 56)
-                        .addComponent(cmdexit))
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(cmd_search)))
-                .addContainerGap(407, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(389, 389, 389)
+                                .addComponent(cmdprint)
+                                .addGap(56, 56, 56)
+                                .addComponent(cmdexit))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(245, 245, 245)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tdate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(cmd_search)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmd_clear)))
+                        .addGap(0, 322, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,8 +218,10 @@ public class viewvt extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel17)
-                    .addComponent(edate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmd_search)
+                    .addComponent(tdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmd_search)
+                        .addComponent(cmd_clear))
                     .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -245,17 +265,36 @@ public class viewvt extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdprintActionPerformed
 
     private void cmd_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_searchActionPerformed
-        try{
-            String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
-            String end=((JTextField)edate.getDateEditor().getUiComponent()).getText().trim();
-
-            String check = "select COUNT (*)as total from vt where date between '"+start+"'and '"+end+"'";
+      if (((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+            {
+             JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date and end date</font></html>");
+            }
+       else if(((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+             {
+             JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill start date</font></html>");
+             }
+       else if (((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
+                 { 
+                    JOptionPane.showMessageDialog(null, "<html><font color='red'>Fill end date</font></html>");
+                 }
+       else{       
+        try
+        {   
+        String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
+        String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
+      
+            String check = "select COUNT (*)as total from vt where date >='"+start+"'and date <='"+end+"'";
 
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
-            int tr =rs.getInt("total");
+            int tr =rs.getInt("total");  
+            if(tr==0){
+                  JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
+                 }
+            else{
             JOptionPane.showMessageDialog(null, tr+" "+"records found");
-
+            
+           
          while(rs.next()){
                 if(rs.getInt("total")>0)
 
@@ -306,7 +345,7 @@ public class viewvt extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
 
                 }
-
+         }
             }}
             catch (SQLException | HeadlessException ex) {
 
@@ -322,8 +361,14 @@ public class viewvt extends javax.swing.JFrame {
                  catch(Exception ex){
                   }
                 }
-       
+       }
     }//GEN-LAST:event_cmd_searchActionPerformed
+
+    private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
+         ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");
+          update_table();
+    }//GEN-LAST:event_cmd_clearActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -340,17 +385,24 @@ public class viewvt extends javax.swing.JFrame {
         column.setMaxWidth(width);
         column.setPreferredWidth(width);
     }
+     WindowListener exitlistener = new WindowAdapter(){
+         @Override
+         public void windowClosing(WindowEvent e){
+         // int c = JOptionPane.showOptionalDialog(null, "Are you sure to close?""Exit",JOptionPane.YES_NO_OPTION);
+         }
+     
+     };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_search;
     private javax.swing.JButton cmdexit;
     private javax.swing.JButton cmdprint;
-    private com.toedter.calendar.JDateChooser edate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser sdate;
     private javax.swing.JTable tablevt;
+    private com.toedter.calendar.JDateChooser tdate;
     // End of variables declaration//GEN-END:variables
 }

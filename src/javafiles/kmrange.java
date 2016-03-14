@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class kmrange extends javax.swing.JFrame {
@@ -337,6 +339,11 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
         // TODO add your handling code here:
          viewkmr vkmr = new viewkmr();
                 vkmr.setVisible(true);
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(kmrange.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_viewkmMouseClicked
 
     private void closekmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closekmMousePressed

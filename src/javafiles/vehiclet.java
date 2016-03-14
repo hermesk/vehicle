@@ -11,6 +11,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -431,11 +433,10 @@ public class vehiclet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void wt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wt1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_wt1ActionPerformed
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-        // TODO add your handling code here:
+
         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||wt1.getText().trim().isEmpty()||
                wt2.getText().trim().isEmpty()||wt3.getText().trim().isEmpty()||wt4.getText().trim().isEmpty() )
         {
@@ -561,6 +562,11 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
         dispose();
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(vehiclet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cmd_exitActionPerformed
 
     private void logoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMousePressed
@@ -752,7 +758,6 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_wt4KeyPressed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_logoutActionPerformed
 
         

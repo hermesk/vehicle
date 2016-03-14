@@ -660,7 +660,6 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_printActionPerformed
 
     private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
-        // TODO add your handling code here:
         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
             wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
@@ -772,7 +771,6 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_updateActionPerformed
 
     private void txt_DateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_DateKeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if((Character.isDigit(c)||
             (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '/'||evt.getKeyChar() == '-')){
@@ -781,7 +779,6 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_DateKeyTyped
 
     private void wt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
             (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
@@ -921,11 +918,9 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_wt1KeyTyped
 
     private void wt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wt1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_wt1ActionPerformed
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
-        // TODO add your handling code here:
         ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
         ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
         ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");
@@ -938,7 +933,6 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_clearActionPerformed
 
     private void cmd_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_deleteActionPerformed
-        // TODO add your handling code here:
         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
             wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
@@ -977,7 +971,6 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_deleteActionPerformed
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-        // TODO add your handling code here:
         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
             wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
@@ -1099,7 +1092,6 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_saveActionPerformed
          
     private void wt3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt3KeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
             (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
@@ -1108,7 +1100,6 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_wt3KeyTyped
 
     private void wt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt2KeyTyped
-        // TODO add your handling code here:
         char c=evt.getKeyChar();
         if(!(Character.isDigit(c)||
             (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
@@ -1160,12 +1151,23 @@ public class adminvt extends javax.swing.JFrame {
                  String tm42 =rs.getString("tir4");
                  t42.setValue(format.parse(tm42));
              wt4.setText(rs.getString("fwr4"));
-     
-         }
+          }
         }
-                catch(SQLException | ParseException e){
+          /*catch(Exception  e){
+              
         JOptionPane.showMessageDialog(null, e);}    }//GEN-LAST:event_tablevtMouseClicked
-
+       */
+    catch(Exception  e){
+              
+        JOptionPane.showMessageDialog(null, e);} 
+    finally {
+                try{
+                  rs.close();
+                  pst.close();
+                  }
+                 catch(Exception ex){
+                  }
+                }}
     private void cmd_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_searchActionPerformed
          
       if (((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())
