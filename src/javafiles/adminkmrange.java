@@ -1,6 +1,8 @@
 package javafiles;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,6 +26,7 @@ public class adminkmrange extends javax.swing.JFrame {
     
     Connection conn = null;
     ResultSet rs = null;
+    ResultSet rss = null;
     PreparedStatement pst = null;
     
     public adminkmrange() {
@@ -128,9 +131,13 @@ public class adminkmrange extends javax.swing.JFrame {
       }
        finally {
                 try{
+                   if(rs!=null&&pst!=null){
                   rs.close();
+                  rs=null;
                   pst.close();
-                  }
+                  pst=null;
+                    }
+                    }
                  catch(Exception ex){
                   }
                 }
@@ -181,7 +188,24 @@ public class adminkmrange extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_search = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we)
+            { 
+                String ObjButtons[] = {"Yes","No"};
+                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to close?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                if(PromptResult==JOptionPane.YES_OPTION)
+                {
+                    dispose();
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,e);
+                    }
+                }
+            }
+        });
 
         tablekmr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -531,7 +555,6 @@ public class adminkmrange extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_clearActionPerformed
 
     private void cmd_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_delActionPerformed
-        // TODO add your handling code here:
         if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
                 dibal.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
                 ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
@@ -547,7 +570,7 @@ public class adminkmrange extends javax.swing.JFrame {
         
           try {
               pst=conn.prepareStatement(sql);
-              pst.setString(1, rs.getString("id"));
+              pst.setString(1, rss.getString("id"));
               
               pst.execute();
                     JOptionPane.showMessageDialog(null, "deleted");
@@ -558,8 +581,12 @@ public class adminkmrange extends javax.swing.JFrame {
          }
           finally {
                 try{
+                  if(rs!=null&&pst!=null){
                   rs.close();
+                  rss=null;
                   pst.close();
+                  pst=null;
+                    }
                   }
                  catch(Exception ex){
                   }
@@ -617,7 +644,6 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
        }
              finally {
                 try{
-                  rs.close();
                   pst.close();
                   }
                  catch(Exception ex){
@@ -636,20 +662,20 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
             String tableclicked = (tablekmr.getModel().getValueAt(row, col).toString());
             String sql = "select* from kmrange where id ='"+tableclicked+"'";
              pst=conn.prepareStatement(sql);
-             rs = pst.executeQuery();
-         if(rs.next()){
-             String dt = rs.getString("date");
+             rss = pst.executeQuery();
+         if(rss.next()){
+             String dt = rss.getString("date");
              java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
              txt_Date.setDate(date);
           
-             ComboBox_vehicle.setSelectedItem(rs.getString("vehicle"));
+             ComboBox_vehicle.setSelectedItem(rss.getString("vehicle"));
            
-             ComboBox_driver.setSelectedItem(rs.getString("driver"));
-             kmgl.setText(rs.getString("glkm"));
-             tkm.setText(rs.getString("tkm"));
-             diesel.setText(rs.getString("diesel"));
-             dibal.setText(rs.getString("dbal"));
-             tfw.setText(rs.getString("tfw"));
+             ComboBox_driver.setSelectedItem(rss.getString("driver"));
+             kmgl.setText(rss.getString("glkm"));
+             tkm.setText(rss.getString("tkm"));
+             diesel.setText(rss.getString("diesel"));
+             dibal.setText(rss.getString("dbal"));
+             tfw.setText(rss.getString("tfw"));
          }
     }//GEN-LAST:event_tablekmrMouseClicked
            catch(Exception e){
@@ -657,8 +683,12 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
            }
            finally {
                 try{
-                  rs.close();
+                  if(rs!=null&&pst!=null){
+                  rss.close();
+                  rss=null;
                   pst.close();
+                  pst=null;
+                    }
                   }
                  catch(Exception ex){
                   }
@@ -713,11 +743,8 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                   }
                 }
        
-        update_table();
-
-         
-          }       
-           
+        update_table();         
+          }             
     }//GEN-LAST:event_cmd_updateActionPerformed
 
     private void cmd_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_printActionPerformed

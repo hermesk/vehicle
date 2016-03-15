@@ -3,6 +3,8 @@ package javafiles;
 
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.sql.Connection;
@@ -17,6 +19,9 @@ public class register extends javax.swing.JFrame {
 
     Connection conn = null;
     ResultSet rs = null;
+    ResultSet rss = null;
+    ResultSet rsr = null;
+   
     PreparedStatement pst = null;
    
     public register() {
@@ -44,8 +49,11 @@ public class register extends javax.swing.JFrame {
             }
        finally {
                 try{
+                    if(rs!=null){
                   rs.close();
+                  rs=null;
                   pst.close();
+                    }
                   }
                  catch(Exception ex){
                   }
@@ -76,7 +84,24 @@ public class register extends javax.swing.JFrame {
 
         } ;
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we)
+            { 
+                String ObjButtons[] = {"Yes","No"};
+                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                if(PromptResult==JOptionPane.YES_OPTION)
+                {
+                    dispose();
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,e);
+                    }
+                }
+            }
+        });
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(0, 0, 0));
 
@@ -230,9 +255,9 @@ public class register extends javax.swing.JFrame {
                      {
                         String check ="SELECT COUNT(*) AS total FROM users  where username = '"+uname.getText()+"'"; 
                         pst=conn.prepareStatement(check);
-                        rs = pst.executeQuery();
-                        while(rs.next()){
-                        if(rs.getInt("total")>0)
+                        rsr = pst.executeQuery();
+                        while(rsr.next()){
+                        if(rsr.getInt("total")>0)
                         {
                           JOptionPane.showMessageDialog(null, "username already exist!");
                         }
@@ -255,8 +280,12 @@ public class register extends javax.swing.JFrame {
         }
                          finally {
                 try{
+                   if(rs!=null&&pst!=null){
                   rs.close();
+                  rs=null;
                   pst.close();
+                  pst=null;
+                    }
                   }
                  catch(Exception ex){
                   }
@@ -269,8 +298,12 @@ public class register extends javax.swing.JFrame {
                            }
           finally {
                 try{
+                   if(rs!=null&&pst!=null){
                   rs.close();
+                  rs=null;
                   pst.close();
+                  pst=null;
+                    }
                   }
                  catch(Exception ex){
                   }
@@ -284,27 +317,31 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_registerActionPerformed
 
     private void tableusersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableusersMouseClicked
-        // TODO add your handling code here:
-         try{
+
+        try{
             int row = tableusers.getSelectedRow();
             int col = tableusers.getSelectedColumn();
 
             String tableclicked = (tableusers.getModel().getValueAt(row, col).toString());
             String sql = "select* from users where username ='"+tableclicked+"'";
              pst=conn.prepareStatement(sql);
-             rs = pst.executeQuery();
-         if(rs.next()){
-         uname.setText(rs.getString("username").trim());
-         pwd.setText(rs.getString("password").trim());
-         cpwd.setText(rs.getString("password").trim());
+             rss = pst.executeQuery();
+         if(rss.next()){
+         uname.setText(rss.getString("username").trim());
+         pwd.setText(rss.getString("password").trim());
+         cpwd.setText(rss.getString("password").trim());
          }}
           catch(Exception e){
                JOptionPane.showMessageDialog(null, e);
            }
     finally {
                 try{
-                  //rs.close();
+                  if(rs!=null&&pst!=null){
+                  rss.close();
+                  rss=null;
                   pst.close();
+                  pst=null;
+                    }
                   }
                  catch(Exception ex){
                   }
@@ -322,7 +359,7 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_clearActionPerformed
 
     private void cmd_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_delActionPerformed
-        // TODO add your handling code here:
+ 
         if(uname.getText().isEmpty()||pwd.getText().isEmpty()||cpwd.getText().isEmpty()){
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
         }
@@ -336,7 +373,7 @@ public class register extends javax.swing.JFrame {
             if(d==0){
 
             try {
-                String name =  rs.getString("username").trim(); 
+                String name =  rss.getString("username").trim(); 
                  if(!name.equals("admin")&&!name.equals("root"))
                  {  String sql = "delete from users where username=?";
                      pst=conn.prepareStatement(sql);
@@ -357,8 +394,12 @@ public class register extends javax.swing.JFrame {
             }
              finally {
                 try{
-                  rs.close();
+                 if(rs!=null&&pst!=null){
+                  rss.close();
+                  rss=null;
                   pst.close();
+                  pst=null;
+                 }
                   }
                  catch(Exception ex){
                   }
