@@ -68,6 +68,7 @@ public class viewdrivers extends javax.swing.JFrame {
         };
         cmdprint = new javax.swing.JButton();
         cmdexit = new javax.swing.JButton();
+        cmdexcel = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -119,6 +120,13 @@ public class viewdrivers extends javax.swing.JFrame {
             }
         });
 
+        cmdexcel.setText("Excel");
+        cmdexcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdexcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -129,7 +137,9 @@ public class viewdrivers extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
+                        .addGap(33, 33, 33)
+                        .addComponent(cmdexcel)
+                        .addGap(28, 28, 28)
                         .addComponent(cmdprint)
                         .addGap(54, 54, 54)
                         .addComponent(cmdexit)))
@@ -142,7 +152,8 @@ public class viewdrivers extends javax.swing.JFrame {
                 .addGap(87, 87, 87)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdprint)
-                    .addComponent(cmdexit))
+                    .addComponent(cmdexit)
+                    .addComponent(cmdexcel))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -194,6 +205,10 @@ public class viewdrivers extends javax.swing.JFrame {
     
     }//GEN-LAST:event_cmdprintActionPerformed
 
+    private void cmdexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexcelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdexcelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +223,7 @@ public class viewdrivers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdexcel;
     private javax.swing.JButton cmdexit;
     private javax.swing.JButton cmdprint;
     private javax.swing.JMenu jMenu1;

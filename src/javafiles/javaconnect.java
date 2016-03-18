@@ -11,15 +11,20 @@ public class javaconnect {
     
   
     public static Connection connecrDb()
-    {
-        try{   Class.forName("org.sqlite.JDBC");
+    {           
+       /* String dburl ="jdbc:derby://localhost:1527/vehicles";
+        String uname ="root";
+        String pwd ="root";*/
+        try{  
+            //Class.forName("org.sqlite.JDBC");
                Connection conn = DriverManager.getConnection("jdbc:sqlite:vehicle.sqlite");     
+   
 
            //JOptionPane.showMessageDialog(null, "connection established");
             return conn;
         }
         
-        catch (ClassNotFoundException | SQLException e)
+        catch (SQLException e)
         {
             JOptionPane.showMessageDialog(null, e);
             return null;

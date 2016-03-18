@@ -27,6 +27,8 @@ public class viewkmr extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    public static viewkmr obj =null;
+
     public viewkmr() {
         super("Kilometer Overhaul");
         initComponents();
@@ -94,7 +96,12 @@ public class viewkmr extends javax.swing.JFrame {
 
         return fw;
     }
-    
+      public static viewkmr getObj(){
+       if(obj==null){
+         obj=new viewkmr();
+       }
+        return obj;
+    }
     private void update_table(){
       try{
           String sql;

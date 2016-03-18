@@ -20,6 +20,8 @@ public class kmrange extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    public static kmrange obj =null;
+
     
     public kmrange() {
         super("Kilometer Overhaul");
@@ -31,6 +33,12 @@ public class kmrange extends javax.swing.JFrame {
         setVisible(true);
         setResizable(false);
     
+    }
+    public static kmrange getObj(){
+       if(obj==null){
+         obj=new kmrange();
+       }
+        return obj;
     }
 
     @SuppressWarnings("unchecked")

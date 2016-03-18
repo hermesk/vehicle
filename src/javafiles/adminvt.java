@@ -35,9 +35,13 @@ public class adminvt extends javax.swing.JFrame {
    
     Connection conn = null;
     ResultSet rs = null;
+    ResultSet rss = null;
+    ResultSet rsd = null;
     PreparedStatement pst = null;
+    
     float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,vt,tt;
     float th1,th2,th3,th4,tm1,tm2,tm3,tm4,tmh1,tmh2,tmh3,tmh4;
+    
     public adminvt() {
      super("Fill Vehicleturnabout");
       conn = javaconnect.connecrDb();
@@ -45,6 +49,7 @@ public class adminvt extends javax.swing.JFrame {
        ComboDriver();
        fillCombo();
         update_table();
+        setVisible(false);
         //deactivate maxmize
         /*setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
@@ -83,10 +88,10 @@ public class adminvt extends javax.swing.JFrame {
 
     private void update_table(){ //update jtable
       try{
-          String sql = "select id, date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
-                  + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
-                  + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
-                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt";
+          String sql = "select id, date ,vehicle as Vehicle,driver as Driver,runs as Runs,tor1 as TOut_R1,"
+                  + "tir1 as TIn_R1,fwr1 as FW1,tor2 as TOut_R2,tir2 as TIn_R2"
+                  + ",fwr2 as FW2,tor3 as TOut_R3,tir3 as TIn_R3,fwr3 as FW3,tor4 as TOut_R4,tir4 as TIn_R4, "
+                  + "fwr4 as FW4,tfw as TFW,vt from vt";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
@@ -94,18 +99,18 @@ public class adminvt extends javax.swing.JFrame {
         fixWidth(tablevt, 1, 80);
         fixWidth(tablevt, 2, 70); 
         fixWidth(tablevt, 3, 120); 
-        fixWidth(tablevt, 4, 40); 
-        fixWidth(tablevt, 5, 55);
-        fixWidth(tablevt, 6, 50);
+        fixWidth(tablevt, 4, 50); 
+        fixWidth(tablevt, 5, 70);
+        fixWidth(tablevt, 6, 70);
         fixWidth(tablevt, 7, 48);
-        fixWidth(tablevt, 8, 55);
-        fixWidth(tablevt, 9, 50);
+        fixWidth(tablevt, 8, 70);
+        fixWidth(tablevt, 9, 70);
         fixWidth(tablevt, 10,48);
-        fixWidth(tablevt, 11, 55);
-        fixWidth(tablevt, 12, 50);
+        fixWidth(tablevt, 11, 70);
+        fixWidth(tablevt, 12, 70);
         fixWidth(tablevt, 13, 48);
-        fixWidth(tablevt, 14, 55);
-        fixWidth(tablevt, 15, 50);
+        fixWidth(tablevt, 14, 70);
+        fixWidth(tablevt, 15, 70);
         fixWidth(tablevt, 16, 48);
         fixWidth(tablevt, 17, 60);
         fixWidth(tablevt, 18, 50);
@@ -448,8 +453,8 @@ public class adminvt extends javax.swing.JFrame {
                         .addComponent(cmd_search))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,9 +550,8 @@ public class adminvt extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1407, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1729, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -609,8 +613,8 @@ public class adminvt extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1433, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,31 +627,25 @@ public class adminvt extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
    
     private void kmrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kmrMouseClicked
-        // TODO add your handling code here:
-        adminkmrange kmrg = new adminkmrange();
-               kmrg.setVisible(true);
-              
+                
+        adminkmrange.getObj().setVisible(true);
 
     }//GEN-LAST:event_kmrMouseClicked
 
     private void vehicleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehicleMouseClicked
-        // TODO add your handling code here:
-        vehicles v = new vehicles();
-                v.setVisible(true);
-       
+               
+        vehicles.getObj().setVisible(true);
     }//GEN-LAST:event_vehicleMouseClicked
 
     private void drMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drMouseClicked
-        // TODO add your handling code here:
-        admindrivers adr = new admindrivers();
-                   adr.setVisible(true);
-       
+              
+        admindrivers.getObj().setVisible(true);
     }//GEN-LAST:event_drMouseClicked
 
     private void adduserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adduserMouseClicked
-        // TODO add your handling code here:
-        register rg = new register();
-                 rg.setVisible(true);
+               
+        register.getObj().setVisible(true);
+
     }//GEN-LAST:event_adduserMouseClicked
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
@@ -953,6 +951,7 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_clearActionPerformed
 
     private void cmd_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_deleteActionPerformed
+        
         if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().isEmpty()||wt1.getText().isEmpty()||
             wt2.getText().isEmpty()||wt3.getText().isEmpty()||wt4.getText().isEmpty() )
         {
@@ -963,11 +962,16 @@ public class adminvt extends javax.swing.JFrame {
             int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
 
             if(d==0){
-                String sql = "delete from vt where id=?";
+             int row = tablevt.getSelectedRow();
+               int col = tablevt.getSelectedColumn();
+               String tableclicked = (tablevt.getModel().getValueAt(row, col).toString());
+               String sql = "delete* from vt where id ='"+tableclicked+"'";
+
+              
 
                 try {
                     pst=conn.prepareStatement(sql);
-                    pst.setString(1, rs.getString("id"));
+                    pst.setString(1, rss.getString("id"));
 
                     pst.execute();
                     JOptionPane.showMessageDialog(null, "deleted");
@@ -978,8 +982,12 @@ public class adminvt extends javax.swing.JFrame {
                 }
              finally {
                 try{
-                  rs.close();
+                   if(rs!=null&&pst!=null){
+                   rs.close();
+                  rss=null;
                   pst.close();
+                  pst=null;
+                    }
                   }
                  catch(Exception ex){
                   }
@@ -1128,66 +1136,72 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_wt2KeyTyped
 
     private void tablevtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablevtMouseClicked
- try{
+          try{
             int row = tablevt.getSelectedRow();
             int col = tablevt.getSelectedColumn();
 
             String tableclicked = (tablevt.getModel().getValueAt(row, col).toString());
             String sql = "select* from vt where id ='"+tableclicked+"'";
              pst=conn.prepareStatement(sql);
-             rs = pst.executeQuery();
-         if(rs.next()){
-             String add1 = rs.getString("date");
+             rss = pst.executeQuery();
+         while(rss.next()){
+             String add1 = rss.getString("date");
              java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(add1);
              txt_Date.setDate(date);
           
-             ComboBox_vehicle.setSelectedItem(rs.getString("vehicle"));
+             ComboBox_vehicle.setSelectedItem(rss.getString("vehicle"));
            
-             ComboBox_driver.setSelectedItem(rs.getString("driver"));
+             ComboBox_driver.setSelectedItem(rss.getString("driver"));
           
-            runs.setValue(rs.getInt("runs"));
+            runs.setValue(rss.getInt("runs"));
               
               SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-                 String tm11 =rs.getString("tor1");
+                 String tm11 =rss.getString("tor1");
                  t11.setValue(format.parse(tm11));
-                 String tm12 =rs.getString("tir1");
+                 String tm12 =rss.getString("tir1");
                  t12.setValue(format.parse(tm12));
                  
-             wt1.setText(rs.getString("fwr1"));
-                 String tm21 =rs.getString("tor2");
+             wt1.setText(rss.getString("fwr1"));
+                 String tm21 =rss.getString("tor2");
                  t21.setValue(format.parse(tm21));
-                 String tm22 =rs.getString("tir2");
+                 String tm22 =rss.getString("tir2");
                  t22.setValue(format.parse(tm22));
                  
-             wt2.setText(rs.getString("fwr2"));
-                 String tm31 =rs.getString("tor3");
+             wt2.setText(rss.getString("fwr2"));
+                 String tm31 =rss.getString("tor3");
                  t31.setValue(format.parse(tm31));
-                 String tm32 =rs.getString("tir3");
+                 String tm32 =rss.getString("tir3");
                  t32.setValue(format.parse(tm32));
-             wt3.setText(rs.getString("fwr3"));
+             wt3.setText(rss.getString("fwr3"));
              
-             String tm41 =rs.getString("tor4");
+             String tm41 =rss.getString("tor4");
                  t41.setValue(format.parse(tm41));
-                 String tm42 =rs.getString("tir4");
+                 String tm42 =rss.getString("tir4");
                  t42.setValue(format.parse(tm42));
-             wt4.setText(rs.getString("fwr4"));
+             wt4.setText(rss.getString("fwr4"));
           }
         }
           /*catch(Exception  e){
               
         JOptionPane.showMessageDialog(null, e);}    }//GEN-LAST:event_tablevtMouseClicked
        */
-    catch(Exception  e){
+    catch(SQLException | ParseException  e){
               
         JOptionPane.showMessageDialog(null, e);} 
+          
     finally {
                 try{
-                  rs.close();
+                  if(rs!=null&&pst!=null){
+                  rss.close();
+                  //rss=null;
                   pst.close();
+                  pst=null;
+                    }
                   }
                  catch(Exception ex){
                   }
-                }}
+                }
+          }
     private void cmd_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_searchActionPerformed
          
       if (((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim().isEmpty()&&((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim().isEmpty())

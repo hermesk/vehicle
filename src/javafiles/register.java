@@ -23,7 +23,8 @@ public class register extends javax.swing.JFrame {
     ResultSet rsr = null;
    
     PreparedStatement pst = null;
-   
+    public static register obj =null;
+    
     public register() {
         super("Register user");
         initComponents();
@@ -34,7 +35,12 @@ public class register extends javax.swing.JFrame {
         setResizable(false);
        }
     
-   
+   public static register getObj(){
+       if(obj==null){
+         obj=new register();
+       }
+        return obj;
+    }
  private void update_table(){
       try{
           String sql = "select  username,password from users";

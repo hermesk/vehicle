@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import javax.swing.JFrame;
@@ -28,8 +29,8 @@ public class adminkmrange extends javax.swing.JFrame {
     ResultSet rs = null;
     ResultSet rss = null;
     PreparedStatement pst = null;
-    
-    public adminkmrange() {
+    public static adminkmrange obj =null;
+    adminkmrange() {
         super("Kilometer Overhaul");
         initComponents();
         conn = javaconnect.connecrDb();
@@ -39,12 +40,18 @@ public class adminkmrange extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
-    }
+    } 
     private void fixWidth(final JTable table, final int columnIndex, final int width) {
         TableColumn column = table.getColumnModel().getColumn(columnIndex);
         column.setMinWidth(width);
         column.setMaxWidth(width);
         column.setPreferredWidth(width);
+    }
+    public static adminkmrange getObj(){
+       if(obj==null){
+         obj=new adminkmrange();
+       }
+        return obj;
     }
      public double getSum(){
          DecimalFormat df = new DecimalFormat("###.##");
@@ -599,7 +606,6 @@ public class adminkmrange extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_delActionPerformed
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-        // TODO add your handling code here:
         String a =kmgl.getText().trim();
         String b =tkm.getText().trim();
 
@@ -651,11 +657,9 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                 }
        
         update_table();
-        //bold();
         }}
     private void tablekmrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablekmrMouseClicked
-        // TODO add your handling code here:
-          try{
+           try{
             int row = tablekmr.getSelectedRow();
             int col = tablekmr.getSelectedColumn();
 
@@ -663,6 +667,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
             String sql = "select* from kmrange where id ='"+tableclicked+"'";
              pst=conn.prepareStatement(sql);
              rss = pst.executeQuery();
+             
          if(rss.next()){
              String dt = rss.getString("date");
              java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
@@ -678,13 +683,13 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
              tfw.setText(rss.getString("tfw"));
          }
     }//GEN-LAST:event_tablekmrMouseClicked
-           catch(Exception e){
+           catch(SQLException | ParseException e){
                JOptionPane.showMessageDialog(null, e);
            }
            finally {
                 try{
                   if(rs!=null&&pst!=null){
-                  rss.close();
+                  rs.close();
                   rss=null;
                   pst.close();
                   pst=null;
@@ -696,20 +701,21 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
        
     }       
     private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
-        // TODO add your handling code here:
-          if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
+         
+        if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
                 dibal.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
                 ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
         {
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
         
-     }
+        }
           else{
          try
         {      
             
                SimpleDateFormat sdf=new SimpleDateFormat("kk:mm");
-                sdf.setTimeZone(TimeZone.getDefault());
+               
+                 sdf.setTimeZone(TimeZone.getDefault());
                  float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText()));
                  float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText()));
                 
@@ -727,11 +733,10 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                         + "tkm='"+v5+"',diesel='"+v6+"',dbal='"+v7+"',tfw='"+v8+"',kmh='"+kml+"',kgl='"+kgl+"'"
                         + "where id='"+v+"'";
                 pst=conn.prepareStatement(sql);
-                pst.execute();
-            
+                pst.execute();          
             JOptionPane.showMessageDialog(null, "Updated");
         }
-          catch(NumberFormatException | SQLException e){
+        catch(NumberFormatException | SQLException e){
         JOptionPane.showMessageDialog(null, e);
         }
          finally {
@@ -763,7 +768,8 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
     }//GEN-LAST:event_cmd_printActionPerformed
 
     private void tfwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfwKeyPressed
-         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
           if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
             dibal.getText().isEmpty()||tfw.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
             ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty())
@@ -834,7 +840,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
             String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
             String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
 
-            String check = "select COUNT (*)as total from kmrange where date between '"+start+"'and '"+end+"'";
+            String check = "select COUNT (*)as total from kmrange where date >='"+start+"'and date <='"+end+"'";
 
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
@@ -852,7 +858,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                 try{
                     String sql= "select id,date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
                     + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
-                    + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where  date between '"+start+"'and '"+end+"' ";
+                    + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where date >='"+start+"'and date <='"+end+"'";
                     pst = conn.prepareStatement(sql);
                     rs=pst.executeQuery();
                     tablekmr.setModel( DbUtils.resultSetToTableModel(rs));

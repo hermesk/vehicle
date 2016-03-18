@@ -85,10 +85,10 @@ public class vehiclet extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         logout = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        kmr = new javax.swing.JMenu();
+        fill_vt = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        viewkm = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -402,26 +402,26 @@ public class vehiclet extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("KM Overhaul");
+        kmr.setText("KM Overhaul");
 
-        jMenuItem1.setText("Fill");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+        fill_vt.setText("Fill");
+        fill_vt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
+                fill_vtMousePressed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
-        jMenu2.add(jSeparator1);
+        kmr.add(fill_vt);
+        kmr.add(jSeparator1);
 
-        jMenuItem2.setText("View");
-        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
+        viewkm.setText("View");
+        viewkm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem2MousePressed(evt);
+                viewkmMousePressed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        kmr.add(viewkm);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(kmr);
 
         setJMenuBar(jMenuBar1);
 
@@ -599,20 +599,19 @@ public class vehiclet extends javax.swing.JFrame {
         
     }//GEN-LAST:event_logoutMousePressed
 
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
-         kmrange kmrg = new kmrange();
-               kmrg.setVisible(true);
+    private void fill_vtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fill_vtMousePressed
+               
+       kmrange.getObj().setVisible(true);
+    }//GEN-LAST:event_fill_vtMousePressed
 
-    }//GEN-LAST:event_jMenuItem1MousePressed
+    private void viewkmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewkmMousePressed
+                viewkmr.getObj().setVisible(true);
 
-    private void jMenuItem2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MousePressed
-         viewkmr vkmr = new viewkmr();
-                vkmr.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2MousePressed
+    }//GEN-LAST:event_viewkmMousePressed
 
     private void cmdviewvtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdviewvtActionPerformed
-         viewvt vwvt = new viewvt();
-               vwvt.setVisible(true);
+                viewkmr.getObj().setVisible(true);
+
     }//GEN-LAST:event_cmdviewvtActionPerformed
 
     private void wt1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt1KeyTyped
@@ -885,6 +884,7 @@ public class vehiclet extends javax.swing.JFrame {
     private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmdviewvt;
+    private javax.swing.JMenuItem fill_vt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -902,13 +902,11 @@ public class vehiclet extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu kmr;
     private javax.swing.JMenuItem logout;
     private javax.swing.JSpinner runs;
     private javax.swing.JSpinner t11;
@@ -920,6 +918,7 @@ public class vehiclet extends javax.swing.JFrame {
     private javax.swing.JSpinner t41;
     private javax.swing.JSpinner t42;
     private com.toedter.calendar.JDateChooser txt_Date;
+    private javax.swing.JMenuItem viewkm;
     private javax.swing.JTextField wt1;
     private javax.swing.JTextField wt2;
     private javax.swing.JTextField wt3;

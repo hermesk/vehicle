@@ -26,6 +26,7 @@ public class viewvt extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    public static viewvt obj =null;
     public viewvt() {
         super("Vehicleturnabout");
         initComponents();
@@ -64,7 +65,12 @@ public class viewvt extends javax.swing.JFrame {
 
                 return vta;
     }
-          
+           public static viewvt getObj(){
+       if(obj==null){
+         obj=new viewvt();
+       }
+        return obj;
+    }
     private void update_table(){
       try{
           String sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"

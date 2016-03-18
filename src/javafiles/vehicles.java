@@ -24,17 +24,22 @@ public class vehicles extends javax.swing.JFrame {
         Connection conn = null;
         ResultSet rs = null;
         PreparedStatement pst = null;
-    
+        public static vehicles obj =null;
     public vehicles() {
         super("Add New Vehicle");
         initComponents();
         conn = javaconnect.connecrDb();
         update_table();
     }
-
+public static vehicles getObj(){
+       if(obj==null){
+         obj=new vehicles();
+       }
+        return obj;
+    }
     private void update_table(){
       try{
-          String sql = "select Regno,DOP as 'Date of Purchase',Make from vehicles";
+          String sql = "select  Regno as Regno,DOP as Date_of_Purchase,Make from vehicles";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevehicles.setModel( DbUtils.resultSetToTableModel(rs));

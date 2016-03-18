@@ -166,7 +166,13 @@ public class login extends javax.swing.JFrame {
                 adminvt vt = new  adminvt();
                  vt.setVisible(true);
                         close();
-                 }else{
+                 }
+                    else if(rt.equals("user1")||pwd.equals("user1")){
+                     vehiclet vt = new  vehiclet();
+                     vt.setVisible(true);
+                        close();
+                     }    
+                    else{
          JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Incorrect login details!</font></h2></html>");
                     }
                }
@@ -227,6 +233,11 @@ public class login extends javax.swing.JFrame {
                 adminvt vt = new  adminvt();
                  vt.setVisible(true);
                         close();}
+              else if(rt.equals("user1")||pwd.equals("user1")){
+                     vehiclet vt = new  vehiclet();
+                     vt.setVisible(true);
+                        close();
+                     }   
                   else{
          JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Incorrect login details!</font></h2></html>");
                   }

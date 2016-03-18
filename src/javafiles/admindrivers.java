@@ -21,6 +21,7 @@ public class admindrivers extends javax.swing.JFrame {
       Connection conn = null;
       ResultSet rs = null;
       PreparedStatement pst = null;
+    public static admindrivers obj =null;
     
     public admindrivers() {
        super("Factroy Drivers");
@@ -30,6 +31,12 @@ public class admindrivers extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
+    }
+    public static admindrivers getObj(){
+       if(obj==null){
+         obj=new admindrivers();
+       }
+        return obj;
     }
  private void update_table(){
       try{
