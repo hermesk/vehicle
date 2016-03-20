@@ -21,22 +21,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
-public class viewkmr extends javax.swing.JFrame {
+public class viewkmr extends javax.swing.JDialog {
 
     
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    public static viewkmr obj =null;
 
-    public viewkmr() {
-        super("Kilometer Overhaul");
+    public viewkmr(java.awt.Frame parent, boolean modal) {
+       super(parent, modal);
         initComponents();
         conn = javaconnect.connecrDb();
         update_table();
-         //deactivate maxmize
-        setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        setVisible(true);
         setResizable(false);
  
     }
@@ -96,12 +92,7 @@ public class viewkmr extends javax.swing.JFrame {
 
         return fw;
     }
-      public static viewkmr getObj(){
-       if(obj==null){
-         obj=new viewkmr();
-       }
-        return obj;
-    }
+      
     private void update_table(){
       try{
           String sql;
@@ -389,7 +380,7 @@ public class viewkmr extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new viewkmr().setVisible(true);
+                new viewkmr(null,true).setVisible(true);
             }
         });
     }

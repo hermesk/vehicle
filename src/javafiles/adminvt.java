@@ -1,6 +1,7 @@
 package javafiles;
 
 
+import java.awt.Dialog;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -50,11 +51,13 @@ public class adminvt extends javax.swing.JFrame {
        fillCombo();
         update_table();
         setVisible(false);
+        
         //deactivate maxmize
         /*setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);*/
     }
+
     public double getSum(){
          
          DefaultTableModel model = (DefaultTableModel)tablevt.getModel();
@@ -85,6 +88,7 @@ public class adminvt extends javax.swing.JFrame {
 
         return vta;
     }
+    
 
     private void update_table(){ //update jtable
       try{
@@ -213,6 +217,7 @@ public class adminvt extends javax.swing.JFrame {
                 }
             }
         });
+        setTitle("vt");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicleturnabout", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
@@ -579,6 +584,11 @@ public class adminvt extends javax.swing.JFrame {
                 kmrMouseClicked(evt);
             }
         });
+        kmr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kmrActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(kmr);
 
         vehicle.setText("Vehicles");
@@ -627,27 +637,28 @@ public class adminvt extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
    
     private void kmrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kmrMouseClicked
-                
-        adminkmrange.getObj().setVisible(true);
-
+       adminkmrange km = new adminkmrange(this,true);                               
+            km.setVisible(true);
     }//GEN-LAST:event_kmrMouseClicked
 
     private void vehicleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vehicleMouseClicked
                
-        vehicles.getObj().setVisible(true);
+      vehicles vh = new vehicles(this,true);
+              vh.setVisible(true);
     }//GEN-LAST:event_vehicleMouseClicked
 
     private void drMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drMouseClicked
-              
-        admindrivers.getObj().setVisible(true);
+             admindrivers adr = new admindrivers(this,true);
+                adr.setVisible(true);
+  
     }//GEN-LAST:event_drMouseClicked
 
     private void adduserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adduserMouseClicked
-               
-        register.getObj().setVisible(true);
-
+      register rg = new register(this,true);
+          rg.setVisible(true);
     }//GEN-LAST:event_adduserMouseClicked
-
+     
+    
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
         System.gc();
         java.awt.Window win[]=java.awt.Window.getWindows();
@@ -1295,6 +1306,10 @@ public class adminvt extends javax.swing.JFrame {
                 }
        }
     }//GEN-LAST:event_cmd_searchActionPerformed
+
+    private void kmrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kmrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kmrActionPerformed
 
     /**
      * @param args the command line arguments

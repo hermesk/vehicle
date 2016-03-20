@@ -601,16 +601,19 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void fill_vtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fill_vtMousePressed
                
-       kmrange.getObj().setVisible(true);
+       kmrange kr = new kmrange(this,true);
+               kr.setVisible(true);
     }//GEN-LAST:event_fill_vtMousePressed
 
     private void viewkmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewkmMousePressed
-                viewkmr.getObj().setVisible(true);
+                viewkmr vkmr = new viewkmr(this,true);
+                 vkmr.setVisible(true);
 
     }//GEN-LAST:event_viewkmMousePressed
 
     private void cmdviewvtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdviewvtActionPerformed
-                viewkmr.getObj().setVisible(true);
+                viewvt vtb = new viewvt(this,true);
+                vtb.setVisible(true);
 
     }//GEN-LAST:event_cmdviewvtActionPerformed
 

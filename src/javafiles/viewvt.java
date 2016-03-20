@@ -21,21 +21,17 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
-public class viewvt extends javax.swing.JFrame {
+public class viewvt extends javax.swing.JDialog {
 
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    public static viewvt obj =null;
-    public viewvt() {
-        super("Vehicleturnabout");
+   
+    public viewvt(java.awt.Frame parent, boolean modal) {
+         super(parent, modal);
         initComponents();
         conn = javaconnect.connecrDb();
-          update_table();
-       
-
-     setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        setVisible(true);
+        update_table();
         setResizable(false);      
     }
           public double getSum(){
@@ -65,12 +61,7 @@ public class viewvt extends javax.swing.JFrame {
 
                 return vta;
     }
-           public static viewvt getObj(){
-       if(obj==null){
-         obj=new viewvt();
-       }
-        return obj;
-    }
+       
     private void update_table(){
       try{
           String sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
@@ -397,7 +388,7 @@ public class viewvt extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new viewvt().setVisible(true);
+                new viewvt(null,true).setVisible(true);
                 
             }
         });

@@ -19,24 +19,20 @@ import javax.swing.JTextField;
 import net.proteanit.sql.DbUtils;
 
 
-public class vehicles extends javax.swing.JFrame {
+public class vehicles extends javax.swing.JDialog{
 
         Connection conn = null;
         ResultSet rs = null;
         PreparedStatement pst = null;
-        public static vehicles obj =null;
-    public vehicles() {
-        super("Add New Vehicle");
+       
+    public vehicles(java.awt.Frame parent, boolean modal) {
+        
+      super(parent, modal);
         initComponents();
         conn = javaconnect.connecrDb();
         update_table();
     }
-public static vehicles getObj(){
-       if(obj==null){
-         obj=new vehicles();
-       }
-        return obj;
-    }
+
     private void update_table(){
       try{
           String sql = "select  Regno as Regno,DOP as Date_of_Purchase,Make from vehicles";
@@ -624,7 +620,7 @@ public static vehicles getObj(){
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-              new vehicles().setVisible(true);
+              new vehicles(null,true).setVisible(true);
             }
         });
     }

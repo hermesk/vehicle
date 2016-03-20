@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
-public class register extends javax.swing.JFrame {
+public class register extends javax.swing.JDialog {
 
     Connection conn = null;
     ResultSet rs = null;
@@ -23,24 +23,18 @@ public class register extends javax.swing.JFrame {
     ResultSet rsr = null;
    
     PreparedStatement pst = null;
-    public static register obj =null;
+
     
-    public register() {
-        super("Register user");
+    public register(java.awt.Frame parent, boolean modal) {
+      
+        super(parent, modal);
         initComponents();
         conn = javaconnect.connecrDb();
         update_table();
-        setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        setVisible(true);
         setResizable(false);
+      
        }
-    
-   public static register getObj(){
-       if(obj==null){
-         obj=new register();
-       }
-        return obj;
-    }
+
  private void update_table(){
       try{
           String sql = "select  username,password from users";
@@ -524,11 +518,7 @@ public class register extends javax.swing.JFrame {
             
  }
     }//GEN-LAST:event_cpwdKeyPressed
-public void refreshConnection() {
-		if (conn == null) {
-        conn = javaconnect.connecrDb();
-		}
-	}
+
 
     /**
      * @param args the command line arguments
@@ -561,7 +551,9 @@ public void refreshConnection() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new register().setVisible(true);
+                new register(null,true).setVisible(true);
+               
+             
             }
         });
     }

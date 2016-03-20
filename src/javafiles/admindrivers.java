@@ -15,29 +15,21 @@ import javax.swing.JTable;
 import net.proteanit.sql.DbUtils;
 
 
-public class admindrivers extends javax.swing.JFrame {
+public class admindrivers extends javax.swing.JDialog {
 
    
       Connection conn = null;
       ResultSet rs = null;
       PreparedStatement pst = null;
-    public static admindrivers obj =null;
     
-    public admindrivers() {
-       super("Factroy Drivers");
+    public admindrivers(java.awt.Frame parent, boolean modal) {
+      super(parent, modal);
            initComponents();
            conn = javaconnect.connecrDb();
            update_table();
-        setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        setVisible(true);
         setResizable(false);
     }
-    public static admindrivers getObj(){
-       if(obj==null){
-         obj=new admindrivers();
-       }
-        return obj;
-    }
+  
  private void update_table(){
       try{
           String sql = "select rowid as 'No',fname as 'First Name',sname as 'Sirname',phoneno as 'Phone No'from drivers";
@@ -577,8 +569,9 @@ public class admindrivers extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new admindrivers().setVisible(true);
+                new admindrivers(null,true).setVisible(true);
             }
         });
     }

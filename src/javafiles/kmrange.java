@@ -15,31 +15,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
-public class kmrange extends javax.swing.JFrame {
+public class kmrange extends javax.swing.JDialog {
 
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    public static kmrange obj =null;
-
     
-    public kmrange() {
-        super("Kilometer Overhaul");
+    public kmrange(java.awt.Frame parent, boolean modal) {
+     super(parent, modal);
+     
         initComponents();
         conn = javaconnect.connecrDb();
         ComboDriver();
         fillCombo();
-        setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        setVisible(true);
         setResizable(false);
     
     }
-    public static kmrange getObj(){
-       if(obj==null){
-         obj=new kmrange();
-       }
-        return obj;
-    }
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -364,7 +356,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
    */
     private void viewkmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewkmMouseClicked
         // TODO add your handling code here:
-         viewkmr vkmr = new viewkmr();
+         viewkmr vkmr = new viewkmr(null,true);
                 vkmr.setVisible(true);
         try {
             conn.close();
@@ -496,7 +488,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new kmrange().setVisible(true);
+                new kmrange(null,true).setVisible(true);
             }
         });
     }

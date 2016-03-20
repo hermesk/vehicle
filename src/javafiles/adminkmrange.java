@@ -22,23 +22,20 @@ import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 
 
-public class adminkmrange extends javax.swing.JFrame {
+public class adminkmrange extends javax.swing.JDialog {
 
     
     Connection conn = null;
     ResultSet rs = null;
     ResultSet rss = null;
-    PreparedStatement pst = null;
-    public static adminkmrange obj =null;
-    adminkmrange() {
-        super("Kilometer Overhaul");
+    PreparedStatement pst = null;   
+    public adminkmrange(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         conn = javaconnect.connecrDb();
         ComboDriver();
         fillCombo();
         update_table();
-        setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        setVisible(true);
         setResizable(false);
     } 
     private void fixWidth(final JTable table, final int columnIndex, final int width) {
@@ -47,12 +44,8 @@ public class adminkmrange extends javax.swing.JFrame {
         column.setMaxWidth(width);
         column.setPreferredWidth(width);
     }
-    public static adminkmrange getObj(){
-       if(obj==null){
-         obj=new adminkmrange();
-       }
-        return obj;
-    }
+   
+    
      public double getSum(){
          DecimalFormat df = new DecimalFormat("###.##");
          DefaultTableModel model = (DefaultTableModel)tablekmr.getModel();
@@ -930,8 +923,9 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new adminkmrange().setVisible(true);
+                new adminkmrange(null,true).setVisible(true);
             }
         });
     }
