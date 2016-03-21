@@ -91,9 +91,9 @@ public class adminvt extends javax.swing.JFrame {
 
     private void update_table(){ //update jtable
       try{
-          String sql = "select id, date ,vehicle as Vehicle,driver as Driver,runs as Runs,tor1 as TOut_R1,"
-                  + "tir1 as TIn_R1,fwr1 as FW1,tor2 as TOut_R2,tir2 as TIn_R2"
-                  + ",fwr2 as FW2,tor3 as TOut_R3,tir3 as TIn_R3,fwr3 as FW3,tor4 as TOut_R4,tir4 as TIn_R4, "
+          String sql = "select id, date ,vehicle as Vehicle,driver as Driver,runs as Runs,tor1 as 'TOut R1',"
+                  + "tir1 as 'TIn R1',fwr1 as FW1,tor2 as 'TOut R2',tir2 as 'TIn R2'"
+                  + ",fwr2 as FW2,tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as FW3,tor4 as 'TOut R4',tir4 as 'TIn R4', "
                   + "fwr4 as FW4,tfw as TFW,vt from vt";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
@@ -204,7 +204,7 @@ public class adminvt extends javax.swing.JFrame {
             public void windowClosing(WindowEvent we)
             { 
                 String ObjButtons[] = {"Yes","No"};
-                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit the system?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
                 if(PromptResult==JOptionPane.YES_OPTION)
                 {
                     System.exit(0);
@@ -217,6 +217,8 @@ public class adminvt extends javax.swing.JFrame {
             }
         });
         setTitle("vt");
+        setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        setIconImages(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicleturnabout", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
@@ -330,7 +332,7 @@ public class adminvt extends javax.swing.JFrame {
             }
         });
 
-        txt_Date.setDateFormatString(" yyyy-MM-d");
+        txt_Date.setDateFormatString(" yyyy-MM-dd");
         txt_Date.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_DateKeyTyped(evt);
@@ -375,11 +377,11 @@ public class adminvt extends javax.swing.JFrame {
 
         jLabel19.setText("From");
 
-        sdate.setDateFormatString(" yyyy-MM-d");
+        sdate.setDateFormatString(" yyyy-MM-dd");
 
         jLabel17.setText("To");
 
-        tdate.setDateFormatString(" yyyy-MM-d");
+        tdate.setDateFormatString(" yyyy-MM-dd");
 
         cmd_search.setText("Search");
         cmd_search.addActionListener(new java.awt.event.ActionListener() {
@@ -527,14 +529,7 @@ public class adminvt extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(wt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmd_delete)
-                            .addComponent(cmd_update)
-                            .addComponent(cmd_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmd_save)
-                            .addComponent(print)))
+                            .addComponent(wt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -543,8 +538,15 @@ public class adminvt extends javax.swing.JFrame {
                             .addComponent(jLabel17)
                             .addComponent(tdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmd_search))
-                        .addGap(9, 9, 9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmd_delete)
+                    .addComponent(cmd_update)
+                    .addComponent(cmd_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmd_save)
+                    .addComponent(print))
                 .addContainerGap(195, Short.MAX_VALUE))
         );
 
@@ -1232,7 +1234,7 @@ public class adminvt extends javax.swing.JFrame {
         String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
         String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
       
-            String check = "select COUNT (*)as total from vt where date >='"+start+"'and date <='"+end+"'";
+            String check = "select COUNT (*)as total from vt where date between'"+start+"'and '"+end+"'";
 
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
