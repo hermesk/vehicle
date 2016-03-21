@@ -81,6 +81,7 @@ public class kmrange extends javax.swing.JDialog {
                 }
             }
         });
+        setTitle("Kilometer Overhaul");
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N

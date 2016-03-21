@@ -1,7 +1,6 @@
 package javafiles;
 
 
-import java.awt.Dialog;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;

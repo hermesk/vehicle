@@ -4,12 +4,10 @@ package javafiles;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.sql.*;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 public class login extends javax.swing.JFrame {
 

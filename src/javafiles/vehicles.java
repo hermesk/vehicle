@@ -98,6 +98,10 @@ public class vehicles extends javax.swing.JDialog{
                 }
             }
         });
+        setTitle("\t\t\t\t\tFACTORY VEHICLES");
+        setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        setIconImage(null);
+        setIconImages(null);
 
         cmd_print.setText("Print");
         cmd_print.addActionListener(new java.awt.event.ActionListener() {

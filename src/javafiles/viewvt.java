@@ -143,7 +143,7 @@ public class viewvt extends javax.swing.JDialog {
                 }
             }
         });
-        setTitle("\n");
+        setTitle("\nVehicleturnabout");
 
         cmdprint.setText("Print");
         cmdprint.addActionListener(new java.awt.event.ActionListener() {
