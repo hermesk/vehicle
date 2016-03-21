@@ -300,7 +300,9 @@ public class kmrange extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-        // TODO add your handling code here:
+        int a =Integer.parseInt(kmgl.getText().trim());
+        int b =Integer.parseInt(tkm.getText().trim());
+
         if(kmgl.getText().isEmpty()||tkm.getText().isEmpty()||diesel.getText().isEmpty()||
                 dibal.getText().isEmpty()||tfw.getText().isEmpty()||tfw.getText().isEmpty()||
                 ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty())
@@ -308,6 +310,10 @@ public class kmrange extends javax.swing.JDialog {
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
         
      }
+        else if(a>b){
+           JOptionPane.showMessageDialog(null, "<html><h2>GL KM cannot be greater than total KM</h2></html>");
+                                         }
+       
           else{
             
               try{

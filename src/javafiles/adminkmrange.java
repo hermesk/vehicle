@@ -573,6 +573,16 @@ public class adminkmrange extends javax.swing.JDialog {
               pst.setString(1, rss.getString("id"));
               
               pst.execute();
+        ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");        
+        ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        kmgl.setText("");
+        diesel.setText("");
+        dibal.setText("");
+        tfw.setText("");
+        tfw.setText("");
+        tkm.setText("");
+        
                     JOptionPane.showMessageDialog(null, "deleted");
 
           } catch (SQLException e) {
@@ -599,8 +609,8 @@ public class adminkmrange extends javax.swing.JDialog {
     }//GEN-LAST:event_cmd_delActionPerformed
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-        String a =kmgl.getText().trim();
-        String b =tkm.getText().trim();
+        int a =Integer.parseInt(kmgl.getText().trim());
+        int b =Integer.parseInt(tkm.getText().trim());
 
         if(kmgl.getText().trim().isEmpty()||tkm.getText().trim().isEmpty()||diesel.getText().trim().isEmpty()||
             dibal.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||tfw.getText().trim().isEmpty()||
@@ -609,9 +619,9 @@ public class adminkmrange extends javax.swing.JDialog {
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
 
         } 
-     /*   else if(ab){
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
-                                         }*/
+     else if(a>b){
+           JOptionPane.showMessageDialog(null, "<html><h2>GL KM cannot be greater than total KM</h2></html>");
+                                         }
         else{
 
             try{
