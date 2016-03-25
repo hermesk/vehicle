@@ -410,8 +410,8 @@ public class register extends javax.swing.JDialog {
     }//GEN-LAST:event_cmd_delActionPerformed
 
     private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
-        // TODO add your handling code here:
-         if(uname.getText().trim().isEmpty()||pwd.getText().trim().isEmpty()||cpwd.getText().trim().isEmpty()){
+
+        if(uname.getText().trim().isEmpty()||pwd.getText().trim().isEmpty()||cpwd.getText().trim().isEmpty()){
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
            }
         else if(!pwd.getText().trim().equals(cpwd.getText().trim())){

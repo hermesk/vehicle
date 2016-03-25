@@ -394,12 +394,10 @@ public class vehicles extends javax.swing.JDialog{
     }//GEN-LAST:event_txt_regnoActionPerformed
 
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void cmd_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_deleteActionPerformed
-        // TODO add your handling code here:
          if(txt_make.getText().trim().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||
                      txt_regno.getText().trim().isEmpty())
              {    
@@ -529,7 +527,7 @@ public class vehicles extends javax.swing.JDialog{
     }//GEN-LAST:event_tablevehiclesMouseClicked
 
     private void cmd_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_updateActionPerformed
-        // TODO add your handling code here:
+       
          if(txt_make.getText().trim().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||
                      txt_regno.getText().trim().isEmpty())
              {         

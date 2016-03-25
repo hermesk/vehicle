@@ -37,8 +37,11 @@ public class adminvt extends javax.swing.JFrame {
     ResultSet rs = null;
     ResultSet rss = null;
     ResultSet rsd = null;
+    ResultSet rsu = null;
     PreparedStatement pst = null;
-    
+    PreparedStatement pst1 = null;
+    PreparedStatement pst2 = null;
+   
     float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,vt,tt;
     float th1,th2,th3,th4,tm1,tm2,tm3,tm4,tmh1,tmh2,tmh3,tmh4;
     
@@ -703,8 +706,11 @@ public class adminvt extends javax.swing.JFrame {
 
                 SimpleDateFormat sdf=new SimpleDateFormat("kk:mm");
                 sdf.setTimeZone(TimeZone.getDefault());
+                int row = tablevt.getSelectedRow();
+                int col = tablevt.getSelectedColumn();
 
-                String v = rs.getString("id");
+                String v = (tablevt.getModel().getValueAt(row, col).toString());
+                //String v = rss.getString("id");
                 String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText();
                 String v2 =ComboBox_vehicle.getSelectedItem().toString();
                 String v3 =ComboBox_driver.getSelectedItem().toString();
@@ -973,19 +979,18 @@ public class adminvt extends javax.swing.JFrame {
         else{
             int d = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete", "Delete", JOptionPane.YES_NO_OPTION);
 
-            if(d==0){
-             int row = tablevt.getSelectedRow();
-               int col = tablevt.getSelectedColumn();
-               String tableclicked = (tablevt.getModel().getValueAt(row, col).toString());
-               String sql = "delete* from vt where id ='"+tableclicked+"'";
+            if(d==0){    
+                int row = tablevt.getSelectedRow();
+                int col = tablevt.getSelectedColumn();
 
-              
-
+                String tableclicked = (tablevt.getModel().getValueAt(row, col).toString());
+               String sql = "delete from vt where id =?";
                 try {
-                    pst=conn.prepareStatement(sql);
-                    pst.setString(1, rss.getString("id"));
-
-                    pst.execute();
+                    
+                    pst2=conn.prepareStatement(sql);
+                    pst2.setString(1, tableclicked);
+                    pst2.execute();
+                    
                     JOptionPane.showMessageDialog(null, "deleted");
 
                 } catch (SQLException e) {
@@ -995,8 +1000,7 @@ public class adminvt extends javax.swing.JFrame {
              finally {
                 try{
                    if(rs!=null&&pst!=null){
-                   rs.close();
-                  rss=null;
+                  rs.close();
                   pst.close();
                   pst=null;
                     }
@@ -1154,8 +1158,8 @@ public class adminvt extends javax.swing.JFrame {
 
             String tableclicked = (tablevt.getModel().getValueAt(row, col).toString());
             String sql = "select* from vt where id ='"+tableclicked+"'";
-             pst=conn.prepareStatement(sql);
-             rss = pst.executeQuery();
+             pst1=conn.prepareStatement(sql);
+             rss = pst1.executeQuery();
          while(rss.next()){
              String add1 = rss.getString("date");
              java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(add1);
@@ -1201,14 +1205,15 @@ public class adminvt extends javax.swing.JFrame {
               
         JOptionPane.showMessageDialog(null, e);} 
           
-    finally {
-                try{
-                  if(rs!=null&&pst!=null){
-                  rss.close();
-                  //rss=null;
-                  pst.close();
-                  pst=null;
-                    }
+  finally {
+                
+                  try{
+                  if(rs!=null){
+                  rs.close();
+                                     }
+                   if(rss!=null){
+                       rss.close();
+                                     }
                   }
                  catch(Exception ex){
                   }

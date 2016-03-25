@@ -28,6 +28,8 @@ public class adminkmrange extends javax.swing.JDialog {
     Connection conn = null;
     ResultSet rs = null;
     ResultSet rss = null;
+    
+    
     PreparedStatement pst = null;   
     public adminkmrange(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -722,7 +724,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                  float kml = (Float.parseFloat(tkm.getText()))/ (Float.parseFloat(diesel.getText()));
                  float kgl = (Float.parseFloat(tfw.getText()))/ (Float.parseFloat(diesel.getText()));
                 
-                String v = rs.getString("id");
+                String v = rss.getString("id");
                 String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim();
                 String v2 =ComboBox_vehicle.getSelectedItem().toString();
                 String v3 =ComboBox_driver.getSelectedItem().toString();
@@ -744,7 +746,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
         }
          finally {
                 try{
-                  rs.close();
+                  rss.close();
                   pst.close();
                   }
                  catch(Exception ex){
@@ -842,7 +844,7 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
         try {
             String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
             String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
-
+            
             String check = "select COUNT (*)as total from kmrange where date >='"+start+"'and date <='"+end+"'";
 
             pst=conn.prepareStatement(check);

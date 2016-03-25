@@ -48,11 +48,7 @@ public class admindrivers extends javax.swing.JDialog {
                   }
                  catch(Exception ex){
                   }
-                }
-      
-      
-      
-      
+                }   
      }
    
     @SuppressWarnings("unchecked")
@@ -282,8 +278,7 @@ public class admindrivers extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-        // TODO add your handling code here:
-        if(fname.getText().isEmpty()||sname.getText().isEmpty()||phoneno.getText().isEmpty())
+      if(fname.getText().isEmpty()||sname.getText().isEmpty()||phoneno.getText().isEmpty())
         {
            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all the fields!</font></h2></html>");
         }

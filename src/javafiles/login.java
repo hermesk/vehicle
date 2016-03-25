@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class login extends javax.swing.JFrame {
 
     Connection conn = null;
-    ResultSet rs = null;
+    ResultSet log = null;
     PreparedStatement pst = null;
     
     public login() {
@@ -140,10 +140,10 @@ public class login extends javax.swing.JFrame {
              pst.setString(1,txt_user.getText().trim());
              pst.setString(2,md5(txt_password.getText().trim()));
              
-             rs =pst.executeQuery(); 
+             log =pst.executeQuery(); 
              
-             if(rs.next()){
-                 String name =  rs.getString("username").trim(); 
+             if(log.next()){
+                 String name =  log.getString("username").trim(); 
                  if(name.equals("admin")||name.equals("root"))
                  {
                 adminvt vt = new  adminvt();
@@ -183,7 +183,7 @@ public class login extends javax.swing.JFrame {
    }
          finally {
                 try{
-                  rs.close();
+                 log.close();
                   pst.close();
                   }
                  catch(Exception ex){
@@ -203,10 +203,10 @@ public class login extends javax.swing.JFrame {
              pst.setString(1,txt_user.getText().trim());
              pst.setString(2,md5(txt_password.getText().trim()));
              
-             rs =pst.executeQuery(); 
+             log =pst.executeQuery(); 
              
-             if(rs.next()){
-                 String name =  rs.getString("username").trim(); 
+             if(log.next()){
+                 String name = log.getString("username").trim(); 
                  if(name.equals("admin")||name.equals("root"))
                  {
                 adminvt vt = new  adminvt();
@@ -249,7 +249,7 @@ public class login extends javax.swing.JFrame {
    }
          finally {
                 try{
-                  rs.close();
+                  log.close();
                   pst.close();
                   }
                  catch(Exception ex){
