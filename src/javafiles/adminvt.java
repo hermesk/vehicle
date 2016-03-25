@@ -1145,7 +1145,15 @@ public class adminvt extends javax.swing.JFrame {
                 }
        
             
-            update_table();}
+         ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");
+
+        wt1.setText("");
+        wt2.setText("");
+        wt3.setText("");
+        wt4.setText("");
+        update_table();}
             
         
     }//GEN-LAST:event_cmd_saveActionPerformed

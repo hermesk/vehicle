@@ -124,6 +124,7 @@ public class viewvt extends javax.swing.JDialog {
             { return false;}
         };
         cmd_clear = new javax.swing.JButton();
+        print = new javax.swing.JButton();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -194,15 +195,19 @@ public class viewvt extends javax.swing.JDialog {
             }
         });
 
+        print.setText("Print");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -223,8 +228,16 @@ public class viewvt extends javax.swing.JDialog {
                                 .addComponent(cmd_search)
                                 .addGap(18, 18, 18)
                                 .addComponent(cmd_clear)))
-                        .addGap(0, 322, Short.MAX_VALUE)))
+                        .addGap(0, 322, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(516, 516, 516)
+                    .addComponent(print)
+                    .addContainerGap(517, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,13 +251,18 @@ public class viewvt extends javax.swing.JDialog {
                         .addComponent(cmd_clear))
                     .addComponent(sdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdexit)
                     .addComponent(cmdprint))
                 .addGap(42, 42, 42))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(247, 247, 247)
+                    .addComponent(print)
+                    .addContainerGap(134, Short.MAX_VALUE)))
         );
 
         setSize(new java.awt.Dimension(1104, 439));
@@ -384,6 +402,24 @@ public class viewvt extends javax.swing.JDialog {
           update_table();
     }//GEN-LAST:event_cmd_clearActionPerformed
 
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);
+        MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
+        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+
+        boolean fitWidth = fitWidthBox.isSelected();
+
+        try{
+            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH
+            : JTable.PrintMode.NORMAL;
+            tablevt.print(mode,header,footer);
+        }
+        catch(java.awt.print.PrinterException e)
+        {
+            PrintStream format = System.err.format("Cannot print %s%n");
+        }
+    }//GEN-LAST:event_printActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -415,6 +451,7 @@ public class viewvt extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton print;
     private com.toedter.calendar.JDateChooser sdate;
     private javax.swing.JTable tablevt;
     private com.toedter.calendar.JDateChooser tdate;

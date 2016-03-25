@@ -309,7 +309,10 @@ public class register extends javax.swing.JDialog {
                   }
                 }
        
-         update_table();
+                     uname.setText("");
+                     pwd.setText("");
+                     cpwd.setText("");
+                     update_table();
         }
                      else{}
         
@@ -351,9 +354,10 @@ public class register extends javax.swing.JDialog {
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
         // TODO add your handling code here:
-        uname.setText("");
+         uname.setText("");
          pwd.setText("");
          cpwd.setText("");
+         update_table();
          
         
     }//GEN-LAST:event_cmd_clearActionPerformed

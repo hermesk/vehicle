@@ -661,7 +661,16 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
                   }
                 }
        
-        update_table();
+      ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");        
+        ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        kmgl.setText("");
+        diesel.setText("");
+        dibal.setText("");
+        tfw.setText("");
+        tfw.setText("");
+        tkm.setText("");
+           update_table();
         }}
     private void tablekmrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablekmrMouseClicked
            try{

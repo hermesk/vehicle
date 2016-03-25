@@ -32,7 +32,7 @@ public class admindrivers extends javax.swing.JDialog {
   
  private void update_table(){
       try{
-          String sql = "select rowid as 'No',fname as 'First Name',sname as 'Sirname',phoneno as 'Phone No'from drivers";
+          String sql = "select id as 'No',fname as 'First Name',sname as 'Sirname',phoneno as 'Phone No'from drivers";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           table_drivers.setModel( DbUtils.resultSetToTableModel(rs));
@@ -327,7 +327,10 @@ public class admindrivers extends javax.swing.JDialog {
                  catch(Exception ex){
                   }
                 }
-               update_table();
+                    fname.setText("");
+                    sname.setText("");
+                    phoneno.setText("");
+                    update_table();
 
             }
     }//GEN-LAST:event_cmd_saveActionPerformed
@@ -430,6 +433,7 @@ public class admindrivers extends javax.swing.JDialog {
         fname.setText("");
         sname.setText("");
         phoneno.setText("");
+        update_table();
     }//GEN-LAST:event_cmd_clearActionPerformed
 
     private void table_driversMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_driversMouseClicked
