@@ -5,6 +5,7 @@
     <Property name="defaultCloseOperation" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection code="JFrame.DO_NOTHING_ON_CLOSE);&#xd;&#xa;addWindowListener(new WindowAdapter() {&#xd;&#xa;    @Override&#xd;&#xa;    public void windowClosing(WindowEvent we)&#xd;&#xa;    { &#xd;&#xa;        String ObjButtons[] = {&quot;Yes&quot;,&quot;No&quot;};&#xd;&#xa;        int PromptResult = JOptionPane.showOptionDialog(null,&quot;Are you sure you want to close?&quot;,&quot;Confirm&quot;,JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);&#xd;&#xa;        if(PromptResult==JOptionPane.YES_OPTION)&#xd;&#xa;        {&#xd;&#xa;            dispose();&#xd;&#xa;            try {&#xd;&#xa;            conn.close();&#xd;&#xa;        } catch (SQLException e) {&#xd;&#xa;                     JOptionPane.showMessageDialog(null,e);&#xd;&#xa;        }&#xd;&#xa;        }&#xd;&#xa;    }&#xd;&#xa;}" type="code"/>
     </Property>
+    <Property name="title" type="java.lang.String" value="&#x9;&#x9;&#x9;&#x9;Factory Kilometer Overhaul"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -79,7 +80,9 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="cmd_print" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="393" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="cmd_exit" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -104,7 +107,10 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="319" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="cmd_print" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cmd_print" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmd_exit" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -409,6 +415,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_searchActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="cmd_exit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Exit"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmd_exitActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

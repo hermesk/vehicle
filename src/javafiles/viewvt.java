@@ -4,7 +4,6 @@ package javafiles;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -107,6 +106,21 @@ public class viewvt extends javax.swing.JDialog {
                 }
        
      }
+                    public void close()
+                    { 
+                        String ObjButtons[] = {"Yes","No"};
+                        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to close?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                        if(PromptResult==JOptionPane.YES_OPTION)
+                        {
+                            dispose();
+                            try {
+                            conn.close();
+                        } catch (SQLException e) {
+                                JOptionPane.showMessageDialog(null,e);
+                        }
+
+                    }
+                }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -124,7 +138,6 @@ public class viewvt extends javax.swing.JDialog {
             { return false;}
         };
         cmd_clear = new javax.swing.JButton();
-        print = new javax.swing.JButton();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -144,7 +157,8 @@ public class viewvt extends javax.swing.JDialog {
                 }
             }
         });
-        setTitle("\nVehicleturnabout");
+        setTitle("\n                                     \t\t\tVehicleturnabout");
+        setIconImages(null);
 
         cmdprint.setText("Print");
         cmdprint.addActionListener(new java.awt.event.ActionListener() {
@@ -195,13 +209,6 @@ public class viewvt extends javax.swing.JDialog {
             }
         });
 
-        print.setText("Print");
-        print.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,11 +240,6 @@ public class viewvt extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jScrollPane2)))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(516, 516, 516)
-                    .addComponent(print)
-                    .addContainerGap(517, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,11 +260,6 @@ public class viewvt extends javax.swing.JDialog {
                     .addComponent(cmdexit)
                     .addComponent(cmdprint))
                 .addGap(42, 42, 42))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(247, 247, 247)
-                    .addComponent(print)
-                    .addContainerGap(134, Short.MAX_VALUE)))
         );
 
         setSize(new java.awt.Dimension(1104, 439));
@@ -270,13 +267,11 @@ public class viewvt extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexitActionPerformed
-        // TODO add your handling code here:
-        dispose();
+                   close();
     }//GEN-LAST:event_cmdexitActionPerformed
 
     private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed
-        // TODO add your handling code here:
-        JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);                                                
+     JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);                                                
      MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
       MessageFormat footer = new MessageFormat("Page{0,number,integer}");
       
@@ -315,17 +310,17 @@ public class viewvt extends javax.swing.JDialog {
         String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
         String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
       
-            String check = "select COUNT (*)as total from vt where date >='"+start+"'and date <='"+end+"'";
+            String check = "select COUNT (*)as total from vt where date between'"+start+"'and '"+end+"'";
 
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
             int tr =rs.getInt("total");  
             if(tr==0){
-                  JOptionPane.showMessageDialog(null, "<html><font color='red'>No record Found!</font></html>");
+                  JOptionPane.showMessageDialog(null, "<html>No record Found!</html>");
                  }
             else{
             JOptionPane.showMessageDialog(null, tr+" "+"records found");
-            
+           
            
          while(rs.next()){
                 if(rs.getInt("total")>0)
@@ -338,7 +333,6 @@ public class viewvt extends javax.swing.JDialog {
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
-       // fixWidth(tablevt, 0, 30);
         fixWidth(tablevt, 0, 80);
         fixWidth(tablevt, 1, 70); 
         fixWidth(tablevt, 2, 120); 
@@ -402,24 +396,6 @@ public class viewvt extends javax.swing.JDialog {
           update_table();
     }//GEN-LAST:event_cmd_clearActionPerformed
 
-    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-        JCheckBox fitWidthBox = new JCheckBox("Fit width to printed page", true);
-        MessageFormat header = new MessageFormat("Factory Vehicleturnabout");
-        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
-
-        boolean fitWidth = fitWidthBox.isSelected();
-
-        try{
-            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH
-            : JTable.PrintMode.NORMAL;
-            tablevt.print(mode,header,footer);
-        }
-        catch(java.awt.print.PrinterException e)
-        {
-            PrintStream format = System.err.format("Cannot print %s%n");
-        }
-    }//GEN-LAST:event_printActionPerformed
-
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -435,13 +411,7 @@ public class viewvt extends javax.swing.JDialog {
         column.setMaxWidth(width);
         column.setPreferredWidth(width);
     }
-     WindowListener exitlistener = new WindowAdapter(){
-         @Override
-         public void windowClosing(WindowEvent e){
-         // int c = JOptionPane.showOptionalDialog(null, "Are you sure to close?""Exit",JOptionPane.YES_NO_OPTION);
-         }
-     
-     };
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_clear;
@@ -451,7 +421,6 @@ public class viewvt extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton print;
     private com.toedter.calendar.JDateChooser sdate;
     private javax.swing.JTable tablevt;
     private com.toedter.calendar.JDateChooser tdate;

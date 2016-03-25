@@ -127,6 +127,21 @@ public class viewkmr extends javax.swing.JDialog {
                 }
        
      }
+                public void close()
+                { 
+                    String ObjButtons[] = {"Yes","No"};
+                    int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to close?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                    if(PromptResult==JOptionPane.YES_OPTION)
+                    {
+                        dispose();
+                        try {
+                        conn.close();
+                    } catch (SQLException e) {
+                            JOptionPane.showMessageDialog(null,e);
+                    }
+
+                }
+            }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -164,6 +179,8 @@ public class viewkmr extends javax.swing.JDialog {
                 }
             }
         });
+        setTitle("                           Kilometer Overhaul");
+        setIconImages(null);
 
         tablekmr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -270,13 +287,7 @@ public class viewkmr extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexitActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(viewkmr.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       close();
     }//GEN-LAST:event_cmdexitActionPerformed
 
     private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed

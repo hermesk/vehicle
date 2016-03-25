@@ -76,6 +76,7 @@ public class vehicles extends javax.swing.JDialog{
         cmd_update = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablevehicles = new javax.swing.JTable();
+        cmd_exit = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -260,6 +261,13 @@ public class vehicles extends javax.swing.JDialog{
                 .addContainerGap())
         );
 
+        cmd_exit.setText("Exit");
+        cmd_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_exitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -267,7 +275,9 @@ public class vehicles extends javax.swing.JDialog{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmd_print)
-                .addGap(215, 215, 215))
+                .addGap(18, 18, 18)
+                .addComponent(cmd_exit)
+                .addGap(124, 124, 124))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -279,7 +289,9 @@ public class vehicles extends javax.swing.JDialog{
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(cmd_print)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmd_print)
+                    .addComponent(cmd_exit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -617,7 +629,25 @@ public class vehicles extends javax.swing.JDialog{
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jMenuItem1MousePressed
-         
+
+    private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
+             close();
+    }//GEN-LAST:event_cmd_exitActionPerformed
+                public void close()
+            { 
+                String ObjButtons[] = {"Yes","No"};
+                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to close?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                if(PromptResult==JOptionPane.YES_OPTION)
+                {
+                    dispose();
+                    try {
+                    conn.close();
+                } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null,e);
+                }
+
+            }
+        } 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -629,6 +659,7 @@ public class vehicles extends javax.swing.JDialog{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_delete;
+    private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_print;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmd_update;

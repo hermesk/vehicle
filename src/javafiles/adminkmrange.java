@@ -189,6 +189,7 @@ public class adminkmrange extends javax.swing.JDialog {
         tdate = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         txt_search = new javax.swing.JButton();
+        cmd_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -208,6 +209,7 @@ public class adminkmrange extends javax.swing.JDialog {
                 }
             }
         });
+        setTitle("\t\t\t\tFactory Kilometer Overhaul");
 
         tablekmr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -420,6 +422,13 @@ public class adminkmrange extends javax.swing.JDialog {
             }
         });
 
+        cmd_exit.setText("Exit");
+        cmd_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_exitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -447,7 +456,9 @@ public class adminkmrange extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmd_print)
-                .addGap(393, 393, 393))
+                .addGap(35, 35, 35)
+                .addComponent(cmd_exit)
+                .addGap(285, 285, 285))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,7 +478,9 @@ public class adminkmrange extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(cmd_print)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmd_print)
+                    .addComponent(cmd_exit))
                 .addGap(16, 16, 16))
         );
 
@@ -914,10 +927,26 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 
             }}
     }//GEN-LAST:event_txt_searchActionPerformed
- 
-    /**
-     * @param args the command line arguments
-     */
+
+    private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
+                     close();
+    }//GEN-LAST:event_cmd_exitActionPerformed
+                    public void close()
+                { 
+                    String ObjButtons[] = {"Yes","No"};
+                    int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to close?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                    if(PromptResult==JOptionPane.YES_OPTION)
+                    {
+                        dispose();
+                        try {
+                        conn.close();
+                    } catch (SQLException e) {
+                            JOptionPane.showMessageDialog(null,e);
+                    }
+
+                }
+            }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1012,6 +1041,7 @@ private void fillCombo(){
     private javax.swing.JComboBox ComboBox_vehicle;
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_del;
+    private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_print;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmd_update;

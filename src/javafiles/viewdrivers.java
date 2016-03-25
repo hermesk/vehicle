@@ -55,7 +55,21 @@ public class viewdrivers extends javax.swing.JFrame {
                 }
        
      }
+                public void close()
+                { 
+                    String ObjButtons[] = {"Yes","No"};
+                    int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to close?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                    if(PromptResult==JOptionPane.YES_OPTION)
+                    {
+                        dispose();
+                        try {
+                        conn.close();
+                    } catch (SQLException e) {
+                            JOptionPane.showMessageDialog(null,e);
+                    }
 
+                }
+            }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -91,6 +105,7 @@ public class viewdrivers extends javax.swing.JFrame {
                 }
             }
         });
+        setTitle("\t\t\tRagati Tea Factory Drivers");
 
         table_drivers.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 18)));
         table_drivers.setModel(new javax.swing.table.DefaultTableModel(
@@ -187,9 +202,9 @@ public class viewdrivers extends javax.swing.JFrame {
 
     private void cmdexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdexitActionPerformed
         // TODO add your handling code here:
-        dispose();
+        close();
     }//GEN-LAST:event_cmdexitActionPerformed
-
+   
     private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed
         // TODO add your handling code here:
         MessageFormat header = new MessageFormat("Ragati Tea Factory Drivers");

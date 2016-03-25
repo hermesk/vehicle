@@ -74,6 +74,7 @@ public class admindrivers extends javax.swing.JDialog {
         };
         ;
         cmd_print = new javax.swing.JButton();
+        cmd_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -93,6 +94,7 @@ public class admindrivers extends javax.swing.JDialog {
                 }
             }
         });
+        setTitle("                                                 Ragati Tea Factory Drivers");
         setIconImages(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Drivers", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
@@ -226,6 +228,13 @@ public class admindrivers extends javax.swing.JDialog {
             }
         });
 
+        cmd_exit.setText("Exit");
+        cmd_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_exitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -240,7 +249,9 @@ public class admindrivers extends javax.swing.JDialog {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(cmd_print)
-                        .addGap(218, 218, 218))))
+                        .addGap(28, 28, 28)
+                        .addComponent(cmd_exit)
+                        .addGap(117, 117, 117))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +265,9 @@ public class admindrivers extends javax.swing.JDialog {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmd_print))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmd_print)
+                    .addComponent(cmd_exit)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -540,9 +553,24 @@ public class admindrivers extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_phonenoKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
+     close(); 
+                }//GEN-LAST:event_cmd_exitActionPerformed
+                public void close()
+                    { 
+                        String ObjButtons[] = {"Yes","No"};
+                        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to close?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                        if(PromptResult==JOptionPane.YES_OPTION)
+                        {
+                            dispose();
+                            try {
+                            conn.close();
+                        } catch (SQLException e) {
+                                JOptionPane.showMessageDialog(null,e);
+                        }
+
+                    }
+                }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -578,6 +606,7 @@ public class admindrivers extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_clear;
+    private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_print;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmd_update;

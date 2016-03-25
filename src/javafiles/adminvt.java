@@ -193,6 +193,7 @@ public class adminvt extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         tdate = new com.toedter.calendar.JDateChooser();
         cmd_search = new javax.swing.JButton();
+        cmd_exit = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -393,6 +394,13 @@ public class adminvt extends javax.swing.JFrame {
             }
         });
 
+        cmd_exit.setText("Exit");
+        cmd_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_exitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -448,7 +456,9 @@ public class adminvt extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(279, 279, 279)
-                        .addComponent(print))
+                        .addComponent(print)
+                        .addGap(27, 27, 27)
+                        .addComponent(cmd_exit))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel19)
@@ -549,7 +559,8 @@ public class adminvt extends javax.swing.JFrame {
                     .addComponent(cmd_update)
                     .addComponent(cmd_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmd_save)
-                    .addComponent(print))
+                    .addComponent(print)
+                    .addComponent(cmd_exit))
                 .addContainerGap(195, Short.MAX_VALUE))
         );
 
@@ -1340,9 +1351,26 @@ public class adminvt extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_kmrActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
+     
+        close();
+    }//GEN-LAST:event_cmd_exitActionPerformed
+
+    public void close()
+    { 
+        String ObjButtons[] = {"Yes","No"};
+        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit the system?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+        if(PromptResult==JOptionPane.YES_OPTION)
+        {
+            System.exit(0);
+            try {
+            conn.close();
+        } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null,e);
+        }
+        
+    }
+}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1438,6 +1466,7 @@ private void fixWidth(final JTable table, final int columnIndex, final int width
     private javax.swing.JMenu adduser;
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_delete;
+    private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmd_search;
     private javax.swing.JButton cmd_update;

@@ -108,7 +108,9 @@ public class vehiclet extends javax.swing.JFrame {
                 }
             }
         });
+        setTitle("\t\t\t\tFactory Vehicleturnabout");
         setBackground(new java.awt.Color(204, 204, 204));
+        setIconImages(null);
         setName("VehicleTurnabout"); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -580,12 +582,7 @@ public class vehiclet extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_clearActionPerformed
 
     private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
-        dispose();
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(vehiclet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        close();
     }//GEN-LAST:event_cmd_exitActionPerformed
 
     private void logoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMousePressed
@@ -657,7 +654,22 @@ public class vehiclet extends javax.swing.JFrame {
         evt.consume();
          getToolkit().beep();}
     }//GEN-LAST:event_txt_DateKeyTyped
+            public void close()
+                { 
+                    String ObjButtons[] = {"Yes","No"};
+                    int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit the system?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                    if(PromptResult==JOptionPane.YES_OPTION)
+                    {
+                        System.exit(0);
+                        try {
+                        conn.close();
+                    } catch (SQLException e) {
+                            JOptionPane.showMessageDialog(null,e);
+                    }
 
+                }
+            }
+    
     private void wt4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
              if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||wt1.getText().trim().isEmpty()||

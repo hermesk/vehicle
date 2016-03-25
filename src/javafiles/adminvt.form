@@ -204,6 +204,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
                                   <Component id="print" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="cmd_exit" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -332,6 +334,7 @@
                               <Component id="cmd_clear" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="cmd_save" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="print" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmd_exit" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="195" max="32767" attributes="0"/>
                       </Group>
@@ -615,6 +618,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmd_searchActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="cmd_exit">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Exit"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmd_exitActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
