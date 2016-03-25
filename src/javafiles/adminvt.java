@@ -710,7 +710,6 @@ public class adminvt extends javax.swing.JFrame {
                 int col = tablevt.getSelectedColumn();
 
                 String v = (tablevt.getModel().getValueAt(row, col).toString());
-                //String v = rss.getString("id");
                 String v1 =((JTextField)txt_Date.getDateEditor().getUiComponent()).getText();
                 String v2 =ComboBox_vehicle.getSelectedItem().toString();
                 String v3 =ComboBox_driver.getSelectedItem().toString();
@@ -801,7 +800,15 @@ public class adminvt extends javax.swing.JFrame {
                   }
                 }
        
-            update_table();
+          ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");
+
+        wt1.setText("");
+        wt2.setText("");
+        wt3.setText("");
+        wt4.setText("");
+        update_table();
           
         }
     }//GEN-LAST:event_cmd_updateActionPerformed
@@ -1011,7 +1018,15 @@ public class adminvt extends javax.swing.JFrame {
        
             }
             }
-            update_table();
+         ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)sdate.getDateEditor().getUiComponent()).setText("");
+        ((JTextField)tdate.getDateEditor().getUiComponent()).setText("");
+
+        wt1.setText("");
+        wt2.setText("");
+        wt3.setText("");
+        wt4.setText("");
+        update_table();
     }//GEN-LAST:event_cmd_deleteActionPerformed
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
