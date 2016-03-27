@@ -3,16 +3,24 @@ import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -92,12 +100,9 @@ public class adminkmrange extends javax.swing.JDialog {
           
                String  kgppl = df.format(kg);
                String  lpkma = df.format(kp);
-               Object[] row = { "","<html><h3><font color='black'>Total</font></h3></html>","", "", glkm,Tkm,fuel,"",fw,lpkma,kgppl};
+               Object[] row = { "","Total","", "", glkm,Tkm,fuel,"",fw,lpkma,kgppl};
                 model.addRow(row);
-                int  b= tablekmr.getRowCount()-1;
-                 for(int i=10;i>=4;i--){
-                     tablekmr.setValueAt("<html><u><b>" + tablekmr.getValueAt(b,i) + "</b></u></html>",b,i);
-                 }
+                
 
         return fw;
     }
@@ -190,6 +195,7 @@ public class adminkmrange extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txt_search = new javax.swing.JButton();
         cmd_exit = new javax.swing.JButton();
+        cmd_toexcel = new javax.swing.JButton();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -429,6 +435,13 @@ public class adminkmrange extends javax.swing.JDialog {
             }
         });
 
+        cmd_toexcel.setText("Save to Excel");
+        cmd_toexcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_toexcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -455,6 +468,8 @@ public class adminkmrange extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmd_toexcel)
+                .addGap(26, 26, 26)
                 .addComponent(cmd_print)
                 .addGap(35, 35, 35)
                 .addComponent(cmd_exit)
@@ -480,7 +495,8 @@ public class adminkmrange extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmd_print)
-                    .addComponent(cmd_exit))
+                    .addComponent(cmd_exit)
+                    .addComponent(cmd_toexcel))
                 .addGap(16, 16, 16))
         );
 
@@ -864,10 +880,15 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
        }
        else{
         try {
+
             String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
             String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
-            
-            String check = "select COUNT (*)as total from kmrange where date >='"+start+"'and date <='"+end+"'";
+              DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+              Date date1 = df.parse(start);
+              Date date12= df.parse(end);
+
+
+            String check = "select COUNT (*)as total from kmrange where date between '"+start+"'and'"+end+"'";
 
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
@@ -925,12 +946,62 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 
                 JOptionPane.showMessageDialog(null, ex);
 
+            } catch (ParseException ex) {
+                Logger.getLogger(adminkmrange.class.getName()).log(Level.SEVERE, null, ex);
             }}
     }//GEN-LAST:event_txt_searchActionPerformed
+            //export to excel
+            public void toExcel(JTable tablekmr, File file){
+               
+                    try (FileWriter excel = new FileWriter(file)) {
+                        for(int i = 0; i < tablekmr.getColumnCount(); i++){
+                            excel.write(tablekmr.getColumnName(i) + "\t");
+                                               }
+                          excel.write("\n");
+                       
+                          for(int i=0; i< tablekmr.getRowCount(); i++) {
+                            for(int j=0; j < tablekmr.getColumnCount(); j++) {
+                            excel.write(tablekmr.getValueAt(i,j).toString()+"\t");                           
 
+                            }
+                           excel.write("\n");
+                        }
+                    
+
+                }catch(IOException e){ 
+                 JOptionPane.showMessageDialog(null,e);
+ }
+            }
+
+      
     private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
                      close();
     }//GEN-LAST:event_cmd_exitActionPerformed
+
+    private void cmd_toexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_toexcelActionPerformed
+
+        JFileChooser fc = new JFileChooser();
+        int option = fc.showSaveDialog(adminkmrange.this);
+        if(option == JFileChooser.APPROVE_OPTION){
+            String filename = fc.getSelectedFile().getName();
+            String path = fc.getSelectedFile().getParentFile().getPath();
+
+            int len = filename.length();
+            String ext = "";
+            String file = "";
+
+            if(len > 4){
+                ext = filename.substring(len-4, len);
+            }
+
+            if(ext.equals(".xls")){
+                file = path + "\\" + filename; 
+            }else{
+                file = path + "\\" + filename + ".xls"; 
+            }
+            toExcel(tablekmr, new File(file));
+        }
+    }//GEN-LAST:event_cmd_toexcelActionPerformed
                     public void close()
                 { 
                     String ObjButtons[] = {"Yes","No"};
@@ -1044,6 +1115,7 @@ private void fillCombo(){
     private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_print;
     private javax.swing.JButton cmd_save;
+    private javax.swing.JButton cmd_toexcel;
     private javax.swing.JButton cmd_update;
     private javax.swing.JTextField dibal;
     private javax.swing.JTextField diesel;

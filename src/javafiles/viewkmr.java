@@ -1,9 +1,15 @@
 package javafiles;
 
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,14 +17,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
 public class viewkmr extends javax.swing.JDialog {
@@ -82,14 +88,11 @@ public class viewkmr extends javax.swing.JDialog {
             kg = (float) (kgpl/(i+1));
          }
                String  kgppl = df.format(kg);
+               String str = "<html><b><u>" +kgppl+ "</u></b></html>";
                String  lpkma = df.format(kp);
-               Object[] row = { "","<html><h3><font color='black'>Total</font></h3></html>", "", glkm,Tkm,fuel,"",fw,lpkma,kgppl};
-                model.addRow(row);
-                int  b= tablekmr.getRowCount()-1;
-                 for(int i=9;i>=3;i--){
-                     tablekmr.setValueAt("<html><u><b>" + tablekmr.getValueAt(b,i) + "</b></u></html>",b,i);
-                 }
-
+               Object[] row = { "Total","", "", glkm,Tkm,fuel,"",fw,lpkma,kgppl};
+               model.addRow(row);
+               
         return fw;
     }
       
@@ -111,6 +114,8 @@ public class viewkmr extends javax.swing.JDialog {
                         fixWidth(tablekmr, 6, 80);
                         fixWidth(tablekmr, 7, 100);
                         getSum();
+                  
+        
 
       }
       catch(Exception e)
@@ -142,7 +147,30 @@ public class viewkmr extends javax.swing.JDialog {
 
                 }
             }
-   
+                //export to excel
+            public void toExcel(JTable tablekmr, File file){
+               
+                    try (FileWriter excel = new FileWriter(file)) {
+                        for(int i = 0; i < tablekmr.getColumnCount(); i++){
+                            excel.write(tablekmr.getColumnName(i) + "\t");
+                                               }
+                          excel.write("\n");
+                       
+                          for(int i=0; i< tablekmr.getRowCount(); i++) {
+                            for(int j=0; j < tablekmr.getColumnCount(); j++) {
+                            excel.write(tablekmr.getValueAt(i,j).toString()+"\t");                           
+
+                            }
+                           excel.write("\n");
+                        }
+                    
+
+                }catch(IOException e){ 
+                 JOptionPane.showMessageDialog(null,e);
+ }
+            }
+
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -160,6 +188,7 @@ public class viewkmr extends javax.swing.JDialog {
         tdate = new com.toedter.calendar.JDateChooser();
         txt_search = new javax.swing.JButton();
         cmd_clear = new javax.swing.JButton();
+        cmd_toexcel = new javax.swing.JButton();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -231,6 +260,13 @@ public class viewkmr extends javax.swing.JDialog {
             }
         });
 
+        cmd_toexcel.setText("Save to Excel");
+        cmd_toexcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_toexcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,7 +280,9 @@ public class viewkmr extends javax.swing.JDialog {
                         .addGap(386, 386, 386)
                         .addComponent(cmdprint)
                         .addGap(56, 56, 56)
-                        .addComponent(cmdexit))
+                        .addComponent(cmdexit)
+                        .addGap(44, 44, 44)
+                        .addComponent(cmd_toexcel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(235, 235, 235)
                         .addComponent(jLabel1)
@@ -278,7 +316,8 @@ public class viewkmr extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdexit)
-                    .addComponent(cmdprint))
+                    .addComponent(cmdprint)
+                    .addComponent(cmd_toexcel))
                 .addGap(47, 47, 47))
         );
 
@@ -291,8 +330,8 @@ public class viewkmr extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdexitActionPerformed
 
     private void cmdprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdprintActionPerformed
-        // TODO add your handling code here:
-         MessageFormat header = new MessageFormat("Ragati Tea Factory Vehicle Km Overhaul");
+      
+      MessageFormat header = new MessageFormat("Ragati Tea Factory Vehicle Km Overhaul");
       MessageFormat footer = new MessageFormat("Page{0,number,integer}");
 
       try{
@@ -385,6 +424,31 @@ public class viewkmr extends javax.swing.JDialog {
         
     }//GEN-LAST:event_cmd_clearActionPerformed
 
+    private void cmd_toexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_toexcelActionPerformed
+              
+        JFileChooser fc = new JFileChooser();
+                int option = fc.showSaveDialog(viewkmr.this);
+                if(option == JFileChooser.APPROVE_OPTION){
+                    String filename = fc.getSelectedFile().getName(); 
+                    String path = fc.getSelectedFile().getParentFile().getPath();
+
+					int len = filename.length();
+					String ext = "";
+					String file = "";
+
+					if(len > 4){
+						ext = filename.substring(len-4, len);
+					        }
+
+					if(ext.equals(".xls")){
+						file = path + "\\" + filename; 
+					}else{
+						file = path + "\\" + filename + ".xls"; 
+					}
+					toExcel(tablekmr, new File(file));
+				}
+    }//GEN-LAST:event_cmd_toexcelActionPerformed
+
    
     public static void main(String args[]) {
         
@@ -398,6 +462,7 @@ public class viewkmr extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_clear;
+    private javax.swing.JButton cmd_toexcel;
     private javax.swing.JButton cmdexit;
     private javax.swing.JButton cmdprint;
     private javax.swing.JLabel jLabel1;

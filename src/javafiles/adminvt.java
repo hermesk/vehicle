@@ -5,6 +5,9 @@ import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +22,7 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -80,12 +84,12 @@ public class adminvt extends javax.swing.JFrame {
             fw+=d1;          
             }
                 String vtab = df.format(vta);
-                Object[] row = {"","<html><h3><font color='black'>Total</font></h3></html>", "", "","", "","","","", "","", "","", "","","", "",fw,vtab};
+                Object[] row = {"","Total", "", "","", "","","","", "","", "","", "","","", "",fw,vtab};
                 model.addRow(row);
-                int  b= tablevt.getRowCount()-1;
+               /* int  b= tablevt.getRowCount()-1;
                  for(int i=18;i>=17;i--){
                      tablevt.setValueAt("<html><u><b>" + tablevt.getValueAt(b,i) + "</b></u></html>",b,i);
-                 }
+                 }*/
 
 
         return vta;
@@ -194,6 +198,7 @@ public class adminvt extends javax.swing.JFrame {
         tdate = new com.toedter.calendar.JDateChooser();
         cmd_search = new javax.swing.JButton();
         cmd_exit = new javax.swing.JButton();
+        cmd_toexcel = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -401,6 +406,13 @@ public class adminvt extends javax.swing.JFrame {
             }
         });
 
+        cmd_toexcel.setText("Save to Excel");
+        cmd_toexcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_toexcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -455,7 +467,9 @@ public class adminvt extends javax.swing.JFrame {
                             .addComponent(t31))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
+                        .addGap(176, 176, 176)
+                        .addComponent(cmd_toexcel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(print)
                         .addGap(27, 27, 27)
                         .addComponent(cmd_exit))
@@ -560,7 +574,8 @@ public class adminvt extends javax.swing.JFrame {
                     .addComponent(cmd_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmd_save)
                     .addComponent(print)
-                    .addComponent(cmd_exit))
+                    .addComponent(cmd_exit)
+                    .addComponent(cmd_toexcel))
                 .addContainerGap(195, Short.MAX_VALUE))
         );
 
@@ -1352,10 +1367,57 @@ public class adminvt extends javax.swing.JFrame {
     }//GEN-LAST:event_kmrActionPerformed
 
     private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
-     
+
         close();
     }//GEN-LAST:event_cmd_exitActionPerformed
 
+    private void cmd_toexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_toexcelActionPerformed
+
+        JFileChooser fc = new JFileChooser();
+        int option = fc.showSaveDialog(adminvt.this);
+        if(option == JFileChooser.APPROVE_OPTION){
+            String filename = fc.getSelectedFile().getName();
+            String path = fc.getSelectedFile().getParentFile().getPath();
+
+            int len = filename.length();
+            String ext = "";
+            String file = "";
+
+            if(len > 4){
+                ext = filename.substring(len-4, len);
+            }
+
+            if(ext.equals(".xls")){
+                file = path + "\\" + filename; 
+            }else{
+                file = path + "\\" + filename + ".xls"; 
+            }
+            toExcel(tablevt, new File(file));
+        }    }//GEN-LAST:event_cmd_toexcelActionPerformed
+ //export to excel
+            public void toExcel(JTable tablevt, File file){
+               
+                    try (FileWriter excel = new FileWriter(file)) {
+                        for(int i = 0; i < tablevt.getColumnCount(); i++){
+                            excel.write(tablevt.getColumnName(i) + "\t");
+                                               }
+                          excel.write("\n");
+                       
+                          for(int i=0; i< tablevt.getRowCount(); i++) {
+                            for(int j=0; j < tablevt.getColumnCount(); j++) {
+                            excel.write(tablevt.getValueAt(i,j).toString()+"\t");                           
+
+                            }
+                           excel.write("\n");
+                        }
+                    
+
+                }catch(IOException e){ 
+                 JOptionPane.showMessageDialog(null,e);
+ }
+            }
+
+      
     public void close()
     { 
         String ObjButtons[] = {"Yes","No"};
@@ -1469,6 +1531,7 @@ private void fixWidth(final JTable table, final int columnIndex, final int width
     private javax.swing.JButton cmd_exit;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmd_search;
+    private javax.swing.JButton cmd_toexcel;
     private javax.swing.JButton cmd_update;
     private javax.swing.JMenu dr;
     private javax.swing.JLabel jLabel1;

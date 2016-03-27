@@ -4,6 +4,9 @@ package javafiles;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +15,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -51,13 +55,13 @@ public class viewvt extends javax.swing.JDialog {
             fw+=d1;          
             }
                 String vtab = df.format(vta);
-                Object[] row = {"<html><h3><font color='black'>Total</font></h3></html>", "","","", "","","","", "","", "","", "","","", "",fw,vtab};
+                Object[] row = {"Total", "","","", "","","","", "","", "","", "","","", "",fw,vtab};
                 model.addRow(row);
-                 int  b= tablevt.getRowCount()-1;
+              /*   int  b= tablevt.getRowCount()-1;
                  for(int i=17;i>=16;i--){
                      tablevt.setValueAt("<html><u><b>" + tablevt.getValueAt(b,i) + "</b></u></html>",b,i);
                  }
-
+                      */
                 return vta;
     }
        
@@ -138,6 +142,7 @@ public class viewvt extends javax.swing.JDialog {
             { return false;}
         };
         cmd_clear = new javax.swing.JButton();
+        cmd_toexcel = new javax.swing.JButton();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -209,6 +214,13 @@ public class viewvt extends javax.swing.JDialog {
             }
         });
 
+        cmd_toexcel.setText("Save to Excel");
+        cmd_toexcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmd_toexcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,9 +230,11 @@ public class viewvt extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(389, 389, 389)
+                                .addGap(397, 397, 397)
+                                .addComponent(cmd_toexcel)
+                                .addGap(18, 18, 18)
                                 .addComponent(cmdprint)
-                                .addGap(56, 56, 56)
+                                .addGap(39, 39, 39)
                                 .addComponent(cmdexit))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(245, 245, 245)
@@ -258,7 +272,8 @@ public class viewvt extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdexit)
-                    .addComponent(cmdprint))
+                    .addComponent(cmdprint)
+                    .addComponent(cmd_toexcel))
                 .addGap(42, 42, 42))
         );
 
@@ -396,6 +411,31 @@ public class viewvt extends javax.swing.JDialog {
           update_table();
     }//GEN-LAST:event_cmd_clearActionPerformed
 
+    private void cmd_toexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_toexcelActionPerformed
+
+        JFileChooser fc = new JFileChooser();
+        int option = fc.showSaveDialog(viewvt.this);
+        if(option == JFileChooser.APPROVE_OPTION){
+            String filename = fc.getSelectedFile().getName();
+            String path = fc.getSelectedFile().getParentFile().getPath();
+
+            int len = filename.length();
+            String ext = "";
+            String file = "";
+
+            if(len > 4){
+                ext = filename.substring(len-4, len);
+            }
+
+            if(ext.equals(".xls")){
+                file = path + "\\" + filename; 
+            }else{
+                file = path + "\\" + filename + ".xls"; 
+            }
+            toExcel(tablevt, new File(file));
+        }
+    }//GEN-LAST:event_cmd_toexcelActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -405,6 +445,30 @@ public class viewvt extends javax.swing.JDialog {
             }
         });
     }
+    //export to excel
+            public void toExcel(JTable tablevt, File file){
+               
+                    try (FileWriter excel = new FileWriter(file)) {
+                        for(int i = 0; i < tablevt.getColumnCount(); i++){
+                            excel.write(tablevt.getColumnName(i) + "\t");
+                                               }
+                          excel.write("\n");
+                       
+                          for(int i=0; i< tablevt.getRowCount(); i++) {
+                            for(int j=0; j < tablevt.getColumnCount(); j++) {
+                            excel.write(tablevt.getValueAt(i,j).toString()+"\t");                           
+
+                            }
+                           excel.write("\n");
+                        }
+                    
+
+                }catch(IOException e){ 
+                 JOptionPane.showMessageDialog(null,e);
+ }
+            }
+
+ 
      private void fixWidth(final JTable table, final int columnIndex, final int width) {
         TableColumn column = table.getColumnModel().getColumn(columnIndex);
         column.setMinWidth(width);
@@ -416,6 +480,7 @@ public class viewvt extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmd_clear;
     private javax.swing.JButton cmd_search;
+    private javax.swing.JButton cmd_toexcel;
     private javax.swing.JButton cmdexit;
     private javax.swing.JButton cmdprint;
     private javax.swing.JLabel jLabel1;
