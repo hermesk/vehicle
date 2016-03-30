@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -325,7 +326,7 @@ public class viewvt extends javax.swing.JDialog {
         String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
         String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
       
-            String check = "select COUNT (*)as total from vt where date between'"+start+"'and '"+end+"'";
+            String check = "select COUNT (*)as total from vt where strftime('%s',date) between strftime('%s','"+start+"') and strftime('%s','"+end+"')";
 
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
@@ -344,7 +345,7 @@ public class viewvt extends javax.swing.JDialog {
                   String sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
                   + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
                   + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
-                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt where date between '"+start+"' and '"+end+"'";
+                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt where strftime('%s',date) between strftime('%s','"+start+"') and strftime('%s','"+end+"')";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));

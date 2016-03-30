@@ -363,7 +363,7 @@ public class viewkmr extends javax.swing.JDialog {
             String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
             String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
             
-            String check = "select COUNT (*)as total from kmrange where date >='"+start+"'and date <='"+end+"'";
+            String check = "select COUNT (*)as total from kmrange where strftime('%s',date) between strftime('%s','"+start+"') and strftime('%s','"+end+"')";
 
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
@@ -381,7 +381,7 @@ public class viewkmr extends javax.swing.JDialog {
                 try{
                     String sql= "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
                     + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
-                    + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where  date between '"+start+"'and '"+end+"' ";
+                    + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where  strftime('%s',date) between strftime('%s','"+start+"') and strftime('%s','"+end+"')";
                     pst = conn.prepareStatement(sql);
                     rs=pst.executeQuery();
                     tablekmr.setModel( DbUtils.resultSetToTableModel(rs));

@@ -79,7 +79,7 @@ public class vehicles extends javax.swing.JDialog{
         cmd_exit = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        cmdclose = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -297,16 +297,16 @@ public class vehicles extends javax.swing.JDialog{
 
         jMenu1.setText("File");
 
-        jMenuItem1.setText("Close");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cmdclose.setText("Close");
+        cmdclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem1MouseClicked(evt);
+                cmdcloseMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
+                cmdcloseMousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(cmdclose);
 
         jMenuBar1.add(jMenu1);
 
@@ -405,9 +405,9 @@ public class vehicles extends javax.swing.JDialog{
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_regnoActionPerformed
 
-    private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
+    private void cmdcloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdcloseMouseClicked
         dispose();
-    }//GEN-LAST:event_jMenuItem1MouseClicked
+    }//GEN-LAST:event_cmdcloseMouseClicked
 
     private void cmd_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_deleteActionPerformed
          if(txt_make.getText().trim().isEmpty()||((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||
@@ -625,10 +625,10 @@ public class vehicles extends javax.swing.JDialog{
       }
     }//GEN-LAST:event_cmd_printActionPerformed
 
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+    private void cmdcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdcloseMousePressed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jMenuItem1MousePressed
+    }//GEN-LAST:event_cmdcloseMousePressed
 
     private void cmd_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_exitActionPerformed
              close();
@@ -664,12 +664,12 @@ public class vehicles extends javax.swing.JDialog{
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton cmd_update;
     private javax.swing.JButton cmdclear;
+    private javax.swing.JMenuItem cmdclose;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

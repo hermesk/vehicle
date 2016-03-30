@@ -880,15 +880,13 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
        }
        else{
         try {
+                            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
             String start=((JTextField)sdate.getDateEditor().getUiComponent()).getText().trim();
             String end=((JTextField)tdate.getDateEditor().getUiComponent()).getText().trim();
-              DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-              Date date1 = df.parse(start);
-              Date date12= df.parse(end);
 
 
-            String check = "select COUNT (*)as total from kmrange where date between '"+start+"'and'"+end+"'";
+            String check = "select COUNT (*)as total from kmrange where strftime('%s',date) between strftime('%s','"+start+"') and strftime('%s','"+end+"')";
 
             pst=conn.prepareStatement(check);
             rs = pst.executeQuery();
@@ -903,10 +901,10 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
             while(rs.next()){
                 if(rs.getInt("total")>0)
 
-                try{
-                    String sql= "select id,date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
-                    + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
-                    + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where date >='"+start+"'and date <='"+end+"'";
+          try{
+          String sql= "select id,date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
+             + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
+         + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange where strftime('%s',date) between strftime('%s','"+start+"') and strftime('%s','"+end+"')";
                     pst = conn.prepareStatement(sql);
                     rs=pst.executeQuery();
                     tablekmr.setModel( DbUtils.resultSetToTableModel(rs));
@@ -946,8 +944,6 @@ catch(  SQLException | NumberFormatException | HeadlessException e){
 
                 JOptionPane.showMessageDialog(null, ex);
 
-            } catch (ParseException ex) {
-                Logger.getLogger(adminkmrange.class.getName()).log(Level.SEVERE, null, ex);
             }}
     }//GEN-LAST:event_txt_searchActionPerformed
             //export to excel
