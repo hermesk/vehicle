@@ -1,6 +1,5 @@
 package javafiles;
 
-
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -13,8 +12,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -26,16 +23,17 @@ public class vehiclet extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    float th=0,tm=0,tmh,TH4,TH1,TH2,TH3,vt,tt;
-    float th1,th2,th3,th4,tm1,tm2,tm3,tm4,tmh1,tmh2,tmh3,tmh4;
+    float th = 0, tm = 0, tmh, TH4, TH1, TH2, TH3, vt, tt;
+    float th1, th2, th3, th4, tm1, tm2, tm3, tm4, tmh1, tmh2, tmh3, tmh4;
+
     public vehiclet() {
-        
-      super("Fill Vehicleturnabout");
-      conn = javaconnect.connecrDb();
-       initComponents();
+
+        super("Fill Vehicleturnabout");
+        conn = javaconnect.connecrDb();
+        initComponents();
         ComboDriver();
         fillCombo();
-         setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
     }
@@ -114,8 +112,8 @@ public class vehiclet extends javax.swing.JFrame {
         setName("VehicleTurnabout"); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicleturnabout", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-        jPanel1.setForeground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicleturnabout", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setText("Enter timein for run 2");
 
@@ -138,6 +136,7 @@ public class vehiclet extends javax.swing.JFrame {
             }
         });
 
+        cmd_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Save-icon.png"))); // NOI18N
         cmd_save.setText("Save");
         cmd_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,6 +220,7 @@ public class vehiclet extends javax.swing.JFrame {
         t42.setModel(new SpinnerDateModel());
         t42.setEditor(new JSpinner.DateEditor(t42, "HH:mm"));
 
+        cmd_clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Clear-icon.png"))); // NOI18N
         cmd_clear.setText("Clear");
         cmd_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,6 +228,7 @@ public class vehiclet extends javax.swing.JFrame {
             }
         });
 
+        cmd_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Button-Close-icon.png"))); // NOI18N
         cmd_exit.setText("Exit");
         cmd_exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,7 +300,7 @@ public class vehiclet extends javax.swing.JFrame {
                                 .addComponent(cmdviewvt)
                                 .addGap(18, 18, 18)
                                 .addComponent(cmd_exit)))
-                        .addGap(0, 94, Short.MAX_VALUE))))
+                        .addGap(0, 474, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,14 +374,14 @@ public class vehiclet extends javax.swing.JFrame {
                     .addComponent(cmd_exit)
                     .addComponent(cmdviewvt)
                     .addComponent(cmd_save))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 205, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,22 +435,22 @@ public class vehiclet extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(491, 491, 491)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 154, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(663, 700));
+        setSize(new java.awt.Dimension(906, 700));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -458,123 +459,116 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
 
-        if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||wt1.getText().trim().isEmpty()||
-               wt2.getText().trim().isEmpty()||wt3.getText().trim().isEmpty()||wt4.getText().trim().isEmpty() )
-        {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
+        if (((JTextField) txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty() || wt1.getText().trim().isEmpty()
+                || wt2.getText().trim().isEmpty() || wt3.getText().trim().isEmpty() || wt4.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
 
-        } 
-          else{          
-              try{
-             
-              Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
-              Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
-  
-         
-            String sql = "insert into vt(date,vehicle,driver,runs,tor1,tir1,fwr1"
-                    + ",tor2,tir2,fwr2,tor3,tir3,fwr3,tor4,tir4,fwr4,tfw,vt)"
-                    
-            + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            pst=conn.prepareStatement(sql);
-            
-          SimpleDateFormat sdf=new SimpleDateFormat("kk:mm");
-          sdf.setTimeZone(TimeZone.getDefault());
-          String tt11=sdf.format(t11.getValue());
-          String tt12=sdf.format(t12.getValue());
-          String tt21=sdf.format(t21.getValue());          
-          String tt22=sdf.format(t22.getValue());
-          String tt31=sdf.format(t31.getValue()); 
-          String tt32=sdf.format(t32.getValue());
-          String tt41=sdf.format(t41.getValue());
-          String tt42=sdf.format(t42.getValue()); 
-          //FT RUN1
-                 Date d11 = sdf.parse(tt11);
-	         Date d12= sdf.parse(tt12);
-                 long diff1 = d12.getTime()-d11.getTime();
-                 long diffH1 = diff1 / (60 * 60 * 1000) % 24;
-                 long diffM1 = diff1 / (60 * 1000) % 60;
-                 th1 = th+diffH1;
-                 tm1 = tm+diffM1;
-                 tmh1 = tm1/60;
-                 TH1 = tmh1 +th1;
-          //FT RUN2
-                 Date d21 = sdf.parse(tt21);
-	         Date d22= sdf.parse(tt22);
-                 long diff2 = d22.getTime() - d21.getTime();
-                 long diffH2 = diff2 / (60 * 60 * 1000) % 24;
-                 long diffM2 = diff2 / (60 * 1000) % 60;
-                 th2 = th+diffH2;
-                 tm2 = tm+diffM2;
-                 tmh2 = tm2/60;
-                 TH2 = tmh2 +th2;
-           //FT RUN3      
-                 Date d31 = sdf.parse(tt31);
-	         Date d32= sdf.parse(tt32);
-                 long diff3 = d32.getTime() - d31.getTime();
-                 long diffH3 = diff3 / (60 * 60 * 1000) % 24;
-                 long diffM3 = diff3 / (60 * 1000) % 60;
-                 th3 = th+diffH3;
-                 tm3 = tm+diffM3;
-                 tmh3 = tm3/60;
-                 TH3 = tmh3 +th3; 
-           //FT RUN4      
-                 Date d41 = sdf.parse(tt41);
-	         Date d42= sdf.parse(tt42);
-                 long diff4 = d42.getTime() - d41.getTime();
-                 long diffH4 = diff4 / (60 * 60 * 1000) % 24;//hrs
-                 long diffM4 = diff4 / (60 * 1000) % 60;//mins
-                 th4 = th+diffH4;
-                 tm4 = tm+diffM4;
-                 tmh4 = tm4/60;
-                 TH4 = tmh4 +th4; 
-                 tt = TH1+TH2+TH3+TH4;
-                 
-                int run =(int)runs.getValue();
-                 vt = (float)tt/run;
-            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim());
-            pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
-            pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-            pst.setString(4,  runs.getValue().toString().trim());
-            
-            pst.setString(5,tt11 );
-            pst.setString(6, tt12);
-            pst.setString(7, wt1.getText().trim());
-            
-            pst.setString(8, tt21);
-            pst.setString(9, tt22);
-            pst.setString(10,wt2.getText().trim());
-            
-            pst.setString(11, tt31);
-            pst.setString(12, tt32);
-            pst.setString(13, wt3.getText().trim());
-            
-            pst.setString(14, tt41);
-            pst.setString(15, tt42);
-            pst.setString(16, wt4.getText().trim());
-            pst.setFloat(17, tfw);
-            pst.setDouble(18,vt );
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Saved Successfully");
+        } else {
+            try {
 
-        }
-              catch(NumberFormatException | SQLException | ParseException | HeadlessException e){
-              JOptionPane.showMessageDialog(null, e);
+                Float tfw = Float.parseFloat(wt1.getText()) + Float.parseFloat(wt2.getText())
+                        + Float.parseFloat(wt3.getText()) + Float.parseFloat(wt4.getText());
 
-        }
-         finally {
-                try{
-                  rs.close();
-                  pst.close();
-                  }
-                 catch(Exception ex){
-                  }
+                String sql = "insert into vt(date,vehicle,driver,runs,tor1,tir1,fwr1"
+                        + ",tor2,tir2,fwr2,tor3,tir3,fwr3,tor4,tir4,fwr4,tfw,vt)"
+                        + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                pst = conn.prepareStatement(sql);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                sdf.setTimeZone(TimeZone.getDefault());
+                String tt11 = sdf.format(t11.getValue());
+                String tt12 = sdf.format(t12.getValue());
+                String tt21 = sdf.format(t21.getValue());
+                String tt22 = sdf.format(t22.getValue());
+                String tt31 = sdf.format(t31.getValue());
+                String tt32 = sdf.format(t32.getValue());
+                String tt41 = sdf.format(t41.getValue());
+                String tt42 = sdf.format(t42.getValue());
+                //FT RUN1
+                Date d11 = sdf.parse(tt11);
+                Date d12 = sdf.parse(tt12);
+                long diff1 = d12.getTime() - d11.getTime();
+                long diffH1 = diff1 / (60 * 60 * 1000) % 24;
+                long diffM1 = diff1 / (60 * 1000) % 60;
+                th1 = th + diffH1;
+                tm1 = tm + diffM1;
+                tmh1 = tm1 / 60;
+                TH1 = tmh1 + th1;
+                //FT RUN2
+                Date d21 = sdf.parse(tt21);
+                Date d22 = sdf.parse(tt22);
+                long diff2 = d22.getTime() - d21.getTime();
+                long diffH2 = diff2 / (60 * 60 * 1000) % 24;
+                long diffM2 = diff2 / (60 * 1000) % 60;
+                th2 = th + diffH2;
+                tm2 = tm + diffM2;
+                tmh2 = tm2 / 60;
+                TH2 = tmh2 + th2;
+                //FT RUN3      
+                Date d31 = sdf.parse(tt31);
+                Date d32 = sdf.parse(tt32);
+                long diff3 = d32.getTime() - d31.getTime();
+                long diffH3 = diff3 / (60 * 60 * 1000) % 24;
+                long diffM3 = diff3 / (60 * 1000) % 60;
+                th3 = th + diffH3;
+                tm3 = tm + diffM3;
+                tmh3 = tm3 / 60;
+                TH3 = tmh3 + th3;
+                //FT RUN4      
+                Date d41 = sdf.parse(tt41);
+                Date d42 = sdf.parse(tt42);
+                long diff4 = d42.getTime() - d41.getTime();
+                long diffH4 = diff4 / (60 * 60 * 1000) % 24;//hrs
+                long diffM4 = diff4 / (60 * 1000) % 60;//mins
+                th4 = th + diffH4;
+                tm4 = tm + diffM4;
+                tmh4 = tm4 / 60;
+                TH4 = tmh4 + th4;
+                tt = TH1 + TH2 + TH3 + TH4;
+
+                int run = (int) runs.getValue();
+                vt = (float) tt / run;
+                pst.setString(1, ((JTextField) txt_Date.getDateEditor().getUiComponent()).getText().trim());
+                pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
+                pst.setString(3, ComboBox_driver.getSelectedItem().toString());
+                pst.setString(4, runs.getValue().toString().trim());
+
+                pst.setString(5, tt11);
+                pst.setString(6, tt12);
+                pst.setString(7, wt1.getText().trim());
+
+                pst.setString(8, tt21);
+                pst.setString(9, tt22);
+                pst.setString(10, wt2.getText().trim());
+
+                pst.setString(11, tt31);
+                pst.setString(12, tt32);
+                pst.setString(13, wt3.getText().trim());
+
+                pst.setString(14, tt41);
+                pst.setString(15, tt42);
+                pst.setString(16, wt4.getText().trim());
+                pst.setFloat(17, tfw);
+                pst.setDouble(18, vt);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Saved Successfully");
+
+            } catch (NumberFormatException | SQLException | ParseException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+
+            } finally {
+                try {
+                    rs.close();
+                    pst.close();
+                } catch (Exception ex) {
                 }
-       
+            }
+
         }
     }//GEN-LAST:event_cmd_saveActionPerformed
 
     private void cmd_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_clearActionPerformed
-        ((JTextField)txt_Date.getDateEditor().getUiComponent()).setText("");
+        ((JTextField) txt_Date.getDateEditor().getUiComponent()).setText("");
         wt1.setText("");
         wt2.setText("");
         wt3.setText("");
@@ -587,213 +581,208 @@ public class vehiclet extends javax.swing.JFrame {
 
     private void logoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMousePressed
         System.gc();
-        java.awt.Window win[]=java.awt.Window.getWindows();
-         for(int i=0;i<win.length;i++){
-             win[i].dispose();
-             win[i]=null;}
+        java.awt.Window win[] = java.awt.Window.getWindows();
+        for (int i = 0; i < win.length; i++) {
+            win[i].dispose();
+            win[i] = null;
+        }
         login lg = new login();
-              lg.setVisible(true);
-        
+        lg.setVisible(true);
+
     }//GEN-LAST:event_logoutMousePressed
 
     private void fill_vtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fill_vtMousePressed
-               
-       kmrange kr = new kmrange(this,true);
-               kr.setVisible(true);
+
+        kmrange kr = new kmrange(this, true);
+        kr.setVisible(true);
     }//GEN-LAST:event_fill_vtMousePressed
 
     private void viewkmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewkmMousePressed
-                viewkmr vkmr = new viewkmr(this,true);
-                 vkmr.setVisible(true);
+        viewkmr vkmr = new viewkmr(this, true);
+        vkmr.setVisible(true);
 
     }//GEN-LAST:event_viewkmMousePressed
 
     private void cmdviewvtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdviewvtActionPerformed
-                viewvt vtb = new viewvt(this,true);
-                vtb.setVisible(true);
+        viewvt vtb = new viewvt(this, true);
+        vtb.setVisible(true);
 
     }//GEN-LAST:event_cmdviewvtActionPerformed
 
     private void wt1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt1KeyTyped
-        char c=evt.getKeyChar();
-        if(!(Character.isDigit(c)||
-        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
-        evt.consume();
-         getToolkit().beep();
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE || evt.getKeyChar() == '.')) {
+            evt.consume();
+            getToolkit().beep();
         }
     }//GEN-LAST:event_wt1KeyTyped
 
     private void wt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt2KeyTyped
-        char c=evt.getKeyChar();
-        if(!(Character.isDigit(c)||
-        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
-        evt.consume();
-         getToolkit().beep();}
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE || evt.getKeyChar() == '.')) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_wt2KeyTyped
 
     private void wt3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt3KeyTyped
-        char c=evt.getKeyChar();
-        if(!(Character.isDigit(c)||
-        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
-        evt.consume();
-         getToolkit().beep();}
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE || evt.getKeyChar() == '.')) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_wt3KeyTyped
 
     private void wt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyTyped
-        char c=evt.getKeyChar();
-        if(!(Character.isDigit(c)||
-        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '.')){
-        evt.consume();
-         getToolkit().beep();}
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE || evt.getKeyChar() == '.')) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_wt4KeyTyped
 
     private void txt_DateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_DateKeyTyped
-        char c=evt.getKeyChar();
-        if((Character.isDigit(c)||
-        (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE||evt.getKeyChar() == '/'||evt.getKeyChar() == '-')){
-        evt.consume();
-         getToolkit().beep();}
+        char c = evt.getKeyChar();
+        if ((Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE || evt.getKeyChar() == '/' || evt.getKeyChar() == '-')) {
+            evt.consume();
+            getToolkit().beep();
+        }
     }//GEN-LAST:event_txt_DateKeyTyped
-            public void close()
-                { 
-                    String ObjButtons[] = {"Yes","No"};
-                    int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit the system?","Confirm",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,ObjButtons,ObjButtons[1]);
-                    if(PromptResult==JOptionPane.YES_OPTION)
-                    {
-                        System.exit(0);
-                        try {
-                        conn.close();
-                    } catch (SQLException e) {
-                            JOptionPane.showMessageDialog(null,e);
-                    }
-
-                }
+    public void close() {
+        String ObjButtons[] = {"Yes", "No"};
+        int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to exit the system?", "Confirm", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ObjButtons, ObjButtons[1]);
+        if (PromptResult == JOptionPane.YES_OPTION) {
+            System.exit(0);
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
             }
-    
+
+        }
+    }
+
     private void wt4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wt4KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-             if(((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty()||wt1.getText().trim().isEmpty()||
-               wt2.getText().trim().isEmpty()||wt3.getText().trim().isEmpty()||wt4.getText().trim().isEmpty() )
-        {
-           JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (((JTextField) txt_Date.getDateEditor().getUiComponent()).getText().trim().isEmpty() || wt1.getText().trim().isEmpty()
+                    || wt2.getText().trim().isEmpty() || wt3.getText().trim().isEmpty() || wt4.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "<html><h2><font color='red'>Fill all fields!</font></h2></html>");
 
-        }
-          else{          
-              try{
-             
-              Float tfw = Float.parseFloat(wt1.getText()) +Float.parseFloat(wt2.getText())+
-              Float.parseFloat(wt3.getText())+Float.parseFloat(wt4.getText());
-  
-         
-            String sql = "insert into vt(date,vehicle,driver,runs,tor1,tir1,fwr1"
-                    + ",tor2,tir2,fwr2,tor3,tir3,fwr3,tor4,tir4,fwr4,tfw,vt)"
-                    
-            + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            pst=conn.prepareStatement(sql);
-            
-          SimpleDateFormat sdf=new SimpleDateFormat("kk:mm");
-          sdf.setTimeZone(TimeZone.getDefault());
-          String tt11=sdf.format(t11.getValue());
-          String tt12=sdf.format(t12.getValue());
-          String tt21=sdf.format(t21.getValue());          
-          String tt22=sdf.format(t22.getValue());
-          String tt31=sdf.format(t31.getValue()); 
-          String tt32=sdf.format(t32.getValue());
-          String tt41=sdf.format(t41.getValue());
-          String tt42=sdf.format(t42.getValue()); 
-          //FT RUN1
-                 Date d11 = sdf.parse(tt11);
-	         Date d12= sdf.parse(tt12);
-                 long diff1 = d12.getTime()-d11.getTime();
-                 long diffH1 = diff1 / (60 * 60 * 1000) % 24;
-                 long diffM1 = diff1 / (60 * 1000) % 60;
-                 th1 = th+diffH1;
-                 tm1 = tm+diffM1;
-                 tmh1 = tm1/60;
-                 TH1 = tmh1 +th1;
-          //FT RUN2
-                 Date d21 = sdf.parse(tt21);
-	         Date d22= sdf.parse(tt22);
-                 long diff2 = d22.getTime() - d21.getTime();
-                 long diffH2 = diff2 / (60 * 60 * 1000) % 24;
-                 long diffM2 = diff2 / (60 * 1000) % 60;
-                 th2 = th+diffH2;
-                 tm2 = tm+diffM2;
-                 tmh2 = tm2/60;
-                 TH2 = tmh2 +th2;
-           //FT RUN3      
-                 Date d31 = sdf.parse(tt31);
-	         Date d32= sdf.parse(tt32);
-                 long diff3 = d32.getTime() - d31.getTime();
-                 long diffH3 = diff3 / (60 * 60 * 1000) % 24;
-                 long diffM3 = diff3 / (60 * 1000) % 60;
-                 th3 = th+diffH3;
-                 tm3 = tm+diffM3;
-                 tmh3 = tm3/60;
-                 TH3 = tmh3 +th3; 
-           //FT RUN4      
-                 Date d41 = sdf.parse(tt41);
-	         Date d42= sdf.parse(tt42);
-                 long diff4 = d42.getTime() - d41.getTime();
-                 long diffH4 = diff4 / (60 * 60 * 1000) % 24;//hrs
-                 long diffM4 = diff4 / (60 * 1000) % 60;//mins
-                 th4 = th+diffH4;
-                 tm4 = tm+diffM4;
-                 tmh4 = tm4/60;
-                 TH4 = tmh4 +th4; 
-                 tt = TH1+TH2+TH3+TH4;
-                 
-                int run =(int)runs.getValue();
-                 vt = (float)tt/run;
-            pst.setString(1, ((JTextField)txt_Date.getDateEditor().getUiComponent()).getText().trim());
-            pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
-            pst.setString(3, ComboBox_driver.getSelectedItem().toString());
-            pst.setString(4,  runs.getValue().toString().trim());
-            
-            pst.setString(5,tt11 );
-            pst.setString(6, tt12);
-            pst.setString(7, wt1.getText().trim());
-            
-            pst.setString(8, tt21);
-            pst.setString(9, tt22);
-            pst.setString(10,wt2.getText().trim());
-            
-            pst.setString(11, tt31);
-            pst.setString(12, tt32);
-            pst.setString(13, wt3.getText().trim());
-            
-            pst.setString(14, tt41);
-            pst.setString(15, tt42);
-            pst.setString(16, wt4.getText().trim());
-            pst.setFloat(17, tfw);
-            pst.setDouble(18,vt );
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Saved Successfully");
+            } else {
+                try {
 
-        }
-              catch(NumberFormatException | SQLException | ParseException | HeadlessException e){
-              JOptionPane.showMessageDialog(null, e);
+                    Float tfw = Float.parseFloat(wt1.getText()) + Float.parseFloat(wt2.getText())
+                            + Float.parseFloat(wt3.getText()) + Float.parseFloat(wt4.getText());
 
-        }
-              finally {
-                try{
-                  rs.close();
-                  pst.close();
-                  }
-                 catch(Exception ex){
-                  }
+                    String sql = "insert into vt(date,vehicle,driver,runs,tor1,tir1,fwr1"
+                            + ",tor2,tir2,fwr2,tor3,tir3,fwr3,tor4,tir4,fwr4,tfw,vt)"
+                            + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    pst = conn.prepareStatement(sql);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                    sdf.setTimeZone(TimeZone.getDefault());
+                    String tt11 = sdf.format(t11.getValue());
+                    String tt12 = sdf.format(t12.getValue());
+                    String tt21 = sdf.format(t21.getValue());
+                    String tt22 = sdf.format(t22.getValue());
+                    String tt31 = sdf.format(t31.getValue());
+                    String tt32 = sdf.format(t32.getValue());
+                    String tt41 = sdf.format(t41.getValue());
+                    String tt42 = sdf.format(t42.getValue());
+                    //FT RUN1
+                    Date d11 = sdf.parse(tt11);
+                    Date d12 = sdf.parse(tt12);
+                    long diff1 = d12.getTime() - d11.getTime();
+                    long diffH1 = diff1 / (60 * 60 * 1000) % 24;
+                    long diffM1 = diff1 / (60 * 1000) % 60;
+                    th1 = th + diffH1;
+                    tm1 = tm + diffM1;
+                    tmh1 = tm1 / 60;
+                    TH1 = tmh1 + th1;
+                    //FT RUN2
+                    Date d21 = sdf.parse(tt21);
+                    Date d22 = sdf.parse(tt22);
+                    long diff2 = d22.getTime() - d21.getTime();
+                    long diffH2 = diff2 / (60 * 60 * 1000) % 24;
+                    long diffM2 = diff2 / (60 * 1000) % 60;
+                    th2 = th + diffH2;
+                    tm2 = tm + diffM2;
+                    tmh2 = tm2 / 60;
+                    TH2 = tmh2 + th2;
+                    //FT RUN3      
+                    Date d31 = sdf.parse(tt31);
+                    Date d32 = sdf.parse(tt32);
+                    long diff3 = d32.getTime() - d31.getTime();
+                    long diffH3 = diff3 / (60 * 60 * 1000) % 24;
+                    long diffM3 = diff3 / (60 * 1000) % 60;
+                    th3 = th + diffH3;
+                    tm3 = tm + diffM3;
+                    tmh3 = tm3 / 60;
+                    TH3 = tmh3 + th3;
+                    //FT RUN4      
+                    Date d41 = sdf.parse(tt41);
+                    Date d42 = sdf.parse(tt42);
+                    long diff4 = d42.getTime() - d41.getTime();
+                    long diffH4 = diff4 / (60 * 60 * 1000) % 24;//hrs
+                    long diffM4 = diff4 / (60 * 1000) % 60;//mins
+                    th4 = th + diffH4;
+                    tm4 = tm + diffM4;
+                    tmh4 = tm4 / 60;
+                    TH4 = tmh4 + th4;
+                    tt = TH1 + TH2 + TH3 + TH4;
+
+                    int run = (int) runs.getValue();
+                    vt = (float) tt / run;
+                    pst.setString(1, ((JTextField) txt_Date.getDateEditor().getUiComponent()).getText().trim());
+                    pst.setString(2, ComboBox_vehicle.getSelectedItem().toString());
+                    pst.setString(3, ComboBox_driver.getSelectedItem().toString());
+                    pst.setString(4, runs.getValue().toString().trim());
+
+                    pst.setString(5, tt11);
+                    pst.setString(6, tt12);
+                    pst.setString(7, wt1.getText().trim());
+
+                    pst.setString(8, tt21);
+                    pst.setString(9, tt22);
+                    pst.setString(10, wt2.getText().trim());
+
+                    pst.setString(11, tt31);
+                    pst.setString(12, tt32);
+                    pst.setString(13, wt3.getText().trim());
+
+                    pst.setString(14, tt41);
+                    pst.setString(15, tt42);
+                    pst.setString(16, wt4.getText().trim());
+                    pst.setFloat(17, tfw);
+                    pst.setDouble(18, vt);
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "Saved Successfully");
+
+                } catch (NumberFormatException | SQLException | ParseException | HeadlessException e) {
+                    JOptionPane.showMessageDialog(null, e);
+
+                } finally {
+                    try {
+                        rs.close();
+                        pst.close();
+                    } catch (Exception ex) {
+                    }
                 }
-       
-             }
-    }                                        
 
-        
+            }
+        }
+
+
     }//GEN-LAST:event_wt4KeyPressed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
     }//GEN-LAST:event_logoutActionPerformed
 
-        
     /**
      * @param args the command line arguments
      */
@@ -829,68 +818,56 @@ public class vehiclet extends javax.swing.JFrame {
             }
         });
     }
-     private void fillCombo(){
-     try{
-         String sql = "select *from vehicles";
-         pst = conn.prepareStatement(sql);
-         rs =pst.executeQuery();
-         while(rs.next()){
-          String Regno = rs.getString("Regno");
-          ComboBox_vehicle.addItem(Regno);
-         
-         }
-     
-     
-     }
-     catch(Exception e)
-     {
-        JOptionPane.showMessageDialog(null, e);
-     }
-      finally {
-                try{
-                  rs.close();
-                  pst.close();
-                  }
-                 catch(Exception ex){
-                  }
-                
-                }
-       
-     }
-    
-    
-     private void ComboDriver(){
-          try{
-         String sql = "select *from drivers";
-         pst = conn.prepareStatement(sql);
-         rs =pst.executeQuery();
-         while(rs.next())
-         {
-          String fname = rs.getString("fname").trim();
-          String sname = rs.getString("sname").trim();
-          String name = fname+ " "+sname;
-          ComboBox_driver.addItem(name);
-         }
-     
-     
-     }
-     catch(Exception e)
-     {
-                 JOptionPane.showMessageDialog(null, e);
 
-     
-     }
-           finally {
-                try{
-                  rs.close();
-                  pst.close();
-                  }
-                 catch(Exception ex){
-                  }
-                }
-       
-          }
-   
+    private void fillCombo() {
+        try {
+            String sql = "select *from vehicles";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String Regno = rs.getString("Regno");
+                ComboBox_vehicle.addItem(Regno);
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception ex) {
+            }
+
+        }
+
+    }
+
+    private void ComboDriver() {
+        try {
+            String sql = "select *from drivers";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String fname = rs.getString("fname").trim();
+                String sname = rs.getString("sname").trim();
+                String name = fname + " " + sname;
+                ComboBox_driver.addItem(name);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception ex) {
+            }
+        }
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox_driver;

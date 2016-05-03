@@ -16,10 +16,8 @@ import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -47,7 +45,9 @@ public class adminkmrange extends javax.swing.JDialog {
         fillCombo();
         update_table();
         setResizable(false);
+        JFrame.setDefaultLookAndFeelDecorated(true);
     } 
+    
     private void fixWidth(final JTable table, final int columnIndex, final int width) {
         TableColumn column = table.getColumnModel().getColumn(columnIndex);
         column.setMinWidth(width);
@@ -111,7 +111,7 @@ public class adminkmrange extends javax.swing.JDialog {
       try{
           String sql;
           sql = "select id,date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
-                  + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
+                  + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'GL Collected'"
                   + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
@@ -216,6 +216,7 @@ public class adminkmrange extends javax.swing.JDialog {
             }
         });
         setTitle("\t\t\t\tFactory Kilometer Overhaul");
+        setIconImage(null);
 
         tablekmr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -294,6 +295,7 @@ public class adminkmrange extends javax.swing.JDialog {
 
         jLabel3.setText("Choose Date");
 
+        cmd_clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Clear-icon.png"))); // NOI18N
         cmd_clear.setText("Clear");
         cmd_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,6 +303,7 @@ public class adminkmrange extends javax.swing.JDialog {
             }
         });
 
+        cmd_del.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Button-Close-icon.png"))); // NOI18N
         cmd_del.setText("Delete");
         cmd_del.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,6 +311,7 @@ public class adminkmrange extends javax.swing.JDialog {
             }
         });
 
+        cmd_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Save-icon.png"))); // NOI18N
         cmd_save.setText("Save");
         cmd_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,6 +319,7 @@ public class adminkmrange extends javax.swing.JDialog {
             }
         });
 
+        cmd_update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.png"))); // NOI18N
         cmd_update.setText("Update");
         cmd_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,7 +363,7 @@ public class adminkmrange extends javax.swing.JDialog {
                         .addComponent(cmd_update)
                         .addGap(29, 29, 29)
                         .addComponent(cmd_del)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,6 +426,7 @@ public class adminkmrange extends javax.swing.JDialog {
 
         jLabel2.setText("To");
 
+        txt_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
         txt_search.setText("Search");
         txt_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -428,6 +434,7 @@ public class adminkmrange extends javax.swing.JDialog {
             }
         });
 
+        cmd_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Button-Close-icon.png"))); // NOI18N
         cmd_exit.setText("Exit");
         cmd_exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,6 +442,7 @@ public class adminkmrange extends javax.swing.JDialog {
             }
         });
 
+        cmd_toexcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Save-icon.png"))); // NOI18N
         cmd_toexcel.setText("Save to Excel");
         cmd_toexcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

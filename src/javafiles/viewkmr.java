@@ -1,9 +1,6 @@
 package javafiles;
 
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -24,18 +21,18 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
 public class viewkmr extends javax.swing.JDialog {
 
     
-    Connection conn = null;
+    Connection conn;
     ResultSet rs = null;
     PreparedStatement pst = null;
 
     public viewkmr(java.awt.Frame parent, boolean modal) {
        super(parent, modal);
+        this.conn = null;
         initComponents();
         conn = javaconnect.connecrDb();
         update_table();
@@ -100,7 +97,7 @@ public class viewkmr extends javax.swing.JDialog {
       try{
           String sql;
           sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',glkm as 'KM on GL'"
-                  + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'Factory Weight'"
+                  + ",tkm as 'Total KM',diesel as 'Diesel',dbal as 'Diesel Bal',tfw as 'GL collected'"
                   + ",kmh as 'L/KM', kgl as 'KG/L'from kmrange";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();

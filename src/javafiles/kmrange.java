@@ -138,7 +138,7 @@ public class kmrange extends javax.swing.JDialog {
 
         jLabel15.setText("Diesel Balance");
 
-        jLabel16.setText("Total Factory Weight ");
+        jLabel16.setText("GL collected");
 
         jDateChooser1.setDateFormatString("yyy-MM-dd\n");
 
@@ -276,7 +276,7 @@ public class kmrange extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel9)

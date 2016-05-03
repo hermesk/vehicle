@@ -71,7 +71,7 @@ public class viewvt extends javax.swing.JDialog {
           String sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
                   + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
                   + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
-                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt";
+                  + "fwr4 as 'FW4',tfw as 'GL Collected',vt from vt";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
@@ -91,7 +91,7 @@ public class viewvt extends javax.swing.JDialog {
         fixWidth(tablevt, 13, 55);
         fixWidth(tablevt, 14, 50);
         fixWidth(tablevt, 15, 48);
-        fixWidth(tablevt, 16, 60);
+        fixWidth(tablevt, 16, 90);
         fixWidth(tablevt, 17, 50);
         getSum();
            
@@ -345,7 +345,7 @@ public class viewvt extends javax.swing.JDialog {
                   String sql = "select date as 'Date',vehicle as 'Vehicle',driver as 'Driver',runs as 'Runs',tor1 as 'TOut R1',"
                   + "tir1 as 'TIn R1',fwr1 as 'FW1',tor2 as 'TOut R2',tir2 as 'TIn R2'"
                   + ",fwr2 as 'FW2',tor3 as 'TOut R3',tir3 as 'TIn R3',fwr3 as'FW3',tor4 as 'TOut R4',tir4 as 'TIn R4', "
-                  + "fwr4 as 'FW4',tfw as 'TFW',vt from vt where strftime('%s',date) between strftime('%s','"+start+"') and strftime('%s','"+end+"')";
+                  + "fwr4 as 'FW4',tfw as 'GL Collected',vt from vt where strftime('%s',date) between strftime('%s','"+start+"') and strftime('%s','"+end+"')";
           pst = conn.prepareStatement(sql);
           rs=pst.executeQuery();
           tablevt.setModel( DbUtils.resultSetToTableModel(rs));
